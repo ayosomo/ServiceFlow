@@ -12,9 +12,14 @@ Use only claims supported by the final saved test evidence. Independent portfoli
 
 “Validated a local Azure Functions blob-trigger reconciliation flow and a non-root TypeScript container backed by a Firestore emulator, with 25 unit/application tests and three persistence integration tests.”
 
+## Supported by actual AWS deployment evidence
+
+“Independent portfolio: deployed and tested an IAM-protected request approval API on AWS Lambda, API Gateway and DynamoDB, with requirements, API contracts, idempotent writes, audit records and verified teardown.”
+
+Evidence: [actual cloud verification](evidence/aws-cloud-verification.json), deployed source commit `e0a49b611d654728a72611ee1a5e7eb571ce4adf`. Fifteen HTTP calls passed, including unsigned and signed wrong-role 403s. One owner exercised all application roles; do not imply independent human approval, production security certification, ongoing hosting or measured savings. Effective least privilege and final delayed billing are not claimed.
+
 ## Withheld until independent provider evidence exists
 
-- “Deployed an IAM-protected Lambda/API Gateway/DynamoDB approval API.”
 - “Deployed an Azure Functions/Blob Storage reconciliation pipeline.”
 - “Deployed a Dockerised Cloud Run/Firestore insights API.”
 - “Role-aware analytics,” “production-scale performance,” “commercial savings,” or any unmeasured outcome.

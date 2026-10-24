@@ -1,12 +1,14 @@
 # ServiceFlow — three implementation case studies
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. Current outcomes are local implementation/testing only. See the evidence register before reusing any claim.
+All demonstration data is synthetic. Portfolio project, not an employer integration. AWS has actual deployment/test/teardown evidence; Azure and Google Cloud outcomes remain local implementation/testing only. See the evidence register before reusing any claim.
 
 ## AWS: make approval traceable
 
 Problem: Service Owners cannot act confidently on incomplete intake or an untraceable decision. Requirement: BA-001/002/005, a complete request, an authorised decision and an audit trail. Implementation: strict input schema, SUBMITTED-only decisions, optimistic version, explicit approver principal, reason and correlation ID. DynamoDB transaction groups the request, event and idempotency receipt. Negative tests show malformed/unauthorised/stale/conflicting attempts do not claim a successful mutation.
 
-Decision: a small request-by-ID access pattern justifies a single DynamoDB table without a secondary index. The SAM configuration protects all routes with IAM, and the handler adds business-role allowlists. Local HTTP tokens are a separate development mode. DynamoDB Local transactions/replay and SAM validation/packaging passed. Limitation: real IAM behaviour, live persistence and account cost review require the provider gate. Lesson: authentication, business authorisation and concurrency are different acceptance requirements.
+Decision: a small request-by-ID access pattern justifies a single DynamoDB table without a secondary index. The SAM configuration protects all routes with IAM, and the handler adds business-role allowlists. Local HTTP tokens are a separate development mode. After explicit approval and Free-plan checks, the eu-north-1 stack deployed successfully. Fifteen real HTTP calls verified valid submission/approval, replay, malformed input, duplicate/stale conflicts, unsigned denial and signed reader-only mutation denial. Independent DynamoDB checks confirmed one approved request, two audit events and two receipts; regional logs/retention passed. All dedicated resources were independently verified removed. [Cloud evidence](evidence/aws-cloud-verification.json).
+
+Limitation: one owner exercised all roles, so the demo does not establish independent human approval. Managed project defaults prevent an effective least-privilege claim. The Free plan remained active; delayed/final billing is not independently verified. Lesson: authentication, business authorisation and concurrency are different acceptance requirements, and teardown is part of delivery evidence.
 
 ## Azure: expose rather than hide inconsistent sources
 

@@ -1,6 +1,6 @@
 # Implemented architecture and proposed cloud topology
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. Cloud nodes below describe supplied deployment configuration, not deployed resources.
+All demonstration data is synthetic. Portfolio project, not an employer integration. AWS nodes were deployed and verified as a temporary demo on 24 October 2026, then removed. Azure and Google Cloud nodes describe locally tested configuration; their live deployment remains unverified.
 
 ```mermaid
 flowchart LR

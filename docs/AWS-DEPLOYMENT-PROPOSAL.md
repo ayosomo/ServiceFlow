@@ -1,6 +1,6 @@
-# AWS deployment proposal — awaiting owner approval
+# AWS deployment proposal — approved and completed
 
-Review date: 24 October 2026. This proposal authorises nothing by itself. All data is fictional. Local access was separately approved and verified; no cloud application resources have been created.
+Review date: 24 October 2026. Owner subsequently explicitly approved this exact deployment, tests and teardown in chat. The run completed and all dedicated resources were removed. [Actual evidence](evidence/aws-cloud-verification.json). The proposal below preserves the scope that was approved; it is not standing permission for another deployment. All data is fictional.
 
 ## Scope to approve
 

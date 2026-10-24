@@ -4,11 +4,11 @@ Independent Business Analysis and TypeScript portfolio by **Olukoyede Osomo**.
 
 **All demonstration data is synthetic. Portfolio project, not an employer integration.**
 
-Three small applications address one fictional service-delivery problem: incomplete requests, conflicting operational data and unclear performance reporting. BA requirements and acceptance tests connect the business question to actual implementation evidence. Live provider deployments are **NOT VERIFIED**; no chargeable resources have been authorised or created.
+Three small applications address one fictional service-delivery problem: incomplete requests, conflicting operational data and unclear performance reporting. BA requirements and acceptance tests connect the business question to actual implementation evidence. **AWS was deployed, tested and torn down on 24 October 2026.** Azure and Google Cloud live deployments remain **NOT VERIFIED**.
 
 | Lab                                                           | Implemented feature                                                    | Local evidence                                          | Cloud                |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- | -------------------- |
-| [AWS request approval](apps/aws-request-approvals/README.md)  | Validated intake, versioned decision, atomic audit/idempotency adapter | [tests](apps/aws-request-approvals/tests/api.test.ts)   | NOT VERIFIED         |
+| [AWS request approval](apps/aws-request-approvals/README.md)  | Validated intake, versioned decision, atomic audit/idempotency adapter | [tests](apps/aws-request-approvals/tests/api.test.ts)   | VERIFIED; torn down  |
 | [Azure reconciliation](apps/azure-data-quality/README.md)     | Preserved CSVs, rule-level findings, retry-safe result commit          | [tests](apps/azure-data-quality/tests/pipeline.test.ts) | NOT VERIFIED         |
 | [GCP delivery insights](apps/gcp-delivery-insights/README.md) | Defined KPIs, findings and rule-backed drill-down                      | [tests](apps/gcp-delivery-insights/tests/api.test.ts)   | NOT VERIFIED         |
 | PostgreSQL reference                                          | Constraints, joins, latest-source window, filtered KPIs and EXPLAIN    | [SQL runner](db/run.ts)                                 | Local only by design |
@@ -60,4 +60,6 @@ No web UI, accessibility audit, commercial time saving or production-scale bench
 
 ## Next review gates
 
-Resolve local runtime/tooling blockers, review IAM and packaging, then verify actual AWS billing/free-plan eligibility. Obtain explicit approval for the exact AWS resource list and retention before deploying. Capture real authenticated and anonymous-denial smoke evidence, tear down and check delayed billing. Follow Azure and GCP only after the AWS gate. Publish a reviewed README/case study and real screenshots; private backends need not be made public.
+AWS passed 15 real HTTP calls, including unsigned and signed wrong-role 403s, with independent DynamoDB request/audit/receipt checks and regional logs. All dedicated resources were independently verified removed. See [cloud evidence](docs/evidence/aws-cloud-verification.json). The Free plan remained active; delayed/final billing is not yet independently verified. One owner exercised all application roles, so no separation-of-duties or effective least-privilege claim is made.
+
+Next: review Azure account eligibility and costs, obtain its separate deployment approval, then repeat for Google Cloud. Publish a reviewed README/case study and real screenshots; private backends need not remain online.

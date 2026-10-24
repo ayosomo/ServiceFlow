@@ -1,6 +1,8 @@
 # AWS — Request and Approval API
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. **Cloud deployment: NOT VERIFIED.**
+All demonstration data is synthetic. Portfolio project, not an employer integration. **Cloud deployment: VERIFIED on 24 October 2026; demo resources subsequently removed.**
+
+The approved eu-north-1 stack reached CREATE_COMPLETE. Fifteen real HTTP calls verified intake, approval, idempotency, conflicts, unsigned denial and signed reader-only mutation denial. Direct DynamoDB reads verified the approved version, two audit events and two receipts. Regional CloudWatch logs and seven-day retention passed. Independent checks confirmed all dedicated resources were deleted. [Redacted evidence](../../docs/evidence/aws-cloud-verification.json) includes timestamps, source/bundle hashes, responses and cleanup checks. This was a temporary synthetic demo with one owner principal, not a production service or independent human approval workflow.
 
 The Operations analyst submits a complete request; an Approver records a reasoned decision. The service rejects malformed input, missing/wrong-role identity, stale versions and reused keys with a different body. A DynamoDB transaction writes the request, audit event and idempotency receipt. Reads are strongly consistent; event history is bounded to 50 recent entries.
 
@@ -8,7 +10,7 @@ Local: set LOCAL_API_TOKEN to a random 24+ character value in your shell and run
 
 DynamoDB Local integration: `docker compose up -d dynamodb`, then run `pnpm test:integration` (also requires Azurite). This creates and deletes a uniquely named local table only; credentials are the emulator's dummy values. Do not point the test at real AWS.
 
-## Manual deployment runbook (blocked by cost gate)
+## Manual deployment runbook (fresh approval required for another run)
 
 1. Install AWS/SAM tooling through the provider's documented installer; authenticate with a profile outside chat. For the new GitHub sign-in project experience, use the supported `aws login --profile serviceflow` browser flow after local-access approval; never paste credentials into chat. Owner completes the browser grant. Inspect Billing and complete [COST_GATE](../../docs/COST_GATE.md).
 2. Run all local checks. Run `pnpm build`; dist/lambda.js includes SDK dependencies, and dist/package.json explicitly selects CommonJS for the SAM handler.
@@ -19,4 +21,4 @@ DynamoDB Local integration: `docker compose up -d dynamodb`, then run `pnpm test
 7. Use a SigV4 client with the local credential provider chain (never copy keys into code/chat). Submit, reread, decide, replay, test stale version, and attempt the same POST unsigned. Unsigned must return 401/403 and no side effects. Save redacted outputs and audit evidence.
 8. Inspect CloudWatch retention, request counts, DynamoDB capacity/storage and Billing. Run `sam delete --stack-name <dedicated-stack> --region <approved-region>` after evidence capture, including stack-managed table/log resources. Check/delete the deployment S3 artefacts/bucket if dedicated and no longer needed. Recheck delayed billing.
 
-No live URL or deployed IAM capability may be claimed until this runbook succeeds. Transaction operation permissions use item-level dynamodb:PutItem on this table; no table scan or admin runtime role is granted.
+The verified temporary endpoint was removed after evidence capture; no continuously hosted service is claimed. The explicit transaction policy uses item-level dynamodb:PutItem on this table and no table scan. AWS's managed project defaults can grant broader effective access; the narrow template policy alone does not prove least privilege.

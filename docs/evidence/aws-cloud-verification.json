@@ -1,0 +1,511 @@
+{
+  "evidenceType": "Actual AWS deployment, bounded smoke and teardown; account/resource identifiers redacted",
+  "approval": "Owner explicitly approved deployment, tests and teardown in chat",
+  "profile": "serviceflow",
+  "region": "eu-north-1",
+  "stackName": "serviceflow-aws-demo",
+  "sourceCommit": "e0a49b611d654728a72611ee1a5e7eb571ce4adf",
+  "templateSHA256": "5024706e12a7e3ce06e7a4cb89c67f34406ad28a0d4149f745aa0a64d4cf1249",
+  "bundleSHA256": "55ba1629c26881aef74f38c6e47424785e6c190cec2aac7ba72bf5e375216d9d",
+  "bundleBytes": 353388,
+  "startedAt": "2026-10-24T14:11:11.446588+00:00",
+  "deploymentExecutionStartedAt": "2026-10-24T14:11:37.139254+00:00",
+  "deployedAt": "2026-10-24T14:12:27.903742+00:00",
+  "smokeCompletedAt": "2026-10-24T14:13:23.893127+00:00",
+  "cleanupCompletedAt": "2026-10-24T14:14:18.160644+00:00",
+  "cleanupVerifiedAt": "2026-10-24T14:14:47.561965+00:00",
+  "deploymentStatus": "CREATE_COMPLETE",
+  "smokePassed": true,
+  "traffic": {
+    "http": 15,
+    "mutations": 10
+  },
+  "checks": [
+    {
+      "check": "Authenticated health",
+      "method": "GET",
+      "path": "/healthz",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "status": "ok"
+      }
+    },
+    {
+      "check": "Unsigned mutation denied",
+      "method": "POST",
+      "path": "/requests",
+      "signed": false,
+      "status": 403,
+      "expected": [
+        401,
+        403
+      ],
+      "passed": true,
+      "response": {
+        "message": "Forbidden"
+      }
+    },
+    {
+      "check": "Unsigned mutation left DynamoDB unchanged",
+      "passed": true
+    },
+    {
+      "check": "Invalid payload rejected",
+      "method": "POST",
+      "path": "/requests",
+      "signed": true,
+      "status": 400,
+      "expected": 400,
+      "passed": true,
+      "response": {
+        "error": "Validation failed",
+        "fields": [
+          {
+            "path": "customerId",
+            "message": "Invalid string: must match pattern /^SYN-\\d{3}$/"
+          },
+          {
+            "path": "summary",
+            "message": "Invalid input: expected string, received undefined"
+          },
+          {
+            "path": "ownerTeam",
+            "message": "Invalid input: expected string, received undefined"
+          },
+          {
+            "path": "priority",
+            "message": "Invalid option: expected one of \"LOW\"|\"MEDIUM\"|\"HIGH\"|\"CRITICAL\""
+          },
+          {
+            "path": "submittedAt",
+            "message": "Invalid input: expected string, received undefined"
+          },
+          {
+            "path": "targetAt",
+            "message": "Invalid input: expected string, received undefined"
+          },
+          {
+            "path": "approvalRequired",
+            "message": "Invalid input: expected boolean, received undefined"
+          }
+        ]
+      }
+    },
+    {
+      "check": "Create synthetic request",
+      "method": "POST",
+      "path": "/requests",
+      "signed": true,
+      "status": 201,
+      "expected": 201,
+      "passed": true,
+      "response": {
+        "requestId": "REQ-0900",
+        "customerId": "SYN-900",
+        "summary": "Synthetic real AWS approval smoke",
+        "ownerTeam": "Operations",
+        "priority": "HIGH",
+        "status": "SUBMITTED",
+        "submittedAt": "2026-10-23T00:00:00.000Z",
+        "targetAt": "2026-11-01T00:00:00.000Z",
+        "approvalRequired": true,
+        "approverId": null,
+        "version": 1
+      }
+    },
+    {
+      "check": "Reread persisted request",
+      "method": "GET",
+      "path": "/requests/REQ-0900",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "request": {
+          "approvalRequired": true,
+          "approverId": null,
+          "customerId": "SYN-900",
+          "ownerTeam": "Operations",
+          "priority": "HIGH",
+          "requestId": "REQ-0900",
+          "status": "SUBMITTED",
+          "submittedAt": "2026-10-23T00:00:00.000Z",
+          "summary": "Synthetic real AWS approval smoke",
+          "targetAt": "2026-11-01T00:00:00.000Z",
+          "version": 1
+        },
+        "events": [
+          {
+            "actorId": "[AWS ARN redacted]",
+            "correlationId": "FwJ0SisPAi0EJIA=",
+            "details": {},
+            "eventId": "f3c9eb91-5d85-4b43-abca-1a096695c4f8",
+            "eventType": "REQUEST_SUBMITTED",
+            "occurredAt": "2026-10-24T14:12:56.626Z",
+            "requestId": "REQ-0900"
+          }
+        ]
+      }
+    },
+    {
+      "check": "Create replay is idempotent",
+      "method": "POST",
+      "path": "/requests",
+      "signed": true,
+      "status": 201,
+      "expected": 201,
+      "passed": true,
+      "response": {
+        "approvalRequired": true,
+        "approverId": null,
+        "customerId": "SYN-900",
+        "ownerTeam": "Operations",
+        "priority": "HIGH",
+        "requestId": "REQ-0900",
+        "status": "SUBMITTED",
+        "submittedAt": "2026-10-23T00:00:00.000Z",
+        "summary": "Synthetic real AWS approval smoke",
+        "targetAt": "2026-11-01T00:00:00.000Z",
+        "version": 1
+      }
+    },
+    {
+      "check": "Changed body with reused key conflicts",
+      "method": "POST",
+      "path": "/requests",
+      "signed": true,
+      "status": 409,
+      "expected": 409,
+      "passed": true,
+      "response": {
+        "error": "Idempotency conflict"
+      }
+    },
+    {
+      "check": "Duplicate ID conflicts",
+      "method": "POST",
+      "path": "/requests",
+      "signed": true,
+      "status": 409,
+      "expected": 409,
+      "passed": true,
+      "response": {
+        "error": "Concurrent write or duplicate ID"
+      }
+    },
+    {
+      "check": "Approve persisted request",
+      "method": "POST",
+      "path": "/requests/REQ-0900/decision",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "requestId": "REQ-0900",
+        "customerId": "SYN-900",
+        "summary": "Synthetic real AWS approval smoke",
+        "ownerTeam": "Operations",
+        "priority": "HIGH",
+        "status": "APPROVED",
+        "submittedAt": "2026-10-23T00:00:00.000Z",
+        "targetAt": "2026-11-01T00:00:00.000Z",
+        "approvalRequired": true,
+        "approverId": "[AWS ARN redacted]",
+        "version": 2
+      }
+    },
+    {
+      "check": "Decision replay is idempotent",
+      "method": "POST",
+      "path": "/requests/REQ-0900/decision",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "approvalRequired": true,
+        "approverId": "[AWS ARN redacted]",
+        "customerId": "SYN-900",
+        "ownerTeam": "Operations",
+        "priority": "HIGH",
+        "requestId": "REQ-0900",
+        "status": "APPROVED",
+        "submittedAt": "2026-10-23T00:00:00.000Z",
+        "summary": "Synthetic real AWS approval smoke",
+        "targetAt": "2026-11-01T00:00:00.000Z",
+        "version": 2
+      }
+    },
+    {
+      "check": "Stale decision conflicts",
+      "method": "POST",
+      "path": "/requests/REQ-0900/decision",
+      "signed": true,
+      "status": 409,
+      "expected": 409,
+      "passed": true,
+      "response": {
+        "error": "Version or transition conflict"
+      }
+    },
+    {
+      "check": "Unsigned read denied",
+      "method": "GET",
+      "path": "/requests/REQ-0900",
+      "signed": false,
+      "status": 403,
+      "expected": [
+        401,
+        403
+      ],
+      "passed": true,
+      "response": {
+        "message": "Forbidden"
+      }
+    },
+    {
+      "check": "Reader-only principal can read",
+      "method": "GET",
+      "path": "/requests/REQ-0900",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "request": {
+          "approvalRequired": true,
+          "approverId": "[AWS ARN redacted]",
+          "customerId": "SYN-900",
+          "ownerTeam": "Operations",
+          "priority": "HIGH",
+          "requestId": "REQ-0900",
+          "status": "APPROVED",
+          "submittedAt": "2026-10-23T00:00:00.000Z",
+          "summary": "Synthetic real AWS approval smoke",
+          "targetAt": "2026-11-01T00:00:00.000Z",
+          "version": 2
+        },
+        "events": [
+          {
+            "actorId": "[AWS ARN redacted]",
+            "correlationId": "FwJ1hi9bgi0EJpg=",
+            "details": {
+              "decision": "APPROVED",
+              "reason": "Synthetic owner-approved AWS demo"
+            },
+            "eventId": "867363ad-c0b7-48a2-903c-0f6c727dcc4c",
+            "eventType": "DECISION_RECORDED",
+            "occurredAt": "2026-10-24T14:13:03.925Z",
+            "requestId": "REQ-0900"
+          },
+          {
+            "actorId": "[AWS ARN redacted]",
+            "correlationId": "FwJ0SisPAi0EJIA=",
+            "details": {},
+            "eventId": "f3c9eb91-5d85-4b43-abca-1a096695c4f8",
+            "eventType": "REQUEST_SUBMITTED",
+            "occurredAt": "2026-10-24T14:12:56.626Z",
+            "requestId": "REQ-0900"
+          }
+        ]
+      }
+    },
+    {
+      "check": "Reader-only principal cannot mutate",
+      "method": "POST",
+      "path": "/requests/REQ-0900/decision",
+      "signed": true,
+      "status": 403,
+      "expected": 403,
+      "passed": true,
+      "response": {
+        "error": "Forbidden"
+      }
+    },
+    {
+      "check": "Signed wrong-role mutation left DynamoDB unchanged",
+      "passed": true
+    },
+    {
+      "check": "Final persisted state",
+      "method": "GET",
+      "path": "/requests/REQ-0900",
+      "signed": true,
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "response": {
+        "request": {
+          "approvalRequired": true,
+          "approverId": "[AWS ARN redacted]",
+          "customerId": "SYN-900",
+          "ownerTeam": "Operations",
+          "priority": "HIGH",
+          "requestId": "REQ-0900",
+          "status": "APPROVED",
+          "submittedAt": "2026-10-23T00:00:00.000Z",
+          "summary": "Synthetic real AWS approval smoke",
+          "targetAt": "2026-11-01T00:00:00.000Z",
+          "version": 2
+        },
+        "events": [
+          {
+            "actorId": "[AWS ARN redacted]",
+            "correlationId": "FwJ1hi9bgi0EJpg=",
+            "details": {
+              "decision": "APPROVED",
+              "reason": "Synthetic owner-approved AWS demo"
+            },
+            "eventId": "867363ad-c0b7-48a2-903c-0f6c727dcc4c",
+            "eventType": "DECISION_RECORDED",
+            "occurredAt": "2026-10-24T14:13:03.925Z",
+            "requestId": "REQ-0900"
+          },
+          {
+            "actorId": "[AWS ARN redacted]",
+            "correlationId": "FwJ0SisPAi0EJIA=",
+            "details": {},
+            "eventId": "f3c9eb91-5d85-4b43-abca-1a096695c4f8",
+            "eventType": "REQUEST_SUBMITTED",
+            "occurredAt": "2026-10-24T14:12:56.626Z",
+            "requestId": "REQ-0900"
+          }
+        ]
+      }
+    },
+    {
+      "check": "Independent DynamoDB request, two audit events and two receipts verified",
+      "passed": true,
+      "requestVersion": 2,
+      "requestStatus": "APPROVED",
+      "auditCount": 2,
+      "receiptCount": 2
+    },
+    {
+      "check": "CloudWatch regional logs and seven-day retention verified",
+      "passed": true,
+      "applicationLogs": [
+        {
+          "correlationId": "FwJzigfEgi0EJtA=",
+          "statusCode": 200
+        },
+        {
+          "correlationId": "FwJ0GhfyAi0EKhw=",
+          "statusCode": 400
+        },
+        {
+          "correlationId": "FwJ0SisPAi0EJIA=",
+          "statusCode": 201
+        },
+        {
+          "correlationId": "FwJ0ogEBgi0EJCQ=",
+          "statusCode": 200
+        },
+        {
+          "correlationId": "FwJ02h02Ai0EKaA=",
+          "statusCode": 201
+        },
+        {
+          "correlationId": "FwJ1DgwtAi0EJtA=",
+          "statusCode": 409
+        },
+        {
+          "correlationId": "FwJ1RhE9gi0EJ0w=",
+          "statusCode": 409
+        },
+        {
+          "correlationId": "FwJ1hi9bgi0EJpg=",
+          "statusCode": 200
+        },
+        {
+          "correlationId": "FwJ1why7gi0EKhw=",
+          "statusCode": 200
+        },
+        {
+          "correlationId": "FwJ1-h1hgi0EKhw=",
+          "statusCode": 409
+        },
+        {
+          "correlationId": "FwJ26jNyAi0EJpg=",
+          "statusCode": 200
+        },
+        {
+          "correlationId": "FwJ3WjQKgi0EJIA=",
+          "statusCode": 403
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "logicalId": "Api",
+      "type": "AWS::ApiGatewayV2::Api",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "ApiApiGatewayDefaultStage",
+      "type": "AWS::ApiGatewayV2::Stage",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "Function",
+      "type": "AWS::Lambda::Function",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "FunctionCreatePermission",
+      "type": "AWS::Lambda::Permission",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "FunctionDecisionPermission",
+      "type": "AWS::Lambda::Permission",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "FunctionHealthPermission",
+      "type": "AWS::Lambda::Permission",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "FunctionReadPermission",
+      "type": "AWS::Lambda::Permission",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "FunctionRole",
+      "type": "AWS::IAM::Role",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "Logs",
+      "type": "AWS::Logs::LogGroup",
+      "creationStatus": "CREATE_COMPLETE"
+    },
+    {
+      "logicalId": "Table",
+      "type": "AWS::DynamoDB::Table",
+      "creationStatus": "CREATE_COMPLETE"
+    }
+  ],
+  "cleanup": {
+    "lambdaRemoved": true,
+    "dynamodbTableRemoved": true,
+    "httpApiRemoved": true,
+    "runtimeRoleRemoved": true,
+    "packagingBucketRemoved": true,
+    "logGroupRemoved": true,
+    "stackDeleted": true
+  },
+  "planAfterTeardown": {
+    "type": "FREE",
+    "status": "ACTIVE"
+  },
+  "billingLimitations": "Credits checked privately after teardown; delayed/final billing not independently verified. No Paid upgrade.",
+  "securityLimitations": "One owner principal exercised all application roles. Reader-only mutation denial tested through temporary allowlist reduction. Managed project defaults prevent an effective least-privilege claim."
+}
