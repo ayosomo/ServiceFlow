@@ -1,0 +1,14 @@
+Timestamp UTC: 2026-10-24T20:27:22.320075+00:00
+Command: pnpm exec vitest run --config vitest.integration.config.ts apps/azure-data-quality/tests/azurite.integration.test.ts
+Exit: 0
+Boundary: local synthetic; no Azure provider calls
+
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  21:27:25
+   Duration  4.23s (import 71%, tests 26%, transform 2%)
+

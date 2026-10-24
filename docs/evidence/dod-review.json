@@ -1,0 +1,21 @@
+{
+  "reviewedAtUTC": "2026-10-24T20:31:09.979535+00:00",
+  "applicationBaselineCommit": "475cc9098cc20f286a46f3c468408092267a79b7",
+  "sourceConfigComparison": "All baseline code/config bytes match except the explicitly changed local integration test",
+  "changedTestSHA256": {
+    "apps/azure-data-quality/tests/azurite.integration.test.ts": "fc76e25c36ed7a0998d8965b51cdf8a5a031a6f1b6235599b90e1187425a1ffa"
+  },
+  "applicationAndInfrastructureCodeUnchanged": true,
+  "currentCandidateFilesChecked": 246,
+  "knownPrivateValuesAbsent": 8,
+  "localTestAndTypecheckPassed": true,
+  "unsignedPutStatus": 403,
+  "sourceBytesAndETagUnchanged": true,
+  "azureCloudVerified": false,
+  "azureCloudEntraRbacVerified": false,
+  "azureProvisioningGate": "HOLD",
+  "localOnlyAlternativeExplicit": true,
+  "ownerUatSignoff": "PENDING",
+  "cloudChanges": [],
+  "gateAudit": "docs/DEFINITION-OF-DONE.md"
+}

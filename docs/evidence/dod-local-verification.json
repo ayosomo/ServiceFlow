@@ -1,0 +1,33 @@
+{
+  "checkedAtUTC": "2026-10-24T20:27:42.625981+00:00",
+  "sourceBasisCommit": "475cc9098cc20f286a46f3c468408092267a79b7",
+  "workingTreeChangesIncluded": true,
+  "checks": [
+    {
+      "command": "pnpm exec vitest run --config vitest.integration.config.ts apps/azure-data-quality/tests/azurite.integration.test.ts",
+      "code": 0,
+      "evidence": "docs/evidence/dod-azure-unsigned.txt",
+      "sha256": "5fc3c088fd4421cf99b6c64ac3e4c1974de322685f981fe0e2a94413ad316874"
+    },
+    {
+      "command": "pnpm typecheck",
+      "code": 0,
+      "evidence": "docs/evidence/dod-typecheck.txt",
+      "sha256": "5dab19e5f282a622018eedee474069269bde19a3b8b1287a6a1e2fad615d8568"
+    },
+    {
+      "command": "pnpm exec vitest run --config vitest.integration.config.ts apps/azure-data-quality/tests/azurite.integration.test.ts --disableConsoleIntercept",
+      "code": 0,
+      "evidence": "docs/evidence/dod-azure-unsigned-response.txt",
+      "sha256": "af8496de4fc9f380856538e8c136a700cda1365fc7c4c1e1af2b5163b121a7a1",
+      "purpose": "Explicit response log capture; default reporter hid passing-test stdout"
+    }
+  ],
+  "allChecksPassed": true,
+  "claim": "Actual unsigned PUT to loopback Azurite returns 403; authenticated reread proves source bytes and ETag unchanged",
+  "azureCloudEntraRbacVerified": false,
+  "cloudDeployments": [],
+  "accountUpgrades": [],
+  "observedUnsignedPutStatus": 403,
+  "sourceBytesAndETagUnchanged": true
+}

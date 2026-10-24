@@ -1,0 +1,55 @@
+{
+  "checkedAtUTC": "2026-10-24 20:28:57 UTC",
+  "sourceCommit": "475cc9098cc20f286a46f3c468408092267a79b7",
+  "tag": "v0.5.0-local-operations",
+  "runs": [
+    {
+      "id": 40129278557,
+      "name": "local-quality-gates",
+      "branch": "v0.5.0-local-operations",
+      "sha": "475cc9098cc20f286a46f3c468408092267a79b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40129278557"
+    },
+    {
+      "id": 40129278525,
+      "name": "local-quality-gates",
+      "branch": "main",
+      "sha": "475cc9098cc20f286a46f3c468408092267a79b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40129278525"
+    },
+    {
+      "id": 40129278538,
+      "name": "codeql",
+      "branch": "v0.5.0-local-operations",
+      "sha": "475cc9098cc20f286a46f3c468408092267a79b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40129278538"
+    },
+    {
+      "id": 40129278531,
+      "name": "codeql",
+      "branch": "main",
+      "sha": "475cc9098cc20f286a46f3c468408092267a79b7",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40129278531"
+    }
+  ],
+  "freshCheckoutStepsObserved": [
+    "actions/checkout@v4",
+    "pnpm install --frozen-lockfile",
+    "pnpm lint",
+    "pnpm typecheck",
+    "pnpm test",
+    "pnpm build",
+    "pnpm test:http",
+    "pnpm test:integration"
+  ],
+  "allObservedStepsPassed": true,
+  "boundary": "Baseline application source; audit follow-up changes only one local integration test and documentation. Audit-release CI is recorded separately after publication."
+}

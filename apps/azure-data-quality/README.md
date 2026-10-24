@@ -4,6 +4,8 @@ All demonstration data is synthetic. Portfolio project, not an employer integrat
 
 The Data Steward gets rule-by-rule exceptions without silent source repairs. Eight dirty CRM rows produce 12 findings: 8 critical and 4 review. Pending approvals and valid late records remain quality-pass operational concerns. The pipeline reads supplier before CRM, uses ETags/content hashes, writes immutable findings, then atomically creates a batch summary. It repairs the convenience findings path on retry; changed inputs under a committed batch ID conflict.
 
+The local Azurite integration also attempts an unsigned PUT over an existing source. It asserts 403, then uses authenticated reread to prove unchanged bytes and ETag before processing the same 48-row batch/replay. [Actual negative-test output](../../docs/evidence/dod-azure-unsigned-response.txt), [quality-gate audit](../../docs/DEFINITION-OF-DONE.md). This tests local storage authentication, not Azure Entra/RBAC or cloud IAM.
+
 Local pure execution: `pnpm azure:batch` saves a labelled local JSON report. Azurite adapter test: start Compose azurite, run `pnpm test:integration`. Functions host execution is a separate check: copy local.settings.example.json to ignored local.settings.json, install Functions Core Tools, run `pnpm build`, then `func start` from this app directory. Upload supplier then CRM to incoming/<batchId>/. Inspect results/<batchId>/summary.json and findings.json, then repeat uploads. Source batch IDs must be immutable after upload; cross-blob snapshot atomicity is not guaranteed.
 
 ## Deployment runbook (blocked by cost gate and quota)

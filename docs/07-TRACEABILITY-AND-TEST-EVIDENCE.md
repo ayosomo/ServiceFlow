@@ -1,5 +1,7 @@
 # Test evidence and reproducibility
 
+The [per-lab Definition of Done audit](DEFINITION-OF-DONE.md) links all eleven supplied gates to evidence and explicitly keeps Azure provisioning on hold/cloud NOT VERIFIED. The follow-up strengthens the existing Azurite integration with actual unsigned-write 403 and unchanged-source bytes/ETag assertions; [local output](evidence/dod-azure-unsigned-response.txt), [verification](evidence/dod-local-verification.json). The existing test count remains three persistence integrations; no extra test count or cloud role-verification claim is invented.
+
 Evidence is recorded in docs/evidence. Tests exercise business acceptance and failure effects; cloud smoke evidence is separate. See IMPLEMENTATION_STATUS.md for the final observed results.
 
 Run from the repository root using Node 22 or the recorded local Node 24:

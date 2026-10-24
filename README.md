@@ -15,6 +15,8 @@ Three small applications address one fictional service-delivery problem: incompl
 
 See [implementation status](docs/IMPLEMENTATION_STATUS.md) for exact passed/pending checks. A source test link alone does not imply that a provider integration passed.
 
+The [Definition of Done audit](docs/DEFINITION-OF-DONE.md) maps all eleven quality gates to per-lab evidence. Azure provisioning remains on hold and cloud NOT VERIFIED; the local unsigned-write check proves Azurite rejection only.
+
 ## Reproduce locally
 
 Use Node 22 LTS (local authoring used recorded Node 24), pnpm 11.25.0 and a running Docker engine.

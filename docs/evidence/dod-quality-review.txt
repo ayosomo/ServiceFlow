@@ -1,0 +1,10 @@
+Captured final output chunk from a completed command session at 2026-10-24 20:30:26 UTC
+Commands: pnpm lint; pnpm check:portfolio; pnpm check:secrets; git diff --check
+Exit: 0
+
+All matched files use Prettier code style!
+$ tsx scripts/check-portfolio.ts
+PASS: 317 local Markdown/image targets across 34 files exist inside the repository; screenshot/source hashes match. External URLs and anchor fragments are not validated by this check.
+$ tsx scripts/check-secrets.ts
+PASS: 245 tracked/untracked non-ignored candidate files checked for AWS access-key IDs, private keys, GitHub tokens and GCP private-key JSON. This bounded pattern scan is not a guarantee; manual review still required.
+

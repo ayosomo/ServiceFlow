@@ -1,0 +1,14 @@
+Timestamp UTC: 2026-10-24T20:29:27.832321+00:00
+Command: pnpm exec vitest run --config vitest.integration.config.ts apps/azure-data-quality/tests/azurite.integration.test.ts --disableConsoleIntercept
+Exit: 0
+
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+{"event":"azure_local_unsigned_write","unsignedPutStatus":403,"sourceUnchanged":true,"boundary":"Actual loopback Azurite authentication test; Azure cloud Entra/RBAC NOT VERIFIED"}
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  21:29:30
+   Duration  4.34s (import 72%, tests 25%, transform 2%)
+
