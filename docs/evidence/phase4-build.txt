@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T18:00:28.894616+00:00
+Command: pnpm build
+Exit: 0
+Boundary: local synthetic lab only
+
+Built AWS, Azure and GCP Node 22 bundles.
+$ tsx scripts/build.ts

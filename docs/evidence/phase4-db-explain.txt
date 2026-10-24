@@ -1,0 +1,25 @@
+Timestamp UTC: 2026-10-24T18:01:04.812706+00:00
+Command: pnpm db:explain
+Exit: 0
+Boundary: local synthetic lab only
+
+Index Scan using requests_pkey on requests  (cost=0.15..8.17 rows=1 width=253) (actual time=0.106..0.790 rows=1 loops=1)
+  Index Cond: (request_id = 'REQ-0024'::text)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=110
+Planning Time: 2.550 ms
+Execution Time: 0.882 ms
+Incremental Sort  (cost=8.17..8.22 rows=2 width=72) (actual time=0.610..0.613 rows=13 loops=1)
+  Sort Key: target_at, request_id
+  Presorted Key: target_at
+  Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
+  Buffers: shared hit=25
+  ->  Index Scan using requests_active_target_idx on requests  (cost=0.14..8.16 rows=1 width=72) (actual time=0.123..0.139 rows=13 loops=1)
+        Index Cond: (target_at < '2026-10-23 00:00:00+00'::timestamp with time zone)
+        Buffers: shared hit=16
+Planning:
+  Buffers: shared hit=16
+Planning Time: 1.879 ms
+Execution Time: 1.201 ms
+$ tsx db/run.ts explain

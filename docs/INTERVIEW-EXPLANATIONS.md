@@ -4,11 +4,13 @@ Independent portfolio, synthetic data. AWS has actual cloud deployment/test/tear
 
 ## Ninety-second business story
 
-“I used a fictional service-request process to demonstrate how I translate a business problem into testable delivery. I defined stakeholder needs, requirements and acceptance criteria. Forty-eight synthetic requests connect traceable approval, source reconciliation and transparent KPIs. I preserved dirty inputs and separated data quality from approval waits and late delivery. PostgreSQL provides an independently checked relational reference. After account/cost review and explicit approval, I deployed the approval API on AWS Lambda, API Gateway and DynamoDB. Fifteen real HTTP calls verified valid actions, retries, conflicts and access denial, with direct audit checks. I then removed the resources and independently verified teardown. Azure and Google Cloud are locally tested and still await their own cloud gates. This independent portfolio is separate from my professional release-delivery experience.”
+“I used a fictional service-request process to demonstrate how I translate a business problem into testable delivery. I defined stakeholder needs, requirements and acceptance criteria. Forty-eight synthetic requests connect traceable approval, source reconciliation and transparent KPIs. I preserved dirty inputs and separated data quality from approval waits and late delivery. PostgreSQL provides an independent relational reference. After cost review and explicit approval, I deployed and tested the request API on AWS and the insights API on Google Cloud, then independently checked removal of the active resources. The Azure Functions pipeline passed an actual local host test, but cloud deployment is blocked by entitlement. The GCP business routes passed while its health path failed; the correction is local-only. I keep those boundaries visible in the evidence. This independent portfolio is separate from my professional release-delivery experience.”
 
 ## AWS three-minute demo
 
 Start with BA-001/002 and OpenAPI. Walk through the saved actual cloud evidence: create/reread, approve, replay, 409 conflicts, unsigned and signed reader-only 403s, then direct audit/receipt checks and teardown. Explain the DynamoDB transaction separately from gateway authentication and business-role allowlists. The temporary endpoint is removed; use local execution for an interactive demo. One owner exercised all roles, so do not imply independent human approval.
+
+Then show the local-only BA-007/008 extension: two synthetic identities, requester decision denial, fail-closed provenance and retry after a lost acknowledgement. Explain why a 503 can follow a committed write. Different principal strings do not prove different humans; stable identity and effective permission review remain production blockers. [Backlog](AWS-PRODUCTION-READINESS.md).
 
 ## Azure three-minute demo
 
@@ -20,7 +22,7 @@ Show KPI catalogue before the response. Query fixed asOf; inspect numerator/deno
 
 ## What failed and what I would improve
 
-Docker initially could not start because a frozen WSL VM held its disk. An owner-approved Windows restart restored the engine; real container/SQL/emulator/host checks then passed. The first reconciliation-count expectation overlooked overlapping findings; inspecting preserved values corrected the assertion without changing input data. Actual host testing caught a .NET/Node emulator-port mismatch, fixed with an explicit local endpoint. AWS cloud deployment, smoke and teardown subsequently passed; regional logging worked despite a documentation ambiguity. Budget listing returned an empty body, so no alert claim was made. Next: Azure/GCP account review and approved deployments, then identity-group and retention decisions before production use. A tiny fixture cannot prove performance or business savings.
+Docker initially could not start because a frozen WSL VM held its disk. An owner-approved Windows restart restored the engine; real container/SQL/emulator/host checks then passed. The first reconciliation-count expectation overlooked overlapping findings; inspecting preserved values corrected the assertion without changing input data. Actual host testing caught a .NET/Node emulator-port mismatch, fixed with an explicit local endpoint. AWS cloud smoke and teardown passed; GCP business smoke passed with an explicit health exception. Budget listing returned an empty body, so no alert claim was made. Next: owner UAT, Azure no-upgrade entitlement clarification and the AWS production backlog; any new cloud run needs fresh approval. A tiny fixture cannot prove performance or business savings.
 
 ## GCP verified interview account
 

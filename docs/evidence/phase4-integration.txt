@@ -1,0 +1,15 @@
+Timestamp UTC: 2026-10-24T18:00:36.592025+00:00
+Command: pnpm test:integration
+Exit: 0
+Boundary: local synthetic lab only
+
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+
+ Test Files  3 passed (3)
+      Tests  3 passed (3)
+   Start at  19:00:38
+   Duration  13.06s (tests 76%, import 22%, transform 2%)
+
+$ vitest run --config vitest.integration.config.ts

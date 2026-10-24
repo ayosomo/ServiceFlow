@@ -1,0 +1,39 @@
+{
+  "generatedAtUTC": "2026-10-24T18:06:05.697Z",
+  "kind": "Static browser views of saved actual evidence; not live provider consoles",
+  "views": [
+    {
+      "name": "aws-local-evidence",
+      "title": "AWS — local HTTP evidence",
+      "boundary": "Actual loopback execution; in-memory persistence. New controls NOT cloud verified.",
+      "sources": [
+        {
+          "file": "docs/evidence/phase4-http-responses.txt",
+          "sha256": "247675b5acf629c430562697f012a889051e30b239e4b455ff4c7acbd958ed5f"
+        }
+      ]
+    },
+    {
+      "name": "azure-local-evidence",
+      "title": "Azure — local Functions host evidence",
+      "boundary": "Actual saved Functions v4 + Azurite result. Azure cloud NOT VERIFIED.",
+      "sources": [
+        {
+          "file": "docs/evidence/azure-package-host.json",
+          "sha256": "25acc184ce9eef183cc18661f6584284ea661969d535a6bde7ca84681e1db349"
+        }
+      ]
+    },
+    {
+      "name": "gcp-cloud-evidence",
+      "title": "GCP — saved cloud business results",
+      "boundary": "Historical approved run; active resources removed. Deployed health failed; correction local-only.",
+      "sources": [
+        {
+          "file": "docs/evidence/gcp-cloud-verification.json",
+          "sha256": "262e52d7c1f60b01eac5a5988f023fcfa0f5213a4633c101f3a4a09201c20ba5"
+        }
+      ]
+    }
+  ]
+}

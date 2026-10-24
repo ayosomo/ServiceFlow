@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'"><title>AWS — local HTTP evidence</title><style>body{margin:0;background:#f1f5f9;color:#142338;font:17px system-ui,sans-serif}main{max-width:1240px;margin:30px auto;padding:32px;background:white;border-top:7px solid #146c78}h1{font-size:34px;margin:10px 0 20px}h2{font-size:18px;margin:0 0 10px}header{color:#146c78;font-weight:700;letter-spacing:2px;font-size:13px}.boundary{background:#fff3d6;padding:15px;border-left:4px solid #ad7100;line-height:1.5}section{border:1px solid #dbe3ec;padding:18px;margin:16px 0}pre{font:15px/1.43 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}footer{font:12px/1.5 Consolas,monospace;color:#45556b;overflow-wrap:anywhere}.note{font-size:14px;line-height:1.5}</style><main><header>SERVICEFLOW CLOUD LABS · EVIDENCE REVIEW</header><h1>AWS — local HTTP evidence</h1><p class="boundary">Actual loopback execution; in-memory persistence. New controls NOT cloud verified.</p><p class="note">All demonstration data is synthetic. Portfolio project, not an employer integration.<br>This browser view displays saved actual records. It is not a live provider console or a new cloud test.</p><section><h2>Recorded run</h2><pre>&quot;Real loopback HTTP, fake/fixture persistence. Not cloud: 2026-10-24T18:00:34.306Z&quot;</pre></section><section><h2>Observed HTTP responses (selected fields)</h2><pre>[
+  {
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;path&quot;: &quot;/requests&quot;,
+    &quot;status&quot;: 201
+  },
+  {
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900/decision&quot;,
+    &quot;status&quot;: 403,
+    &quot;error&quot;: &quot;Forbidden&quot;
+  },
+  {
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900&quot;,
+    &quot;status&quot;: 200,
+    &quot;version&quot;: 1,
+    &quot;auditEvents&quot;: 1
+  },
+  {
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900/decision&quot;,
+    &quot;status&quot;: 200
+  },
+  {
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900/decision&quot;,
+    &quot;status&quot;: 200
+  },
+  {
+    &quot;method&quot;: &quot;POST&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900/decision&quot;,
+    &quot;status&quot;: 409,
+    &quot;error&quot;: &quot;Version or transition conflict&quot;
+  },
+  {
+    &quot;method&quot;: &quot;GET&quot;,
+    &quot;path&quot;: &quot;/requests/REQ-0900&quot;,
+    &quot;status&quot;: 200,
+    &quot;version&quot;: 2,
+    &quot;auditEvents&quot;: 2
+  }
+]</pre></section><footer>docs/evidence/phase4-http-responses.txt<br>SHA-256 247675b5acf629c430562697f012a889051e30b239e4b455ff4c7acbd958ed5f</footer></main></html>

@@ -132,6 +132,22 @@ export function api(repo: Repository, clock = () => new Date().toISOString()) {
     try {
       const input: unknown = JSON.parse(call.body);
       const parsed = creating ? create.parse(input) : decision.parse(input);
+      const existing = deciding ? await repo.get(match![1]!) : null;
+      if (deciding) {
+        if (!existing) return respond(404, { error: "Not found" });
+        const submissions = existing.events.filter(
+          (event) => event.eventType === "REQUEST_SUBMITTED",
+        );
+        const submission = submissions[0];
+        if (
+          submissions.length !== 1 ||
+          !submission?.actorId?.trim() ||
+          submission.requestId !== existing.request.requestId
+        )
+          return respond(503, { error: "Submission audit unavailable" });
+        if (submission.actorId === actor.id)
+          return respond(403, { error: "Requester cannot decide own request" });
+      }
       const fingerprint = createHash("sha256")
         .update(JSON.stringify(parsed))
         .digest("hex");
@@ -159,17 +175,15 @@ export function api(repo: Repository, clock = () => new Date().toISOString()) {
           version: 1,
         });
       } else {
-        const d = decision.parse(input),
-          existing = await repo.get(match![1]!);
-        if (!existing) return respond(404, { error: "Not found" });
+        const d = decision.parse(input);
         if (
-          existing.request.version !== d.version ||
-          !canTransition(existing.request.status, d.decision)
+          existing!.request.version !== d.version ||
+          !canTransition(existing!.request.status, d.decision)
         )
           return respond(409, { error: "Version or transition conflict" });
         expectedVersion = d.version;
         request = requestSchema.parse({
-          ...existing.request,
+          ...existing!.request,
           status: d.decision,
           approverId: actor.id,
           version: d.version + 1,

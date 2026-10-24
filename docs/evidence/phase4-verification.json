@@ -1,0 +1,137 @@
+{
+  "kind": "Actual local Phase 4/AWS hardening verification; no cloud deployment",
+  "startedAtUTC": "2026-10-24T18:00:09.730106+00:00",
+  "sourceBasisCommit": "365c6bf733f013c9685dd3b2e7d97f9d80ee7bc8",
+  "workingTreeChangesIncluded": true,
+  "node": "v24.21.0",
+  "results": [
+    {
+      "command": "pnpm typecheck",
+      "startedAtUTC": "2026-10-24T18:00:09.936569+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-typecheck.txt",
+      "sha256": "978b7ae982b41e6ed86443fdcffbeade729e0e46b0bd665761ed6b9f3e764295"
+    },
+    {
+      "command": "pnpm test --reporter=default --reporter=json --outputFile=docs/evidence/phase4-unit-results.json",
+      "startedAtUTC": "2026-10-24T18:00:20.509832+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-unit.txt",
+      "sha256": "98687bbd83cf9a9f0a8904df930dcaa513662199280ca0745847e3e8d2a2e637"
+    },
+    {
+      "command": "pnpm build",
+      "startedAtUTC": "2026-10-24T18:00:28.894616+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-build.txt",
+      "sha256": "1fee7f2aab7d688da5209f0d3e00c0a78c7e74a790390c0c581613b377e5f398"
+    },
+    {
+      "command": "pnpm test:http",
+      "startedAtUTC": "2026-10-24T18:00:32.829054+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-http.txt",
+      "sha256": "a9749eaff760fc4f41c661e5d02b0cb99948e27404af924e7894c795a0365540"
+    },
+    {
+      "command": "pnpm test:integration",
+      "startedAtUTC": "2026-10-24T18:00:36.592025+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-integration.txt",
+      "sha256": "e35cc5ee26964863268431407b7014bf456bd1348b16e3d867a2eea763b302b9"
+    },
+    {
+      "command": "pnpm db:migrate",
+      "startedAtUTC": "2026-10-24T18:00:51.674471+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-db-migrate.txt",
+      "sha256": "2c15dd5d10ef21ad1d19a8996f65a10706f77e7b37946f9ece402598f5e7375c"
+    },
+    {
+      "command": "pnpm db:seed",
+      "startedAtUTC": "2026-10-24T18:00:57.396500+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-db-seed.txt",
+      "sha256": "79254019a83c059aa901e1b43d0f86bb2ed5387fc226a02a8ca266b9adc2dbb7"
+    },
+    {
+      "command": "pnpm db:test",
+      "startedAtUTC": "2026-10-24T18:01:02.722027+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-db-test.txt",
+      "sha256": "0536c7e35b1826cc99d03526e46c5c373aa987f0c7c56b3c61ec6a3a39762c95"
+    },
+    {
+      "command": "pnpm db:explain",
+      "startedAtUTC": "2026-10-24T18:01:04.812706+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-db-explain.txt",
+      "sha256": "15c31392783a37013c76e8d9adcc6ae400cbbfc0d528afd4244f715e7706d89e"
+    },
+    {
+      "command": "pnpm audit --prod --audit-level=high --json",
+      "startedAtUTC": "2026-10-24T18:01:07.567417+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-audit.txt",
+      "sha256": "ca8601f71d420a409552309e3af2c0cdace9b4e98f3ca2601715b2f5bb8a25de"
+    }
+  ],
+  "cloudMutations": [],
+  "azureCloudVerified": false,
+  "newAwsControlsCloudVerified": false,
+  "completedAtUTC": "2026-10-24T18:01:09.504610+00:00",
+  "allListedCommandsPassed": true,
+  "finalSourceReviewChecks": [
+    {
+      "command": "pnpm lint",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:07:39.269154+00:00",
+      "evidence": "docs/evidence/phase4-lint.txt",
+      "sha256": "7b55e8c826370d51945acce363b38fd48fc8a2e58ac880ef54888773ae970049"
+    },
+    {
+      "command": "pnpm check:portfolio",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:07:52.674988+00:00",
+      "evidence": "docs/evidence/phase4-links.txt",
+      "sha256": "562812c2bdcdd9a46040c26ce83f4f66214e909729808110b5793955b8159a17"
+    },
+    {
+      "command": "pnpm check:secrets",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:07:56.739477+00:00",
+      "evidence": "docs/evidence/phase4-secrets.txt",
+      "sha256": "eb111785a885bbd4cfbdf2abcce178fdd3221d925fd260e509c5c05056a65894"
+    },
+    {
+      "command": "pnpm typecheck",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:08:04.352958+00:00",
+      "evidence": "docs/evidence/phase4-final-typecheck.txt",
+      "sha256": "9639d2561b9da47268868e2cb81ac7d3018e3db3baf6c614bcb96c79773fd93a"
+    },
+    {
+      "command": "pnpm test --reporter=default --reporter=json --outputFile=work/phase4-current-unit-raw.json",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:08:19.713116+00:00",
+      "evidence": "docs/evidence/phase4-final-unit.txt",
+      "sha256": "fe706148bb63f0fa58882fc7158d97001a7f4e9da96343b6932db14da72c52b0"
+    },
+    {
+      "command": "pnpm build",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:08:33.537961+00:00",
+      "evidence": "docs/evidence/phase4-final-build.txt",
+      "sha256": "6f574d677b69e2617e2622f96c2f73e810ad4917a0fe06c53aa416be05852df6"
+    },
+    {
+      "command": "git diff --check",
+      "code": 0,
+      "startedAtUTC": "2026-10-24T18:08:41.322220+00:00",
+      "evidence": "docs/evidence/phase4-diff.txt",
+      "sha256": "5cc58a9414b1153753ee1c9fbefef35c3be4f320dd0e87419d09f3882cf9f380"
+    }
+  ],
+  "allFinalReviewChecksPassed": true,
+  "finalReviewAtUTC": "2026-10-24T18:08:41.660828+00:00"
+}

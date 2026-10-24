@@ -1,0 +1,16 @@
+{
+  "reviewedAtUTC": "2026-10-24T18:11:53.603061+00:00",
+  "candidateFilesChecked": 209,
+  "knownPrivateValuesChecked": 8,
+  "knownPrivateIdentifiersAbsent": true,
+  "utf8TextVerified": true,
+  "imageAndSourceHashesMatched": true,
+  "commandLogHashesMatched": true,
+  "visualReview": "All three actual browser captures inspected; boundaries visible, text/footers readable, no clipping; AWS view contains only its own request workflow",
+  "ownerAcceptance": "PENDING",
+  "azureCloudVerified": false,
+  "newAwsControlsCloudVerified": false,
+  "gcpHealthCorrectionCloudVerified": false,
+  "cloudMutations": [],
+  "limitations": "Bounded pattern/known-identifier review, not a guarantee against all sensitive information."
+}

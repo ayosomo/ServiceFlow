@@ -1,9 +1,16 @@
 import Fastify from "fastify";
 import { api, MemoryRepository } from "./service.js";
 const token = process.env.LOCAL_API_TOKEN;
-if (!token || token.length < 24)
+const approverToken = process.env.LOCAL_APPROVER_TOKEN;
+if (
+  !token ||
+  token.length < 24 ||
+  !approverToken ||
+  approverToken.length < 24 ||
+  token === approverToken
+)
   throw new Error(
-    "Set LOCAL_API_TOKEN to a random 24+ character local-only value.",
+    "Set distinct random 24+ character LOCAL_API_TOKEN and LOCAL_APPROVER_TOKEN values.",
   );
 const app = Fastify({ bodyLimit: 16384 });
 const handle = api(new MemoryRepository());
@@ -16,10 +23,12 @@ app.all("/*", async (req, reply) => {
     actor:
       req.headers.authorization === `Bearer ${token}`
         ? {
-            id: "synthetic-local-user",
-            roles: ["requester", "approver", "reader"],
+            id: "synthetic-local-requester",
+            roles: ["requester", "reader"],
           }
-        : undefined,
+        : req.headers.authorization === `Bearer ${approverToken}`
+          ? { id: "synthetic-local-approver", roles: ["approver", "reader"] }
+          : undefined,
   });
   return reply.code(result.statusCode).send(result.body);
 });

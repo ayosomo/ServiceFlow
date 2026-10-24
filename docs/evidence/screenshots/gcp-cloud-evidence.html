@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'"><title>GCP — saved cloud business results</title><style>body{margin:0;background:#f1f5f9;color:#142338;font:17px system-ui,sans-serif}main{max-width:1240px;margin:30px auto;padding:32px;background:white;border-top:7px solid #146c78}h1{font-size:34px;margin:10px 0 20px}h2{font-size:18px;margin:0 0 10px}header{color:#146c78;font-weight:700;letter-spacing:2px;font-size:13px}.boundary{background:#fff3d6;padding:15px;border-left:4px solid #ad7100;line-height:1.5}section{border:1px solid #dbe3ec;padding:18px;margin:16px 0}pre{font:15px/1.43 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}footer{font:12px/1.5 Consolas,monospace;color:#45556b;overflow-wrap:anywhere}.note{font-size:14px;line-height:1.5}</style><main><header>SERVICEFLOW CLOUD LABS · EVIDENCE REVIEW</header><h1>GCP — saved cloud business results</h1><p class="boundary">Historical approved run; active resources removed. Deployed health failed; correction local-only.</p><p class="note">All demonstration data is synthetic. Portfolio project, not an employer integration.<br>This browser view displays saved actual records. It is not a live provider console or a new cloud test.</p><section><h2>Exact historical run</h2><pre>{
+  &quot;deployedAtUTC&quot;: &quot;2026-10-24T16:44:59.040608+00:00&quot;,
+  &quot;sourceCommit&quot;: &quot;5e709d648fc2ef0bc68eeb7258d1fd9a9741905c&quot;,
+  &quot;region&quot;: &quot;europe-west2&quot;,
+  &quot;revision&quot;: &quot;serviceflow-insights-00001-62l&quot;,
+  &quot;elapsedMinutes&quot;: 33.68,
+  &quot;snapshotUnchanged&quot;: true
+}</pre></section><section><h2>Observed results and exception</h2><pre>{
+  &quot;totalRecords&quot;: 48,
+  &quot;quality&quot;: &quot;41/47&quot;,
+  &quot;readiness&quot;: &quot;13/20&quot;,
+  &quot;overdue&quot;: 9,
+  &quot;healthRoute&quot;: {
+    &quot;deployedHealthzStatus&quot;: 404,
+    &quot;cloudHealthPassed&quot;: false,
+    &quot;localCorrection&quot;: &quot;/health&quot;,
+    &quot;correctionRedeployed&quot;: false,
+    &quot;source&quot;: &quot;https://docs.cloud.google.com/run/docs/known-issues#reserved_url_paths&quot;,
+    &quot;interpretation&quot;: &quot;Healthz returned provider HTML 404 with no request logs while normal KPI route returned 200. This is consistent with the documented reserved-path warning; no provider outage is claimed.&quot;
+  },
+  &quot;cleanup&quot;: {
+    &quot;services&quot;: &quot;ABSENT&quot;,
+    &quot;databases&quot;: &quot;ABSENT&quot;,
+    &quot;repositories&quot;: &quot;ABSENT&quot;,
+    &quot;userServiceAccounts&quot;: &quot;ABSENT&quot;
+  },
+  &quot;projectState&quot;: &quot;DELETE_REQUESTED&quot;
+}</pre></section><footer>docs/evidence/gcp-cloud-verification.json<br>SHA-256 262e52d7c1f60b01eac5a5988f023fcfa0f5213a4633c101f3a4a09201c20ba5</footer></main></html>

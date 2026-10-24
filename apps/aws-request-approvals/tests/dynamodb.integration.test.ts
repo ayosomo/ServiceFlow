@@ -60,10 +60,11 @@ it("DynamoDB Local commits audit and receipt atomically and rejects duplicate wr
     expect(
       (await run({ ...create, idempotencyKey: "duplicate_create" })).statusCode,
     ).toBe(409);
+    const beforeDecision = await repo.get("REQ-0199");
     const decision = {
       method: "POST",
       path: "/requests/REQ-0199/decision",
-      actor,
+      actor: { id: "synthetic-independent-approver", roles: actor.roles },
       idempotencyKey: "integration_decision",
       body: JSON.stringify({
         decision: "APPROVED",
@@ -71,7 +72,21 @@ it("DynamoDB Local commits audit and receipt atomically and rejects duplicate wr
         version: 1,
       }),
     };
-    expect((await run(decision)).statusCode).toBe(200);
+    expect((await run({ ...decision, actor })).statusCode).toBe(403);
+    expect(await repo.get("REQ-0199")).toEqual(beforeDecision);
+    const save = repo.save.bind(repo);
+    let loseAcknowledgement = true;
+    repo.save = async (...args) => {
+      await save(...args);
+      if (loseAcknowledgement) {
+        loseAcknowledgement = false;
+        throw new Error(
+          "Synthetic acknowledgement lost after real local commit",
+        );
+      }
+    };
+    expect((await run(decision)).statusCode).toBe(503);
+    expect((await repo.get("REQ-0199"))?.request.version).toBe(2);
     expect((await run(decision)).statusCode).toBe(200);
     expect(await repo.get("REQ-0199")).toMatchObject({
       request: { status: "APPROVED", version: 2 },

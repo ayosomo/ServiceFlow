@@ -3,12 +3,17 @@ import { randomBytes } from "node:crypto";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 const token = randomBytes(32).toString("hex");
+const approverToken = randomBytes(32).toString("hex");
 const aws = spawn(
   process.execPath,
   ["--import", "tsx", "apps/aws-request-approvals/src/local.ts"],
   {
     windowsHide: true,
-    env: { ...process.env, LOCAL_API_TOKEN: token },
+    env: {
+      ...process.env,
+      LOCAL_API_TOKEN: token,
+      LOCAL_APPROVER_TOKEN: approverToken,
+    },
     stdio: "ignore",
   },
 );
@@ -48,11 +53,12 @@ const request = async (
   method = "GET",
   body?: unknown,
   key?: string,
+  identityToken = token,
 ) => {
   const response = await fetch(base + path, {
     method,
     headers: {
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${identityToken}`,
       "content-type": "application/json",
       ...(key ? { "idempotency-key": key } : {}),
     },
@@ -104,7 +110,26 @@ try {
         "/requests/REQ-0900/decision",
         "POST",
         body,
+        "smoke_self_denial",
+      )
+    ).status,
+    403,
+  );
+  const deniedState = await request(base, "/requests/REQ-0900");
+  assert.equal(
+    (deniedState.body as { request: { version: number } }).request.version,
+    1,
+  );
+  assert.equal((deniedState.body as { events: unknown[] }).events.length, 1);
+  assert.equal(
+    (
+      await request(
+        base,
+        "/requests/REQ-0900/decision",
+        "POST",
+        body,
         "smoke_decision",
+        approverToken,
       )
     ).status,
     200,
@@ -117,6 +142,7 @@ try {
         "POST",
         body,
         "smoke_decision",
+        approverToken,
       )
     ).status,
     200,
@@ -129,6 +155,7 @@ try {
         "POST",
         body,
         "smoke_stale",
+        approverToken,
       )
     ).status,
     409,
@@ -151,11 +178,11 @@ try {
   );
   await mkdir("docs/evidence", { recursive: true });
   await writeFile(
-    "docs/evidence/http-local-smoke.txt",
+    process.env.HTTP_EVIDENCE_FILE ?? "docs/evidence/http-local-smoke.txt",
     evidence.join("\n") + "\nPASS\n",
   );
   console.log(
-    "PASS: actual loopback HTTP intake, approve/replay, stale-version denial, audit reread and compiled GCP KPI service.",
+    "PASS: actual loopback HTTP intake, requester decision denial with unchanged audit/state, distinct approver/replay, stale-version denial, audit reread and compiled GCP KPI service.",
   );
 } finally {
   aws.kill();

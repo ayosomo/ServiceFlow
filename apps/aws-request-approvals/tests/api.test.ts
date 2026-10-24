@@ -15,6 +15,10 @@ const actor: Call["actor"] = {
   id: "synthetic-user",
   roles: ["requester", "approver", "reader"],
 };
+const approver: Call["actor"] = {
+  id: "synthetic-approver",
+  roles: ["approver", "reader"],
+};
 const create: Call = {
   method: "POST",
   path: "/requests",
@@ -29,7 +33,7 @@ it("BA-001/002 creates, persists, decides atomically and replays without another
   const call = {
     method: "POST",
     path: "/requests/REQ-0099/decision",
-    actor,
+    actor: approver,
     body: JSON.stringify({
       decision: "APPROVED",
       reason: "Synthetic approved rationale",
@@ -43,7 +47,7 @@ it("BA-001/002 creates, persists, decides atomically and replays without another
     request: { status: "APPROVED", version: 2 },
     events: [
       {
-        actorId: "synthetic-user",
+        actorId: "synthetic-approver",
         details: { reason: "Synthetic approved rationale" },
       },
       {},
@@ -105,7 +109,7 @@ it("preserves state on duplicate IDs and concurrent conflicting decisions", asyn
       run({
         method: "POST",
         path: "/requests/REQ-0099/decision",
-        actor,
+        actor: approver,
         body: JSON.stringify({
           decision,
           reason: "Concurrent synthetic test",

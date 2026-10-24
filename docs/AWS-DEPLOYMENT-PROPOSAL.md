@@ -2,6 +2,8 @@
 
 Review date: 24 October 2026. Owner subsequently explicitly approved this exact deployment, tests and teardown in chat. The run completed and all dedicated resources were removed. [Actual evidence](evidence/aws-cloud-verification.json). The proposal below preserves the scope that was approved; it is not standing permission for another deployment. All data is fictional.
 
+The subsequent local BA-007/008 hardening is outside this historical run. A new proposal must review distinct requester/approver identities, stable subject mapping and the fail-closed provenance migration boundary; the earlier one-owner smoke cannot verify those controls. [Production-readiness backlog](AWS-PRODUCTION-READINESS.md).
+
 ## Scope to approve
 
 Deploy one temporary `serviceflow-aws-demo` CloudFormation stack in **eu-north-1 (Stockholm)** using the existing `serviceflow` profile. Keep the account on its verified ACTIVE FREE plan. Run the bounded smoke sequence below, capture redacted evidence, then remove the dedicated resources in the same working session, aiming for a deployment lifetime of **at most one hour**. If cleanup fails, report the exact remaining resources immediately and prioritise removal; one hour is an operating target, not an automated expiry.

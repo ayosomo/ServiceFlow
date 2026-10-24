@@ -17,6 +17,7 @@
     "test:http": "tsx scripts/http-smoke.ts",
     "test:container": "tsx scripts/container-smoke.ts",
     "check:secrets": "tsx scripts/check-secrets.ts",
+    "check:portfolio": "tsx scripts/check-portfolio.ts",
     "verify": "tsx scripts/verify.ts",
     "build": "tsx scripts/build.ts",
     "package:azure": "tsx scripts/package-azure.ts",

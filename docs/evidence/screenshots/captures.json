@@ -1,0 +1,29 @@
+{
+  "kind": "Actual local browser captures, not fabricated cloud-console images",
+  "captures": [
+    {
+      "image": "azure-local-evidence.png",
+      "html": "azure-local-evidence.html",
+      "capturedAtUTC": "2026-10-24T18:04:12.257808+00:00",
+      "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
+      "sha256": "56ea4b12d58629e3acd75b3708df98884301b460514954391a0e4a76a3cd2c71",
+      "bytes": 76246
+    },
+    {
+      "image": "gcp-cloud-evidence.png",
+      "html": "gcp-cloud-evidence.html",
+      "capturedAtUTC": "2026-10-24T18:04:15.505502+00:00",
+      "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
+      "sha256": "1bc72f3307b14178efc273b1c82ae5843fe713e8fc5cbf6a4af032389707a37f",
+      "bytes": 84377
+    },
+    {
+      "image": "aws-local-evidence.png",
+      "html": "aws-local-evidence.html",
+      "capturedAtUTC": "2026-10-24T18:06:06.967626+00:00",
+      "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
+      "sha256": "55e80806e411833b79f32e02d095789aa5ed624a5ccd1717469ba61ee3250459",
+      "bytes": 79570
+    }
+  ]
+}

@@ -18,7 +18,13 @@ Evidence: [storage/package runbook](AZURE-PACKAGE-AND-STORAGE.md), [compiled-con
 
 “Reviewed authenticated Google Cloud billing/project/quota evidence and official GBP pricing, then configured and locally verified a 256 MiB authenticated insights container with a documented approval and teardown gate.”
 
-Evidence: [GCP preflight](evidence/gcp-account-preflight.json), [container test](evidence/gcp-proposal-container.json), [configuration](evidence/gcp-configuration-verification.json), [cost scenario and proposal](GCP-DEPLOYMENT-PROPOSAL.md). This supports local engineering and cloud governance claims; Cloud Run deployment remains withheld.
+Evidence: [GCP preflight](evidence/gcp-account-preflight.json), [container test](evidence/gcp-proposal-container.json), [configuration](evidence/gcp-configuration-verification.json), [cost scenario and proposal](GCP-DEPLOYMENT-PROPOSAL.md). These preflight records support local engineering and governance; the separate actual-run section below supplies the later cloud claim.
+
+## Supported by subsequent local AWS hardening
+
+“Added and locally tested controls rejecting a submitting principal's own decision, failing closed on missing submission provenance, and recovering idempotent operations after an uncertain database acknowledgement.”
+
+Evidence: [readiness tests](../apps/aws-request-approvals/tests/readiness.test.ts), [DynamoDB Local persistence](../apps/aws-request-approvals/tests/dynamodb.integration.test.ts), [current execution manifest](evidence/phase4-verification.json). Eight new cases bring the unit/application suite to 33. The database test commits to the actual local emulator before injecting acknowledgement loss; it is not a real AWS outage. These controls are not cloud verified and do not establish independent human separation, effective least privilege, recovery objectives or production readiness. [Prioritised backlog](AWS-PRODUCTION-READINESS.md).
 
 ## Supported by actual AWS deployment evidence
 

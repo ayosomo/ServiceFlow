@@ -16,14 +16,16 @@ jobs:
         with: { node-version: "22", cache: pnpm }
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
+      - run: pnpm check:secrets
+      - run: pnpm check:portfolio
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm build
+      - run: pnpm test:http
       - run: pnpm audit --prod --audit-level=high
       - run: docker compose up -d --wait postgres dynamodb azurite firestore
       - run: pnpm db:migrate && pnpm db:seed && pnpm db:test && pnpm db:explain
       - run: pnpm test:integration
       - if: always()
         run: docker compose down -v
-# No cloud credentials or automatic deployment. CI execution is not verified until
-# this repository is published and a real workflow run succeeds.
+# No cloud credentials or deployment. Passing runs are evidence only for their exact SHA.

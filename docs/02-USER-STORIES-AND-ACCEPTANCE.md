@@ -1,6 +1,6 @@
 # User stories and acceptance
 
-Priority is high for all six MVP stories. Approval of the brief authorises implementation; this pack remains reviewable by the owner.
+Priority is high for all six MVP stories. Approval of the brief authorises implementation; this pack remains reviewable by the owner. US-007/008 are the subsequent local hardening extension, not owner UAT sign-off or historical cloud evidence.
 
 - US-001: As an Operations analyst I want complete requests so delivery can start. Given an authorised requester and valid body, when submitting with a unique idempotency key, then receive 201 and a persistent request. Given missing owner, invalid priority/date or excess size, then receive 400 and no write.
 - US-002: As an Approver I need decisions with reasons. Given SUBMITTED version 1, when an authorised approver approves or rejects, then request version 2 and actor/time/reason audit commit together. Given retry of the same key/body, return the same result without another event. Given stale version, duplicate ID or changed body under one key, return 409 and preserve state.
@@ -8,5 +8,9 @@ Priority is high for all six MVP stories. Approval of the brief authorises imple
 - US-004: As a Manager I need dependable KPIs. Given an explicit snapshot, when requesting metrics, then overdue uses a strict target-before-snapshot comparison and the SQL reference agrees. Given a valid pending approval, then quality passes while readiness is blocked.
 - US-005: As a Service Owner I need access control. Given no verified identity or wrong role, when requesting a protected operation, then 403 and no state change. The real provider endpoint must independently prove IAM denial before any deployed-security claim.
 - US-006: As a Manager I need transparent exclusions. Given dirty records, then KPIs disclose numerator/denominator/exclusions and missing identifiers. Given no assessable records, return null ratios rather than an invented 100% score.
+- US-007: As a Service Owner I need a decision from a different authenticated principal. Given the submitter also has the approver role, when it approves or rejects its own request, then return 403 with no request/event/receipt mutation. Given missing, duplicate, mismatched or empty-actor submission provenance, then fail closed with 503. This exact-principal rule does not establish separate humans across sessions/accounts.
+- US-008: As an Operations analyst I need safe recovery from an uncertain write. Given a transaction committed but the provider acknowledgement was lost, when the identical caller/path/key/body is retried, then return the original result without another event. A 503 must not assert no write occurred; changed-body retries conflict and provider details are not exposed.
 
 UAT sequence: run fixture generation and all checks; submit REQ-0099; reread; approve at version 1; replay; retry with different rationale; inspect audit; process fixture batch twice; omit supplier in a new batch; query snapshot KPIs; drill into REQ-0001 (duplicate) and REQ-0013 (pending approval). Compare output to checked-in snapshots. Do not mark cloud UAT passed from local runs.
+
+Use distinct synthetic requester/approver identities for the new workflow. [Executable reviewer walkthrough and owner acceptance record](UAT-AND-DEMO.md).

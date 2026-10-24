@@ -1,0 +1,64 @@
+Timestamp UTC: 2026-10-24T18:08:19.713116+00:00
+Command: pnpm test --reporter=default --reporter=json --outputFile=work/phase4-current-unit-raw.json
+Exit: 0
+
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-2","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-3","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-4","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-5","statusCode":400,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-6","statusCode":400,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-1","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-2","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-3","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-4","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-006 returns null for zero denominators and rejects missing dates
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > redacts provider errors and does not fabricate zero metrics
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > redacts provider errors and does not fabricate zero metrics
+{"correlationId":"req-2","statusCode":503,"event":"request_complete"}
+
+ ✓ apps/gcp-delivery-insights/tests/api.test.ts (4 tests) 2254ms
+   ✓ BA-004 serves deterministic KPIs and supports bounded drill-down 616ms
+   ✓ denies anonymous, fake and expired tokens 1608ms
+ ✓ apps/azure-data-quality/tests/pipeline.test.ts (7 tests) 92ms
+ ✓ packages/domain/tests/domain.test.ts (5 tests) 305ms
+ ✓ apps/aws-request-approvals/tests/readiness.test.ts (8 tests) 41ms
+ ✓ apps/aws-request-approvals/tests/api.test.ts (9 tests) 30ms
+
+ Test Files  5 passed (5)
+      Tests  33 passed (33)
+   Start at  19:08:22
+   Duration  10.33s (import 58%, tests 36%, transform 5%, worker 1%)
+
+    Isolate  5 workers spawned · ~535ms startup each (spawn + environment, per file)
+             at least ~2.14s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs/work/phase4-current-unit-raw.json
+$ vitest run --exclude '**/*.integration.test.ts' "--reporter=default" "--reporter=json" "--outputFile=work/phase4-current-unit-raw.json"

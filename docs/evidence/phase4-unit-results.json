@@ -1,0 +1,172 @@
+{
+  "kind": "Selected fields from actual current Vitest JSON report; workspace paths normalised; raw report retained privately",
+  "startTimeEpochMs": 1792865302795,
+  "numTotalTests": 33,
+  "numPassedTests": 33,
+  "numFailedTests": 0,
+  "success": true,
+  "suites": [
+    {
+      "file": "apps/aws-request-approvals/tests/api.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "name": "BA-001/002 creates, persists, decides atomically and replays without another audit",
+          "status": "passed"
+        },
+        {
+          "name": "BA-005 denies anonymous and wrong-role calls without side effects",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2026-10-30T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"URGENT\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2026-10-30T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"wrong\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2020-01-01T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "preserves state on duplicate IDs and concurrent conflicting decisions",
+          "status": "passed"
+        },
+        {
+          "name": "reports malformed JSON, oversized input and missing key",
+          "status": "passed"
+        },
+        {
+          "name": "handles provider failure without claiming a write",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/readiness.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "name": "BA-007 denies the submitting principal's own APPROVED decision, including dual-role identities",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 denies the submitting principal's own REJECTED decision, including dual-role identities",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on missing submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on duplicate submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on wrong-request submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on empty-actor submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-008 recovers a create and decision after commit succeeded but its acknowledgement was lost",
+          "status": "passed"
+        },
+        {
+          "name": "BA-008 exposes a bounded 503 and leaves state unchanged when decision reads fail",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/azure-data-quality/tests/pipeline.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "name": "BA-003 preserves sources, reports eight affected rows and replays deterministically",
+          "status": "passed"
+        },
+        {
+          "name": "waits for missing input rather than producing PASS",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed CSV, duplicate headers, oversized files, too many rows and missing columns",
+          "status": "passed"
+        },
+        {
+          "name": "rejects reuse of batch ID for changed data",
+          "status": "passed"
+        },
+        {
+          "name": "concurrent retry creates one committed result",
+          "status": "passed"
+        },
+        {
+          "name": "recovers after failure before commit without returning false success",
+          "status": "passed"
+        },
+        {
+          "name": "repairs the convenience findings file after a post-commit failure",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/gcp-delivery-insights/tests/api.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "name": "BA-004 serves deterministic KPIs and supports bounded drill-down",
+          "status": "passed"
+        },
+        {
+          "name": "denies anonymous, fake and expired tokens",
+          "status": "passed"
+        },
+        {
+          "name": "BA-006 returns null for zero denominators and rejects missing dates",
+          "status": "passed"
+        },
+        {
+          "name": "redacts provider errors and does not fabricate zero metrics",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "packages/domain/tests/domain.test.ts",
+      "status": "passed",
+      "assertions": [
+        {
+          "name": "shared business contract reproduces checked-in 48-record snapshots with eight affected source rows",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract separates quality, readiness and performance",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract handles empty metrics, invalid records and missing IDs explicitly",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract allows only specified transitions",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract compares timestamp instants regardless of fractional-second formatting",
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

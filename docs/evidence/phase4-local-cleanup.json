@@ -1,0 +1,24 @@
+{
+  "checkedAtUTC": "2026-10-24T18:11:49.087164+00:00",
+  "method": "Actual docker compose ps -a --format json; selected only four services started for this review",
+  "services": [
+    {
+      "service": "azurite",
+      "state": "exited"
+    },
+    {
+      "service": "dynamodb",
+      "state": "exited"
+    },
+    {
+      "service": "firestore",
+      "state": "exited"
+    },
+    {
+      "service": "postgres",
+      "state": "exited"
+    }
+  ],
+  "volumesPreserved": true,
+  "cloudChanges": []
+}

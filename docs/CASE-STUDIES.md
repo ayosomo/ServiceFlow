@@ -1,27 +1,15 @@
-# ServiceFlow — three implementation case studies
+# ServiceFlow case-study index
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. AWS and GCP have actual cloud business-feature and teardown evidence; Azure remains locally tested. GCP has an explicit deployed health-route exception. See the evidence register before reusing any claim.
+All demonstration data is synthetic. Portfolio project, not an employer integration.
 
-## AWS: make approval traceable
+The fictional scenario connects complete intake, traceable decisions, preserved source reconciliation and explainable delivery metrics. These are three independently useful labs; no live cross-cloud integration is required or claimed.
 
-Problem: Service Owners cannot act confidently on incomplete intake or an untraceable decision. Requirement: BA-001/002/005, a complete request, an authorised decision and an audit trail. Implementation: strict input schema, SUBMITTED-only decisions, optimistic version, explicit approver principal, reason and correlation ID. DynamoDB transaction groups the request, event and idempotency receipt. Negative tests show malformed/unauthorised/stale/conflicting attempts do not claim a successful mutation.
+| Case study                                                  | Business question                                                         | Verified boundary                                                                                           |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [AWS — traceable request approval](case-studies/AWS.md)     | Can an authorised decision be explained and replayed safely?              | Historical cloud feature set verified/removed; subsequent principal/provenance/recovery controls local-only |
+| [Azure — inspectable reconciliation](case-studies/AZURE.md) | Can contradictory files produce auditable findings without silent repair? | Local Functions-host/exact-ZIP PASS; Azure cloud NOT VERIFIED                                               |
+| [GCP — explainable delivery insights](case-studies/GCP.md)  | Which items need a manager's attention, and why?                          | Historical cloud business APIs verified/removed; health correction local-only                               |
 
-Decision: a small request-by-ID access pattern justifies a single DynamoDB table without a secondary index. The SAM configuration protects all routes with IAM, and the handler adds business-role allowlists. Local HTTP tokens are a separate development mode. After explicit approval and Free-plan checks, the eu-north-1 stack deployed successfully. Fifteen real HTTP calls verified valid submission/approval, replay, malformed input, duplicate/stale conflicts, unsigned denial and signed reader-only mutation denial. Independent DynamoDB checks confirmed one approved request, two audit events and two receipts; regional logs/retention passed. All dedicated resources were independently verified removed. [Cloud evidence](evidence/aws-cloud-verification.json).
+Each case study includes stakeholder requirements, decisions, data flow/source links, tests, visual evidence, cost controls, limitations and next steps. [Reviewer demonstration](UAT-AND-DEMO.md), [Phase 4 review](PHASE-4-PORTFOLIO-REVIEW.md), [CV claim ledger](CV-CLAIMS.md).
 
-Limitation: one owner exercised all roles, so the demo does not establish independent human approval. Managed project defaults prevent an effective least-privilege claim. The Free plan remained active; delayed/final billing is not independently verified. Lesson: authentication, business authorisation and concurrency are different acceptance requirements, and teardown is part of delivery evidence.
-
-## Azure: expose rather than hide inconsistent sources
-
-Problem: the Delivery Coordinator sees contradictory CRM and supplier updates. Requirement: BA-003, preserve both sources and produce inspectable exception evidence. Implementation: deterministic CSV parsing, explicit type conversion, strict byte/row limits, SHA-256/ETag provenance, severity/rule/source/row/value/owner findings. Missing input fails retryably. Create-only summary is the commit point; retries reuse the same hash, conflicting batch reuse fails. Eight affected CRM records produce twelve findings because rules overlap.
-
-Decision: use Blob Storage for immutable source/result artefacts, a CRM blob trigger and no unnecessary queue/table. Polling trigger is tied to the selected Windows Consumption design. Limitation: multiple blob writes are not atomic; immutable source discipline and final summary publication are operational controls. Host-trigger, managed identity and cloud billing evidence remain distinct from a pure pipeline or native emulator test. Lesson: a valid pending approval is readiness-blocked, not dirty data.
-
-## GCP: make KPI definitions reviewable
-
-Problem: a Manager needs actions, not one opaque red/green score. Requirement: BA-004/006, snapshot metrics that reconcile with SQL and disclose exclusions. Implementation: Fastify read-only routes, explicit UTC asOf, transparent numerator/denominator/exclusions, critical-data unassessability, bounded findings drill-down and rule-backed recommendations. Authentication verifies signed identity-token audience and allowlisted verified email. Firestore is accessed through a small dedicated repository using ADC.
-
-Decision: one bounded snapshot document makes the demo predictable and easy to inspect. A non-root Node container defines the deployment unit. The actual container -> Firestore emulator -> HTTP response check passed and matched the independently checked KPIs. Limitation: this is not a production reporting warehouse or a deployed role-aware analytics platform; real IAM-protected Cloud Run/Firestore business tests passed in the approved London run. The 28 HTTP attempts include failures and diagnostics, not 28 passed assertions. Active resources were removed and project deletion requested. `/healthz` returned provider 404; a locally tested `/health` fix was not redeployed. [Actual evidence and limitations](GCP-CLOUD-RESULTS.md). Lesson: independent aggregate SQL and zero-denominator tests prevent attractive but unsupported portfolio metrics.
-
-## Evidence and honest outcomes
-
-The implementation links stakeholder need → rule/API → acceptance test → saved execution log. No employer data or commercial savings was used. Failure evidence includes the Docker startup blocker and an initially incorrect findings-count assertion, corrected from the preserved fixture output. Test source and local command evidence are supplied; cloud screenshots and URLs are not fabricated. Public GitHub source/readback and implementation CI/CodeQL are verified; owner case-study review and screenshots remain open.
+The portfolio index is the public GitHub README. Owner UAT/case-study acceptance remains pending. Images display saved actual evidence with explicit provenance; no cloud-console screenshot, product UI, accessibility audit or measured commercial saving is claimed.

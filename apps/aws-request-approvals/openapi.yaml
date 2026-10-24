@@ -1,5 +1,5 @@
 openapi: 3.1.0
-info: { title: ServiceFlow Request Approval API, version: 0.1.0 }
+info: { title: ServiceFlow Request Approval API, version: 0.2.0 }
 security: [{ sigv4: [] }]
 components:
   securitySchemes:
@@ -90,6 +90,7 @@ paths:
           "200": { description: Request and at most 50 recent audit events },
           "403": { description: Forbidden },
           "404": { description: Missing request },
+          "503": { description: Persistence unavailable },
         }
   /requests/{id}/decision:
     parameters: [{ $ref: "#/components/parameters/RequestId" }]
@@ -106,8 +107,13 @@ paths:
         {
           "200": { description: Atomic request and decision audit },
           "400": { description: Invalid input },
-          "403": { description: Forbidden },
+          "403":
+            { description: Wrong role or submitting principal's own decision },
           "404": { description: Missing request },
           "409": { description: Version, state or idempotency conflict },
-          "503": { description: Persistence unavailable },
+          "503":
+            {
+              description: Persistence or submission audit unavailable; write outcome may be uncertain,
+              retry unchanged body and idempotency key,
+            },
         }
