@@ -10,7 +10,7 @@ Evidence date: 24 October 2026 (Europe/London). Local runtime and persistence ch
 - Initial workspace had no Git repository or remote. A dedicated local ServiceFlow repository has now been initialised; no remote has been created. Trackvera has not been opened or modified.
 - Node v24.21.0; pnpm 11.25.0; Docker CLI 29.9.1; Compose v5.6.0; Git 2.41.0.windows.1.
 - AWS CLI, Azure CLI, Functions Core Tools, gcloud and GitHub CLI absent from PATH at inspection. Workspace-local SAM 1.170.0 and Bicep 0.48.1 were subsequently installed and validated. Functions v4 and gcloud/Firestore run inside local Docker images.
-- Azure CLI 2.91.0 was subsequently prepared from Microsoft's official Windows ZIP under workspace tooling and its version command passed. Azure authentication/subscription eligibility remains unverified; no Azure resources were deployed.
+- Azure CLI 2.91.0 was subsequently prepared from Microsoft's official Windows ZIP under workspace tooling and its version command passed. Azure browser authentication completed; read-only ARM confirms an Enabled FreeTrial subscription with spending limit On. UK South capability listings passed; actual quota, credit balance/expiry and month-to-date cost remain unverified. No Azure resources were deployed. See [subscription review](AZURE-SUBSCRIPTION-REVIEW.md).
 - GitHub connector identity verified as `ayosomo`; no GitHub repository has been created or pushed.
 - Private Notion root authorised by owner in chat; created as ServiceFlow Cloud Labs — BA & Cloud Evidence.
 - Docker's frozen WSL VM was recovered through an owner-approved Windows restart. Docker Desktop 4.96.3 / Engine 29.9.2 returned a real Server response and executed hello-world. Existing Docker data was preserved.
@@ -25,7 +25,7 @@ Evidence date: 24 October 2026 (Europe/London). Local runtime and persistence ch
 
 The owner approved implementing the supplied requirements. G0 means this baseline exists under that brief; it is not a claim of a separate stakeholder workshop. CRM owns planned target, supplier disagreement is REVIEW. Source matching is optional, so unmatched supplier references are REVIEW. Active means SUBMITTED, APPROVED or IN_PROGRESS. Snapshot is 2026-10-23T00:00:00.000Z. REJECTED and DRAFT are excluded from active delivery KPIs. All ratios use null for an empty denominator.
 
-Code was implemented in phase order: shared baseline, AWS, Azure, GCP. AWS has now completed real deployment, smoke and teardown. Azure and Google Cloud still need account access, cost review and separate deployment approval; their local work is complete.
+Code was implemented in phase order: shared baseline, AWS, Azure, GCP. AWS has now completed real deployment, smoke and teardown. Azure account access and initial subscription checks passed; its remaining credit/quota/cost and packaging gates are open. Google Cloud still needs account access/cost review. Both need separate deployment approval; their local work is complete.
 
 ## Gates
 
@@ -48,6 +48,6 @@ The Windows screenshot helper timed out waiting for app approval; no screenshot 
 
 AWS evidence: [actual deployment/test/teardown](evidence/aws-cloud-verification.json), deployed source commit `e0a49b611d654728a72611ee1a5e7eb571ce4adf`. Regional logging worked in the real run. Managed project IAM defaults and one owner exercising all roles prevent an effective least-privilege or independent human approval claim. The offline inventory remains configuration evidence only; the cloud JSON records actual outcomes.
 
-Pending external gates: Azure and Google Cloud account/cost/access review and separate deployment approvals; their actual smoke/IAM/cost/teardown evidence; delayed AWS billing check; public repository publication, owner case-study review, screenshots and actual GitHub CI/CodeQL runs.
+Pending external gates: Azure remaining credit/quota/cost review, code/content deployment configuration and separate approval; Google Cloud account/cost/access review and separate approval; their actual smoke/IAM/cost/teardown evidence; delayed AWS billing check; public repository publication, owner case-study review, screenshots and actual GitHub CI/CodeQL runs.
 
 A fresh local clone of implemented source commit `3169f071e60ede4f4ccbe71e663db2583f896e8c` passed frozen-lockfile installation, lint, strict typecheck, all 25 unit/application tests and all three builds. See docs/evidence/clean-clone.txt. Terminal transcripts retain command/result content; only line endings and trailing whitespace were normalised for Git.

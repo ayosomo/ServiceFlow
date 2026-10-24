@@ -1,0 +1,44 @@
+{
+  "observedAt": "2026-10-24T14:49:56.877690+00:00",
+  "scope": "Read-only Azure subscription and cost review; identifiers and financial observations excluded",
+  "cliVersion": "2.91.0",
+  "browserAuthenticationCompleted": true,
+  "selectedSubscriptionMatchedPortal": true,
+  "subscriptionState": "Enabled",
+  "quotaId": "FreeTrial_2014-09-01",
+  "spendingLimit": "On",
+  "ukSouthSubscriptionLocationVisible": true,
+  "ukSouthWindowsConsumptionListed": true,
+  "storageV2StandardLrsUkSouthMatches": 1,
+  "storageSkuRestrictions": [],
+  "providerRegistration": {
+    "Microsoft.Web": "NotRegistered",
+    "Microsoft.Storage": "NotRegistered"
+  },
+  "subscriptionBudgetCount": 0,
+  "unavailableChecks": {
+    "webUsageUKSouth": {
+      "httpStatus": 400,
+      "result": "NOT VERIFIED"
+    },
+    "creditLots": {
+      "httpStatus": 404,
+      "result": "NOT VERIFIED"
+    },
+    "monthToDateCost": {
+      "httpStatus": 404,
+      "result": "NOT VERIFIED"
+    }
+  },
+  "remainingCredits": null,
+  "exactCreditExpiration": null,
+  "actualMonthToDateCost": null,
+  "cloudDeploymentVerified": false,
+  "deploymentApprovalReceived": false,
+  "cloudMutationsPerformed": [],
+  "limitations": [
+    "Regional listings do not prove quota or allocatable capacity.",
+    "HTTP errors do not imply a zero balance or zero cost.",
+    "Portal observations are recorded privately; no screenshots are published."
+  ]
+}
