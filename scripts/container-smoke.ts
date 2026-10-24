@@ -3,6 +3,7 @@ import { promisify } from "node:util";
 import { randomBytes, createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
+import { dirname } from "node:path";
 import { Firestore } from "@google-cloud/firestore";
 import { fixtures } from "../packages/fixtures/src.js";
 import { reconcile, kpis } from "../packages/domain/src/index.js";
@@ -42,7 +43,7 @@ try {
     "--network",
     "serviceflow-cloud-labs_default",
     "--memory",
-    "384m",
+    "256m",
     "-p",
     "127.0.0.1:58080:8080",
     "-e",
@@ -76,6 +77,12 @@ try {
     await docker(["inspect", "--format", "{{.Config.User}}", name])
   ).stdout.trim();
   assert.equal(user, "node");
+  const memoryLimitBytes = Number(
+    (
+      await docker(["inspect", "--format", "{{.HostConfig.Memory}}", name])
+    ).stdout.trim(),
+  );
+  assert.equal(memoryLimitBytes, 256 * 1024 * 1024);
   const response = await fetch("http://127.0.0.1:58080/kpis?asOf=2026-10-23", {
     headers: { authorization: `Bearer ${token}` },
     signal: AbortSignal.timeout(20000),
@@ -100,15 +107,19 @@ try {
       "serviceflow-insights:local",
     ])
   ).stdout.trim();
-  await mkdir("docs/evidence", { recursive: true });
+  const evidenceFile =
+    process.env.LAB_GCP_CONTAINER_EVIDENCE ??
+    "docs/evidence/gcp-container.json";
+  await mkdir(dirname(evidenceFile), { recursive: true });
   await writeFile(
-    "docs/evidence/gcp-container.json",
+    evidenceFile,
     JSON.stringify(
       {
         timestamp: new Date().toISOString(),
         kind: "Actual Docker Node 22 non-root API -> Firestore emulator -> HTTP response. Not Google Cloud deployment.",
         user,
         image,
+        memoryLimitBytes,
         anonymousStatus: 403,
         invalidTokenStatus: bad.status,
         authenticatedStatus: response.status,

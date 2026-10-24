@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: serviceflow-insights
   labels: { project: serviceflow }
+  annotations:
+    run.googleapis.com/minScale: "0"
+    run.googleapis.com/maxScale: "1"
+    run.googleapis.com/custom-audiences: '["https://serviceflow.example/insights"]'
 spec:
   template:
     metadata:
@@ -10,6 +14,7 @@ spec:
         autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "1"
         run.googleapis.com/cpu-throttling: "true"
+        run.googleapis.com/startup-cpu-boost: "false"
     spec:
       serviceAccountName: REPLACE_WITH_DEDICATED_READ_ONLY_SERVICE_ACCOUNT
       containerConcurrency: 10
@@ -19,6 +24,9 @@ spec:
           ports: [{ containerPort: 8080 }]
           resources: { limits: { cpu: "1", memory: 256Mi } }
           env:
-            - { name: API_AUDIENCE, value: REPLACE_WITH_SERVICE_URL }
+            - {
+                name: API_AUDIENCE,
+                value: "https://serviceflow.example/insights",
+              }
             - { name: ALLOWED_EMAILS, value: REPLACE_WITH_APPROVED_CALLER }
 # No allUsers/allAuthenticatedUsers IAM binding is supplied. Keep invoker IAM enabled.

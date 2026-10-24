@@ -16,6 +16,10 @@ Use only claims supported by the final saved test evidence. Independent portfoli
 
 Evidence: [storage/package runbook](AZURE-PACKAGE-AND-STORAGE.md), [compiled-configuration checks](evidence/azure-configuration-verification.json) and [exact-ZIP host smoke](evidence/azure-package-host.json). Azure cloud deployment remains unverified.
 
+“Reviewed authenticated Google Cloud billing/project/quota evidence and official GBP pricing, then configured and locally verified a 256 MiB authenticated insights container with a documented approval and teardown gate.”
+
+Evidence: [GCP preflight](evidence/gcp-account-preflight.json), [container test](evidence/gcp-proposal-container.json), [configuration](evidence/gcp-configuration-verification.json), [cost scenario and proposal](GCP-DEPLOYMENT-PROPOSAL.md). This supports local engineering and cloud governance claims; Cloud Run deployment remains withheld.
+
 ## Supported by actual AWS deployment evidence
 
 “Independent portfolio: deployed and tested an IAM-protected request approval API on AWS Lambda, API Gateway and DynamoDB, with requirements, API contracts, idempotent writes, audit records and verified teardown.”

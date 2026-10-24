@@ -55,3 +55,5 @@ stateDiagram-v2
 ```
 
 Only submit and approve/reject transitions are exposed through the AWS MVP. Later transitions are defined and tested in the shared domain for clarity, not claimed as API workflows. Local AWS HTTP uses an in-memory adapter and a random environment token on loopback. Production Lambda accepts only API Gateway IAM context. Cloud Run independently verifies audience, signature and allowlisted verified email; there are no mutation routes. Firestore uses ADC with a dedicated read-only runtime identity.
+
+Cloud Run proposal configuration uses a shared custom audience at platform/app layers, separate runtime and caller identities, service/revision max one, zero minimum and CPU boost disabled. Real smoke will use X-Serverless-Authorization for platform IAM and an intact Authorization token for app signature/audience/allowlist checks. Runtime reads the dedicated default Firestore database with its service identity. This topology is proposed and locally checked; no live GCP resource exists. See [approval proposal](GCP-DEPLOYMENT-PROPOSAL.md).

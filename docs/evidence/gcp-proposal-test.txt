@@ -1,0 +1,12 @@
+$ vitest run --exclude '**/*.integration.test.ts'
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+
+ Test Files  4 passed (4)
+      Tests  25 passed (25)
+   Start at  17:21:35
+   Duration  8.17s (import 59%, tests 37%, transform 3%, worker 1%)
+
+    Isolate  4 workers spawned · ~298ms startup each (spawn + environment, per file)
+             at least ~893ms faster with isolate: false — reuses workers across files instead of one per file

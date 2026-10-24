@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-10-24T16:19:02.456318+00:00",
+  "kind": "Local YAML configuration assertions; not Google server validation or deployed configuration",
+  "manifestSHA256": "1765c7e868e3f7a322e036118660f0de4fc27f61fec5f49bddeafc96c92a0e63",
+  "checks": {
+    "serviceMinZero": true,
+    "serviceMaxOne": true,
+    "revisionMinZero": true,
+    "revisionMaxOne": true,
+    "requestCpuBilling": true,
+    "startupCpuBoostOff": true,
+    "memory256Mi": true,
+    "cpuOne": true,
+    "concurrency10": true,
+    "timeout15": true,
+    "audienceMatches": true,
+    "noLocalMode": true,
+    "noIamInvokerBypass": true,
+    "digestCallerRuntimeUnresolved": true
+  },
+  "allPass": true,
+  "serverValidationPerformed": false,
+  "deploymentPerformed": false,
+  "unresolved": "Dedicated project, runtime/caller emails and uploaded image digest require separately approved bootstrap"
+}

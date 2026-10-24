@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-24T16:17:08.385250+00:00",
+  "kind": "Public retail-rate scenario, not spend, forecast guarantee or cap",
+  "region": "europe-west2",
+  "currency": "GBP",
+  "allowancesAndTrialCreditsApplied": false,
+  "scenario": [
+    {
+      "item": "Cloud Run 1 vCPU active for entire hour",
+      "skuId": "085C-A237-027A",
+      "quantity": 3600,
+      "unit": "vCPU-second",
+      "paidMarginalRateGBP": 2.5331e-05,
+      "grossScenarioGBP": 0.0911916
+    },
+    {
+      "item": "Cloud Run 256 MiB active for entire hour",
+      "skuId": "600C-3782-6708",
+      "quantity": 900,
+      "unit": "GiB-second",
+      "paidMarginalRateGBP": 2.638e-06,
+      "grossScenarioGBP": 0.0023742
+    },
+    {
+      "item": "Cloud Run requests",
+      "skuId": "2DA5-55D3-E679",
+      "quantity": 100,
+      "unit": "request",
+      "paidMarginalRateGBP": 3.01e-07,
+      "grossScenarioGBP": 3.01e-05
+    },
+    {
+      "item": "Cloud Run internet data to Europe",
+      "skuId": "0C22-3157-F0C9",
+      "quantity": 0.09765625,
+      "unit": "GiB",
+      "paidMarginalRateGBP": 0.079159499,
+      "grossScenarioGBP": 0.007730419824218749
+    },
+    {
+      "item": "Firestore document reads",
+      "skuId": "F6E9-1FB3-B822",
+      "quantity": 30,
+      "unit": "read",
+      "paidMarginalRateGBP": 2.94e-07,
+      "grossScenarioGBP": 8.82e-06
+    },
+    {
+      "item": "Firestore create",
+      "skuId": "1719-A7E4-D8E2",
+      "quantity": 1,
+      "unit": "write",
+      "paidMarginalRateGBP": 8.82e-07,
+      "grossScenarioGBP": 8.82e-07
+    },
+    {
+      "item": "Firestore cleanup",
+      "skuId": "E263-C868-0006",
+      "quantity": 1,
+      "unit": "delete",
+      "paidMarginalRateGBP": 9.8e-08,
+      "grossScenarioGBP": 9.8e-08
+    },
+    {
+      "item": "Firestore storage with metadata/index headroom for one day",
+      "skuId": "AE86-A637-ABB0",
+      "quantity": 0.00031502016129032257,
+      "unit": "GiB-month (one full day headroom; daily storage sampling)",
+      "paidMarginalRateGBP": 0.088206299,
+      "grossScenarioGBP": 2.778676253780242e-05
+    },
+    {
+      "item": "Registry one image with headroom",
+      "skuId": "8502-299A-ABAF",
+      "quantity": 0.0013440860215053765,
+      "unit": "GiB-month (31-day catalogue conversion)",
+      "paidMarginalRateGBP": 0.075389999,
+      "grossScenarioGBP": 0.00010133064381720431
+    },
+    {
+      "item": "Cloud Logging ingestion",
+      "skuId": "143F-A1B0-E0BE",
+      "quantity": 0.009765625,
+      "unit": "GiB",
+      "paidMarginalRateGBP": 0.376949999,
+      "grossScenarioGBP": 0.003681152333984375
+    },
+    {
+      "item": "Firestore direct operator readback internet data to Europe",
+      "skuId": "1D34-E697-FB06",
+      "quantity": 0.0048828125,
+      "unit": "GiB",
+      "paidMarginalRateGBP": 0.090467999,
+      "grossScenarioGBP": 0.0004417382763671875
+    }
+  ],
+  "totalGrossScenarioGBP": 0.10558812784092532,
+  "catalogueRates": {
+    "085C-A237-027A": {
+      "description": "Services CPU Tier 2  (Request-based billing)",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "s",
+      "paidMarginalUnitRate": 2.5331e-05,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1,
+      "retrievedAt": "2026-10-24T16:13:08.029269+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/152E-C115-5142/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "0C22-3157-F0C9": {
+      "description": "Cloud Run Network Internet Data Transfer Out Europe to Europe",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy",
+      "paidMarginalUnitRate": 0.079159499,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1073741824,
+      "retrievedAt": "2026-10-24T16:13:08.029269+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/152E-C115-5142/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "2DA5-55D3-E679": {
+      "description": "Requests",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "count",
+      "paidMarginalUnitRate": 3.01e-07,
+      "paidTierStartsAt": 2000000,
+      "baseUnitConversionFactor": 1,
+      "retrievedAt": "2026-10-24T16:13:08.029269+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/152E-C115-5142/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "600C-3782-6708": {
+      "description": "Services Memory Tier 2 (Request-based billing)",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy.s",
+      "paidMarginalUnitRate": 2.638e-06,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1073741824,
+      "retrievedAt": "2026-10-24T16:13:08.029269+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/152E-C115-5142/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "1719-A7E4-D8E2": {
+      "description": "Cloud Firestore Entity Writes London",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "count",
+      "paidMarginalUnitRate": 8.82e-07,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1,
+      "retrievedAt": "2026-10-24T16:13:08.844082+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/EE2C-7FAC-5E08/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "AE86-A637-ABB0": {
+      "description": "Cloud Firestore Storage London",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy.mo",
+      "paidMarginalUnitRate": 0.088206299,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 2875910101401600.0,
+      "retrievedAt": "2026-10-24T16:13:08.844082+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/EE2C-7FAC-5E08/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "E263-C868-0006": {
+      "description": "Cloud Firestore Entity Deletes London",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "count",
+      "paidMarginalUnitRate": 9.8e-08,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1,
+      "retrievedAt": "2026-10-24T16:13:08.844082+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/EE2C-7FAC-5E08/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "F6E9-1FB3-B822": {
+      "description": "Cloud Firestore Read Ops London",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "count",
+      "paidMarginalUnitRate": 2.94e-07,
+      "paidTierStartsAt": 0,
+      "baseUnitConversionFactor": 1,
+      "retrievedAt": "2026-10-24T16:13:08.844082+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/EE2C-7FAC-5E08/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "8502-299A-ABAF": {
+      "description": "Artifact Registry Storage",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy.mo",
+      "paidMarginalUnitRate": 0.075389999,
+      "paidTierStartsAt": 0.5,
+      "baseUnitConversionFactor": 2875910101401600.0,
+      "retrievedAt": "2026-10-24T16:13:09.907853+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/149C-F9EC-3994/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "143F-A1B0-E0BE": {
+      "description": "Log Storage cost",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy",
+      "paidMarginalUnitRate": 0.376949999,
+      "paidTierStartsAt": 50,
+      "baseUnitConversionFactor": 1073741824,
+      "retrievedAt": "2026-10-24T16:13:10.387060+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/5490-F7B7-8DF6/skus?currencyCode=GBP&pageSize=5000"
+    },
+    "1D34-E697-FB06": {
+      "description": "Cloud Firestore Internet Data Transfer Out from Europe to Europe (with free tier)",
+      "effectiveTime": "2026-10-24T07:00:00Z",
+      "currency": "GBP",
+      "usageUnit": "GiBy",
+      "paidMarginalUnitRate": 0.090467999,
+      "paidTierStartsAt": 10,
+      "baseUnitConversionFactor": 1073741824,
+      "retrievedAt": "2026-10-24T16:13:08.844082+00:00",
+      "source": "https://cloudbilling.googleapis.com/v1/services/EE2C-7FAC-5E08/skus?currencyCode=GBP&pageSize=5000"
+    }
+  },
+  "zeroCostPaths": [
+    "Local Docker build; no Cloud Build",
+    "Inbound image push and same-region registry pull",
+    "Same-region Firestore connection; no VPC connector/NAT/load balancer",
+    "Default log retention, no extra retention/export/scanning/PITR/backups/TTL"
+  ],
+  "limitations": [
+    "All quantities are assumptions; retries, startup/shutdown and delayed teardown can differ.",
+    "Free Trial must remain active. Expected new cash spend is zero only conditional on the trial, covered services and no upgrade.",
+    "Free allowances are shared/scoped differently; this scenario uses paid marginal rates even where grants exist.",
+    "100 MiB Europe internet egress assumes Europe destination; reprice another destination.",
+    "No measured billing, credit consumption or cost saving is claimed.",
+    "Firestore storage is measured daily: model reserves one full day despite one-hour operational target; 5 MiB extra internet readback headroom is modelled separately."
+  ],
+  "sources": [
+    "https://cloud.google.com/run/pricing",
+    "https://cloud.google.com/firestore/pricing",
+    "https://cloud.google.com/artifact-registry/pricing",
+    "https://cloud.google.com/products/observability/pricing",
+    "https://docs.cloud.google.com/billing/v1/how-tos/catalog-api"
+  ],
+  "method": "First nonzero on-demand tier per SKU, without bulk discounts, free grants or trial credit."
+}

@@ -1,0 +1,2 @@
+$ tsx scripts/build.ts
+Built AWS, Azure and GCP Node 22 bundles.

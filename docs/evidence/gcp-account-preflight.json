@@ -1,0 +1,124 @@
+{
+  "checkedAt": "2026-10-24T16:17:08.385250+00:00",
+  "kind": "Actual read-only authenticated API preflight on existing project; not target-project or deployment evidence",
+  "cliVersion": "590.0.1",
+  "cliArchiveSHA256": "38dad2c60c8507a2042e419ac9293e66b9f96156226c6cda92dcb1c4e8c65cf2",
+  "cliCredentialsWorkspaceLocal": true,
+  "cliAuthorisedByOwner": true,
+  "projectActive": true,
+  "reviewedBillingLinkMatches": true,
+  "billingEnabled": true,
+  "billingCurrency": "GBP",
+  "visibleActiveProjects": 1,
+  "billingLinkedProjects": 1,
+  "reviewedOwnerBindingPresent": true,
+  "userManagedServiceAccountsReturned": 0,
+  "logBucketsReturned": 2,
+  "disabledAPIs": [
+    "run.googleapis.com",
+    "firestore.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "billingbudgets.googleapis.com"
+  ],
+  "quotaMetrics": [
+    {
+      "metric": "run.googleapis.com/cpu_allocation",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "20000"
+    },
+    {
+      "metric": "run.googleapis.com/mem_allocation",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "42949672960"
+    },
+    {
+      "metric": "run.googleapis.com/read_regional",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "1200"
+    },
+    {
+      "metric": "run.googleapis.com/services",
+      "unit": "1/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "1000"
+    },
+    {
+      "metric": "run.googleapis.com/write_regional",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "60"
+    },
+    {
+      "metric": "firestore.googleapis.com/databases",
+      "unit": "1/{project}",
+      "scope": "project",
+      "effectiveLimit": "100"
+    },
+    {
+      "metric": "firestore.googleapis.com/delete_operations_per_project",
+      "unit": "1/d/{project}",
+      "scope": "project",
+      "effectiveLimit": "20000"
+    },
+    {
+      "metric": "firestore.googleapis.com/read_operations_per_project",
+      "unit": "1/d/{project}",
+      "scope": "project",
+      "effectiveLimit": "50000"
+    },
+    {
+      "metric": "firestore.googleapis.com/write_operations_per_project",
+      "unit": "1/d/{project}",
+      "scope": "project",
+      "effectiveLimit": "20000"
+    },
+    {
+      "metric": "artifactregistry.googleapis.com/project_region_repo_management",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "30"
+    },
+    {
+      "metric": "artifactregistry.googleapis.com/project_region_requests",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "60000"
+    },
+    {
+      "metric": "artifactregistry.googleapis.com/project_region_writes",
+      "unit": "1/min/{project}/{region}",
+      "scope": "europe-west2",
+      "effectiveLimit": "18000"
+    }
+  ],
+  "quotaUsageMeasured": false,
+  "quotaPaginationComplete": true,
+  "resourceInventoryComplete": false,
+  "budgetRead": {
+    "initialStatus": 403,
+    "retryWithExplicitQuotaProjectStatus": 403,
+    "retryReason": "SERVICE_DISABLED",
+    "consoleObservation": "Budgets & caps shows initial create-new empty state; no configured entries displayed; no budget/cap created"
+  },
+  "accountConsoleRecheck": {
+    "date": "2026-10-24",
+    "type": "Free trial account",
+    "balanceAndRemainingDaysRecheckedPrivately": true,
+    "displayedCurrentMonthCost": "Zero displayed; delayed/final billing not independently verified"
+  },
+  "cloudMutationsPerformed": [],
+  "deploymentApprovalReceived": false,
+  "cloudDeploymentVerified": false,
+  "limitations": [
+    "Run/Firestore/registry inventory and project-specific region location read blocked by disabled APIs; not empty results.",
+    "Initial v2 locations URL returned 404; corrected documented v1 endpoint returned SERVICE_DISABLED. Initial wildcard Run service list replaced by documented London regional request, also SERVICE_DISABLED.",
+    "Existing-project quotas do not establish quota/capacity in the proposed new dedicated project.",
+    "Project creation entitlement and target billing/IAM/region capacity remain conditional bootstrap gates.",
+    "Quota effective limits are not current usage or a capacity guarantee.",
+    "No complete existing-project inventory across unrelated enabled services is claimed.",
+    "Billing v1 open flag is not proof of Free Trial; explicit console account type is the source."
+  ]
+}

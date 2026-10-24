@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-24T16:21:49.8439453Z",
+  "kind": "Actual local command execution; no cloud deployment",
+  "commands": [
+    {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0
+    }
+  ],
+  "additionalActualChecks": {
+    "containerMemoryBytes": 268435456,
+    "localManifestAssertions": 14,
+    "gitDiffWhitespaceCheck": "PASS",
+    "boundedSecretPatternScanFiles": 154,
+    "reviewedPrivateIdentifiersAbsent": "PASS",
+    "costScenarioArithmeticReconciles": "PASS",
+    "note": "Formatting rechecked after final documentation-only cost-model refinement; app source unchanged."
+  }
+}
