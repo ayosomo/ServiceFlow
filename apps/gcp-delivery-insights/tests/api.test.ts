@@ -47,6 +47,7 @@ it("denies anonymous, fake and expired tokens", async () => {
     identityAuth("https://example.invalid", ["synthetic@example.invalid"]),
   );
   try {
+    expect((await app.inject("/health")).statusCode).toBe(403);
     for (const authorization of [
       undefined,
       "Bearer expired.token.signature",
@@ -90,6 +91,9 @@ it("redacts provider errors and does not fabricate zero metrics", async () => {
     async () => "synthetic",
   );
   try {
+    const health = await app.inject("/health");
+    expect(health.statusCode).toBe(200);
+    expect(health.json()).toEqual({ status: "ok" });
     const r = await app.inject("/kpis");
     expect(r.statusCode).toBe(503);
     expect(r.body).not.toContain("private provider");

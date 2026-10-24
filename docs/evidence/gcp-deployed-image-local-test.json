@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-10-24T16:39:08.100Z",
+  "kind": "Actual Docker Node 22 non-root API -> Firestore emulator -> HTTP response. Not Google Cloud deployment.",
+  "user": "node",
+  "image": "sha256:73efb0a5dd4600d85f63237d2133e353ade0b08812b59225ac028fd5913010ff",
+  "memoryLimitBytes": 268435456,
+  "anonymousStatus": 403,
+  "invalidTokenStatus": 403,
+  "authenticatedStatus": 200,
+  "metrics": {
+    "asOf": "2026-10-23T00:00:00.000Z",
+    "totalRecords": 48,
+    "unidentifiable": 1,
+    "qualityPassRate": {
+      "numerator": 41,
+      "denominator": 47,
+      "excluded": 1,
+      "value": 0.8723404255319149,
+      "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+    },
+    "readinessRate": {
+      "numerator": 13,
+      "denominator": 20,
+      "excluded": 28,
+      "value": 0.65,
+      "definition": "Ready / assessable active; pending approval blocks readiness only."
+    },
+    "overdue": {
+      "count": 9,
+      "denominator": 20,
+      "excluded": 28,
+      "definition": "Active valid records with targetAt strictly before asOf."
+    },
+    "onTimeCompletion": {
+      "numerator": 0,
+      "denominator": 7,
+      "excluded": 41,
+      "value": 0,
+      "definition": "DONE with completion <= target / assessable DONE."
+    },
+    "exceptionBacklog": {
+      "count": 12,
+      "critical": 8,
+      "review": 4
+    },
+    "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+  }
+}

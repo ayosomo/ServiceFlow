@@ -63,3 +63,9 @@ The same actual Node 22 non-root image passed with a Docker-enforced 268,435,456
 Fourteen local manifest assertions passed for service/revision min/max, request CPU billing, boost disabled, memory/CPU/concurrency/timeout, matching custom audience, no local auth mode, no IAM bypass annotation and intentionally unresolved deployment placeholders. This is configuration evidence, not Google server-side validation or live IAM proof. [Manifest checks](evidence/gcp-configuration-verification.json). Quota and price reads are actual API observations; the monetary scenario remains a model. [Exact proposal](GCP-DEPLOYMENT-PROPOSAL.md).
 
 Lint, strict typecheck, all 25 unit/application tests and all three Node 22 builds passed for this follow-up. [Command results](evidence/gcp-proposal-checks.json); per-command transcripts use the `gcp-proposal-` prefix. The tests are local; no provider smoke was run.
+
+## Actual GCP run and local health correction — 24 October 2026
+
+The approved London business API run and active-resource teardown are now recorded in [actual cloud evidence](evidence/gcp-cloud-verification.json). 28 HTTP attempts include failed routing/permission diagnostics; exact KPI, auth, filtering, insight and unchanged-snapshot checks passed. Deployed healthz failed; health correction was not redeployed. [Scope and failures](GCP-CLOUD-RESULTS.md).
+
+The local correction passed lint/typecheck/25 tests/build, authorised loopback HTTP and a 256 MiB non-root Docker/Firestore-emulator retry, including authenticated health 200 and exact KPIs. The first container attempt timed out; both it and the initially sandboxed HTTP startup failure are retained as failures, followed by successful reruns. [Correction checks](evidence/gcp-health-fix-checks.json), [container](evidence/gcp-health-fix-container.json), [HTTP](evidence/gcp-health-fix-http.txt). No second cloud image/revision or cloud health-fix pass is claimed.

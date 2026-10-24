@@ -1,0 +1,2 @@
+$ tsx scripts/container-smoke.ts
+PASS: non-root container, anonymous/invalid token 403 and authenticated API -> Firestore emulator -> exact KPI response.

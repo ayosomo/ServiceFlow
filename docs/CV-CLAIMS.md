@@ -26,10 +26,16 @@ Evidence: [GCP preflight](evidence/gcp-account-preflight.json), [container test]
 
 Evidence: [actual cloud verification](evidence/aws-cloud-verification.json), deployed source commit `e0a49b611d654728a72611ee1a5e7eb571ce4adf`. Fifteen HTTP calls passed, including unsigned and signed wrong-role 403s. One owner exercised all application roles; do not imply independent human approval, production security certification, ongoing hosting or measured savings. Effective least privilege and final delayed billing are not claimed.
 
+## Supported by actual GCP business API and teardown evidence
+
+“Independent portfolio: deployed and tested an IAM-protected Dockerised TypeScript insights API on Google Cloud Run with Firestore, reconciled operational KPIs against a SQL reference and verified resource teardown.”
+
+Evidence: [actual results](GCP-CLOUD-RESULTS.md) and [public-safe provider/test projection](evidence/gcp-cloud-verification.json), deployed source `5e709d648fc2ef0bc68eeb7258d1fd9a9741905c`. This covers working KPI/findings/insight and auth paths. The deployed healthz route failed; its health correction passed locally and was not redeployed. Do not describe the whole application as all checks passing or claim role-aware analytics, permanent hosting, exact zero final cost or production security certification.
+
 ## Withheld until independent provider evidence exists
 
 - “Deployed an Azure Functions/Blob Storage reconciliation pipeline.”
-- “Deployed a Dockerised Cloud Run/Firestore insights API.”
+- “Deployed the corrected `/health` route to Cloud Run.”
 - “Role-aware analytics,” “production-scale performance,” “commercial savings,” or any unmeasured outcome.
 
 Templates and provider documentation do not prove deployment. Record commit ID, passed command log, cloud resource/revision, smoke output and cost/teardown evidence before promoting a claim. This project does not corroborate professional experience claims elsewhere in the handoff; those need their own evidence.

@@ -1,6 +1,6 @@
-# ServiceFlow — three implementation case studies
+# ServiceFlow â€” three implementation case studies
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. AWS has actual deployment/test/teardown evidence; Azure and Google Cloud outcomes remain local implementation/testing only. See the evidence register before reusing any claim.
+All demonstration data is synthetic. Portfolio project, not an employer integration. AWS and GCP have actual cloud business-feature and teardown evidence; Azure remains locally tested. GCP has an explicit deployed health-route exception. See the evidence register before reusing any claim.
 
 ## AWS: make approval traceable
 
@@ -20,8 +20,8 @@ Decision: use Blob Storage for immutable source/result artefacts, a CRM blob tri
 
 Problem: a Manager needs actions, not one opaque red/green score. Requirement: BA-004/006, snapshot metrics that reconcile with SQL and disclose exclusions. Implementation: Fastify read-only routes, explicit UTC asOf, transparent numerator/denominator/exclusions, critical-data unassessability, bounded findings drill-down and rule-backed recommendations. Authentication verifies signed identity-token audience and allowlisted verified email. Firestore is accessed through a small dedicated repository using ADC.
 
-Decision: one bounded snapshot document makes the demo predictable and easy to inspect. A non-root Node container defines the deployment unit. The actual container -> Firestore emulator -> HTTP response check passed and matched the independently checked KPIs. Limitation: this is not a production reporting warehouse or a deployed role-aware analytics platform; live Firestore/Cloud Run evidence is still absent. Lesson: independent aggregate SQL and zero-denominator tests prevent attractive but unsupported portfolio metrics.
+Decision: one bounded snapshot document makes the demo predictable and easy to inspect. A non-root Node container defines the deployment unit. The actual container -> Firestore emulator -> HTTP response check passed and matched the independently checked KPIs. Limitation: this is not a production reporting warehouse or a deployed role-aware analytics platform; real IAM-protected Cloud Run/Firestore business tests passed in the approved London run. The 28 HTTP attempts include failures and diagnostics, not 28 passed assertions. Active resources were removed and project deletion requested. `/healthz` returned provider 404; a locally tested `/health` fix was not redeployed. [Actual evidence and limitations](GCP-CLOUD-RESULTS.md). Lesson: independent aggregate SQL and zero-denominator tests prevent attractive but unsupported portfolio metrics.
 
 ## Evidence and honest outcomes
 
-The implementation links stakeholder need → rule/API → acceptance test → saved execution log. No employer data or commercial savings was used. Failure evidence includes the Docker startup blocker and an initially incorrect findings-count assertion, corrected from the preserved fixture output. Test source and local command evidence are supplied; cloud screenshots and URLs are not fabricated. Public GitHub publication and owner review remain explicit gates.
+The implementation links stakeholder need â†’ rule/API â†’ acceptance test â†’ saved execution log. No employer data or commercial savings was used. Failure evidence includes the Docker startup blocker and an initially incorrect findings-count assertion, corrected from the preserved fixture output. Test source and local command evidence are supplied; cloud screenshots and URLs are not fabricated. Public GitHub publication and owner review remain explicit gates.

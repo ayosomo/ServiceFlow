@@ -60,7 +60,7 @@ try {
   let ready = false;
   for (let i = 0; i < 100; i++) {
     try {
-      const r = await fetch("http://127.0.0.1:58080/healthz", {
+      const r = await fetch("http://127.0.0.1:58080/health", {
         signal: AbortSignal.timeout(500),
       });
       if (r.status === 403) {
@@ -83,6 +83,12 @@ try {
     ).stdout.trim(),
   );
   assert.equal(memoryLimitBytes, 256 * 1024 * 1024);
+  const health = await fetch("http://127.0.0.1:58080/health", {
+    headers: { authorization: `Bearer ${token}` },
+    signal: AbortSignal.timeout(20000),
+  });
+  assert.equal(health.status, 200);
+  assert.deepEqual(await health.json(), { status: "ok" });
   const response = await fetch("http://127.0.0.1:58080/kpis?asOf=2026-10-23", {
     headers: { authorization: `Bearer ${token}` },
     signal: AbortSignal.timeout(20000),
@@ -120,6 +126,7 @@ try {
         user,
         image,
         memoryLimitBytes,
+        authenticatedHealthStatus: health.status,
         anonymousStatus: 403,
         invalidTokenStatus: bad.status,
         authenticatedStatus: response.status,

@@ -66,7 +66,8 @@ export function createApp(
       }),
     );
   });
-  app.get("/healthz", () => ({ status: "ok" }));
+  // Cloud Run reserves some paths ending in z before they reach the container.
+  app.get("/health", () => ({ status: "ok" }));
   const asOf = (query: unknown) => {
     const p = z.object({ asOf: z.string().optional() }).strict().parse(query);
     const v = p.asOf ?? SNAPSHOT;

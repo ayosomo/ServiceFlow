@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-24T16:59:56.6605173Z",
+  "kind": "Local-only correction of Cloud Run reserved health path; not redeployed",
+  "commands": [
+    {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test:http",
+      "exitCode": 0,
+      "successfulRerunEvidence": "gcp-health-fix-http.txt"
+    }
+  ],
+  "earlierFailures": [
+    "Sandboxed loopback HTTP startup failed; authorised loopback rerun passed.",
+    "First post-build container smoke timed out; same corrected image retry passed; emulator stopped after both attempts."
+  ],
+  "containerEvidence": "gcp-health-fix-container.json",
+  "deployedCorrection": false,
+  "applicationSourceSHA256": "e00960df605b1722b10502b9b66538c5360a39b4357d8caa417a1954a9cc1f53"
+}

@@ -1,0 +1,2 @@
+$ tsx scripts/http-smoke.ts
+PASS: actual loopback HTTP intake, approve/replay, stale-version denial, audit reread and compiled GCP KPI service.

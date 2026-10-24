@@ -1,0 +1,713 @@
+{
+  "evidenceDate": "2026-10-24",
+  "kind": "Actual approved Google Cloud deployment, live business API tests and independent active-resource teardown",
+  "scope": "Business API verified; deployed healthz route failed; health correction tested locally only",
+  "approvalReceived": true,
+  "deployedSourceCommit": "5e709d648fc2ef0bc68eeb7258d1fd9a9741905c",
+  "region": "europe-west2",
+  "revision": "serviceflow-insights-00001-62l",
+  "localDeployedImageId": "sha256:73efb0a5dd4600d85f63237d2133e353ade0b08812b59225ac028fd5913010ff",
+  "uploadedImageDigest": "sha256:73efb0a5dd4600d85f63237d2133e353ade0b08812b59225ac028fd5913010ff",
+  "logicalImagePushes": 1,
+  "ociDescriptors": 3,
+  "reportedArtifactBytes": 99534498,
+  "renderedManifestSHA256": "5ace4a379b29271c484724edd9d50610b63b9d5cd43b8d9cfe82871920d039ae",
+  "startedAtUTC": "2026-10-24T16:30:42.406835+00:00",
+  "deployedAtUTC": "2026-10-24T16:44:59.040608+00:00",
+  "businessSmokePassedAtUTC": "2026-10-24T16:57:04.755191+00:00",
+  "resourcesRemovedAtUTC": "2026-10-24T17:04:17.870937+00:00",
+  "projectDeletionRequestedAtUTC": "2026-10-24T17:04:23.181343+00:00",
+  "elapsedMinutesToProjectDeletionRequest": 33.68,
+  "targetQuotas": {
+    "run.googleapis.com/cpu_allocation": 20000,
+    "run.googleapis.com/mem_allocation": 42949672960,
+    "run.googleapis.com/services": 1000,
+    "firestore.googleapis.com/databases": 100,
+    "firestore.googleapis.com/read_operations_per_project": 50000,
+    "firestore.googleapis.com/write_operations_per_project": 20000,
+    "firestore.googleapis.com/delete_operations_per_project": 20000,
+    "artifactregistry.googleapis.com/project_region_repo_management": 30
+  },
+  "controls": {
+    "invokerIAMEnabled": true,
+    "anonymousMembersAbsent": true,
+    "serviceAndRevisionMin": 0,
+    "serviceAndRevisionMax": 1,
+    "cpuVCPU": 1,
+    "memoryMiB": 256,
+    "requestBasedCPU": true,
+    "startupBoost": false,
+    "concurrency": 10,
+    "timeoutSeconds": 15,
+    "customAudience": "https://serviceflow.example/insights",
+    "runtimeProjectRoleOnly": "roles/datastore.viewer",
+    "seedProjectDataRoleRemovedAfterReadback": true,
+    "finalCallerOnlyInvokerVerified": true,
+    "firestoreDefaultStandardNativeFreeTier": true,
+    "firestorePITR": false,
+    "firestoreDeletionProtection": false,
+    "registryScanning": false,
+    "credentialKeysCreated": false,
+    "ephemeralDockerAuthRemoved": true
+  },
+  "traffic": {
+    "applicationHTTPAttemptsIncludingFailedDiagnostics": 28,
+    "explicitPotentialApplicationDocumentReads": 22,
+    "directDocumentReadbacks": 2,
+    "seedCreates": 1,
+    "cleanupDocumentDeletes": 1,
+    "providerBilledReadCountMeasured": false,
+    "note": "22 application attempts could reach a document-loading path plus two direct readbacks; many were denied/invalid. This is a conservative explicit request count, not measured provider billing or SDK retry telemetry."
+  },
+  "httpResults": [
+    {
+      "label": "Authenticated health readiness 1",
+      "at": "2026-10-24T16:45:39.855474+00:00",
+      "status": 404,
+      "path": "/healthz",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 1568
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "Authenticated KPI readiness 1",
+      "at": "2026-10-24T16:54:44.789014+00:00",
+      "status": 200,
+      "path": "/kpis?asOf=2026-10-23",
+      "method": "GET",
+      "response": {
+        "asOf": "2026-10-23T00:00:00.000Z",
+        "totalRecords": 48,
+        "unidentifiable": 1,
+        "qualityPassRate": {
+          "numerator": 41,
+          "denominator": 47,
+          "excluded": 1,
+          "value": 0.8723404255319149,
+          "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+        },
+        "readinessRate": {
+          "numerator": 13,
+          "denominator": 20,
+          "excluded": 28,
+          "value": 0.65,
+          "definition": "Ready / assessable active; pending approval blocks readiness only."
+        },
+        "overdue": {
+          "count": 9,
+          "denominator": 20,
+          "excluded": 28,
+          "definition": "Active valid records with targetAt strictly before asOf."
+        },
+        "onTimeCompletion": {
+          "numerator": 0,
+          "denominator": 7,
+          "excluded": 41,
+          "value": 0,
+          "definition": "DONE with completion <= target / assessable DONE."
+        },
+        "exceptionBacklog": {
+          "count": 12,
+          "critical": 8,
+          "review": 4
+        },
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Anonymous rejected at Cloud Run IAM",
+      "at": "2026-10-24T16:54:45.037344+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "Forged identity rejected at IAM",
+      "at": "2026-10-24T16:54:45.150269+00:00",
+      "status": 401,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 298
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "Valid IAM token cannot bypass missing app token",
+      "at": "2026-10-24T16:54:45.248457+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "error": "Forbidden"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Valid IAM token cannot bypass forged app token",
+      "at": "2026-10-24T16:54:45.344221+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "error": "Forbidden"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Separate seeder without invoker rejected at IAM",
+      "at": "2026-10-24T16:54:45.460964+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 1",
+      "at": "2026-10-24T16:54:56.643502+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 2",
+      "at": "2026-10-24T16:55:06.767167+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 3",
+      "at": "2026-10-24T16:55:16.892945+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 4",
+      "at": "2026-10-24T16:55:27.139002+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 5",
+      "at": "2026-10-24T16:55:37.606533+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "IAM-authorised non-allowlisted seeder rejected by app 6",
+      "at": "2026-10-24T16:55:47.847129+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "nonJsonBodyBytes": 299
+      },
+      "cacheControl": null
+    },
+    {
+      "label": "Valid platform caller plus non-allowlisted signed app identity denied",
+      "at": "2026-10-24T16:57:02.321158+00:00",
+      "status": 403,
+      "path": "/kpis",
+      "method": "GET",
+      "response": {
+        "error": "Forbidden"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Authenticated KPI exact reference check",
+      "at": "2026-10-24T16:57:02.510734+00:00",
+      "status": 200,
+      "path": "/kpis?asOf=2026-10-23",
+      "method": "GET",
+      "response": {
+        "asOf": "2026-10-23T00:00:00.000Z",
+        "totalRecords": 48,
+        "unidentifiable": 1,
+        "qualityPassRate": {
+          "numerator": 41,
+          "denominator": 47,
+          "excluded": 1,
+          "value": 0.8723404255319149,
+          "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+        },
+        "readinessRate": {
+          "numerator": 13,
+          "denominator": 20,
+          "excluded": 28,
+          "value": 0.65,
+          "definition": "Ready / assessable active; pending approval blocks readiness only."
+        },
+        "overdue": {
+          "count": 9,
+          "denominator": 20,
+          "excluded": 28,
+          "definition": "Active valid records with targetAt strictly before asOf."
+        },
+        "onTimeCompletion": {
+          "numerator": 0,
+          "denominator": 7,
+          "excluded": 41,
+          "value": 0,
+          "definition": "DONE with completion <= target / assessable DONE."
+        },
+        "exceptionBacklog": {
+          "count": 12,
+          "critical": 8,
+          "review": 4
+        },
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Critical findings filter and pagination",
+      "at": "2026-10-24T16:57:03.756155+00:00",
+      "status": 200,
+      "path": "/findings?severity=CRITICAL&status=OPEN&limit=3&offset=0",
+      "method": "GET",
+      "response": {
+        "total": 8,
+        "offset": 0,
+        "limit": 3,
+        "items": [
+          {
+            "ruleId": "DUPLICATE_ID",
+            "source": "CRM",
+            "row": 1,
+            "requestId": "REQ-0001",
+            "severity": "CRITICAL",
+            "owner": "Operations",
+            "values": {
+              "requestId": "REQ-0001"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "DUPLICATE_ID",
+            "source": "CRM",
+            "row": 2,
+            "requestId": "REQ-0001",
+            "severity": "CRITICAL",
+            "owner": "Delivery",
+            "values": {
+              "requestId": "REQ-0001"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "INVALID_OWNERTEAM",
+            "source": "CRM",
+            "row": 3,
+            "requestId": "REQ-0003",
+            "severity": "CRITICAL",
+            "owner": "Data Steward",
+            "values": {
+              "field": "ownerTeam",
+              "value": "",
+              "message": "Too small: expected string to have >=1 characters"
+            },
+            "status": "OPEN"
+          }
+        ],
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Review findings filter",
+      "at": "2026-10-24T16:57:03.919281+00:00",
+      "status": 200,
+      "path": "/findings?severity=REVIEW&status=OPEN",
+      "method": "GET",
+      "response": {
+        "total": 4,
+        "offset": 0,
+        "limit": 50,
+        "items": [
+          {
+            "ruleId": "MISSING_MATCH",
+            "source": "SUPPLIER",
+            "row": 2,
+            "requestId": "REQ-0002",
+            "severity": "REVIEW",
+            "owner": "Data Steward",
+            "values": {
+              "requestId": "REQ-0002"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "TARGET_MISMATCH",
+            "source": "SUPPLIER",
+            "row": 6,
+            "requestId": "REQ-0006",
+            "severity": "REVIEW",
+            "owner": "Data Steward",
+            "values": {
+              "crm": "2026-09-01T00:00:00.000Z",
+              "supplier": "2026-10-28T00:00:00.000Z",
+              "authority": "CRM planned target; steward review required"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "TARGET_MISMATCH",
+            "source": "SUPPLIER",
+            "row": 7,
+            "requestId": "REQ-0007",
+            "severity": "REVIEW",
+            "owner": "Data Steward",
+            "values": {
+              "crm": "2026-10-27T00:00:00.000Z",
+              "supplier": "2026-11-15T00:00:00.000Z",
+              "authority": "CRM planned target; steward review required"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "MISSING_MATCH",
+            "source": "SUPPLIER",
+            "row": 8,
+            "requestId": "REQ-0008",
+            "severity": "REVIEW",
+            "owner": "Data Steward",
+            "values": {
+              "requestId": "REQ-0008"
+            },
+            "status": "OPEN"
+          }
+        ],
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Duplicate source record remains unassessable",
+      "at": "2026-10-24T16:57:04.076569+00:00",
+      "status": 200,
+      "path": "/requests/REQ-0001/insight",
+      "method": "GET",
+      "response": {
+        "requestId": "REQ-0001",
+        "asOf": "2026-10-23T00:00:00.000Z",
+        "qualityStatus": "FAIL",
+        "readinessStatus": "UNASSESSABLE",
+        "performanceStatus": "UNASSESSABLE",
+        "findings": [
+          {
+            "ruleId": "DUPLICATE_ID",
+            "source": "CRM",
+            "row": 1,
+            "requestId": "REQ-0001",
+            "severity": "CRITICAL",
+            "owner": "Operations",
+            "values": {
+              "requestId": "REQ-0001"
+            },
+            "status": "OPEN"
+          },
+          {
+            "ruleId": "DUPLICATE_ID",
+            "source": "CRM",
+            "row": 2,
+            "requestId": "REQ-0001",
+            "severity": "CRITICAL",
+            "owner": "Delivery",
+            "values": {
+              "requestId": "REQ-0001"
+            },
+            "status": "OPEN"
+          }
+        ],
+        "actions": [
+          {
+            "ruleId": "DATA_INTEGRITY",
+            "action": "Data Steward to resolve critical findings before delivery assessment"
+          }
+        ]
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Correct pending approval is a readiness blocker",
+      "at": "2026-10-24T16:57:04.222315+00:00",
+      "status": 200,
+      "path": "/requests/REQ-0007/insight",
+      "method": "GET",
+      "response": {
+        "requestId": "REQ-0007",
+        "asOf": "2026-10-23T00:00:00.000Z",
+        "qualityStatus": "PASS",
+        "readinessStatus": "BLOCKED",
+        "performanceStatus": "ON_TRACK",
+        "active": true,
+        "findings": [
+          {
+            "ruleId": "TARGET_MISMATCH",
+            "source": "SUPPLIER",
+            "row": 7,
+            "requestId": "REQ-0007",
+            "severity": "REVIEW",
+            "owner": "Data Steward",
+            "values": {
+              "crm": "2026-10-27T00:00:00.000Z",
+              "supplier": "2026-11-15T00:00:00.000Z",
+              "authority": "CRM planned target; steward review required"
+            },
+            "status": "OPEN"
+          }
+        ],
+        "actions": [
+          {
+            "ruleId": "PENDING_APPROVAL",
+            "action": "Approver to record a decision"
+          }
+        ],
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Malformed snapshot date rejected",
+      "at": "2026-10-24T16:57:04.333356+00:00",
+      "status": 400,
+      "path": "/kpis?asOf=bad-date",
+      "method": "GET",
+      "response": {
+        "error": "Invalid query",
+        "correlationId": "req-b"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Invalid findings severity rejected",
+      "at": "2026-10-24T16:57:04.443782+00:00",
+      "status": 400,
+      "path": "/findings?severity=BAD",
+      "method": "GET",
+      "response": {
+        "error": "Invalid query",
+        "correlationId": "req-c"
+      },
+      "cacheControl": "no-store"
+    },
+    {
+      "label": "Unsupported mutation route rejected",
+      "at": "2026-10-24T16:57:04.540172+00:00",
+      "status": 404,
+      "path": "/kpis",
+      "method": "POST",
+      "response": {
+        "message": "Route POST:/kpis not found",
+        "error": "Not Found",
+        "statusCode": 404
+      },
+      "cacheControl": "no-store"
+    }
+  ],
+  "otherRoutingDiagnostics": {
+    "providerURLHealthProbes": [
+      {
+        "status": 404,
+        "path": "/healthz",
+        "at": "2026-10-24T16:46:59.965320+00:00"
+      },
+      {
+        "status": 404,
+        "path": "/healthz",
+        "at": "2026-10-24T16:47:00.058718+00:00"
+      }
+    ],
+    "routingRechecks": [
+      {
+        "label": "anonymous",
+        "at": "2026-10-24T16:52:14.970274+00:00",
+        "status": 404,
+        "response": {
+          "nonJsonBytes": 1568
+        }
+      },
+      {
+        "label": "dual valid caller",
+        "at": "2026-10-24T16:52:15.060360+00:00",
+        "status": 404,
+        "response": {
+          "nonJsonBytes": 1568
+        }
+      }
+    ],
+    "nativeCurlAnonymousHealthStatus": 404,
+    "normalKpiProbe": {
+      "status": 200,
+      "at": "2026-10-24T16:53:56.150236+00:00",
+      "response": {
+        "asOf": "2026-10-23T00:00:00.000Z",
+        "totalRecords": 48,
+        "unidentifiable": 1,
+        "qualityPassRate": {
+          "numerator": 41,
+          "denominator": 47,
+          "excluded": 1,
+          "value": 0.8723404255319149,
+          "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+        },
+        "readinessRate": {
+          "numerator": 13,
+          "denominator": 20,
+          "excluded": 28,
+          "value": 0.65,
+          "definition": "Ready / assessable active; pending approval blocks readiness only."
+        },
+        "overdue": {
+          "count": 9,
+          "denominator": 20,
+          "excluded": 28,
+          "definition": "Active valid records with targetAt strictly before asOf."
+        },
+        "onTimeCompletion": {
+          "numerator": 0,
+          "denominator": 7,
+          "excluded": 41,
+          "value": 0,
+          "definition": "DONE with completion <= target / assessable DONE."
+        },
+        "exceptionBacklog": {
+          "count": 12,
+          "critical": 8,
+          "review": 4
+        },
+        "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+      }
+    }
+  },
+  "kpis": {
+    "asOf": "2026-10-23T00:00:00.000Z",
+    "totalRecords": 48,
+    "unidentifiable": 1,
+    "qualityPassRate": {
+      "numerator": 41,
+      "denominator": 47,
+      "excluded": 1,
+      "value": 0.8723404255319149,
+      "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+    },
+    "readinessRate": {
+      "numerator": 13,
+      "denominator": 20,
+      "excluded": 28,
+      "value": 0.65,
+      "definition": "Ready / assessable active; pending approval blocks readiness only."
+    },
+    "overdue": {
+      "count": 9,
+      "denominator": 20,
+      "excluded": 28,
+      "definition": "Active valid records with targetAt strictly before asOf."
+    },
+    "onTimeCompletion": {
+      "numerator": 0,
+      "denominator": 7,
+      "excluded": 41,
+      "value": 0,
+      "definition": "DONE with completion <= target / assessable DONE."
+    },
+    "exceptionBacklog": {
+      "count": 12,
+      "critical": 8,
+      "review": 4
+    },
+    "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce"
+  },
+  "sourceHash": "5ae449b03d42d4d9b5ebd640e217fd308d7548bc76c68f06dc9c095b82a74cce",
+  "snapshotUnchangedAfterTests": true,
+  "observability": {
+    "readAtUTC": "2026-10-24T16:57:15.262917+00:00",
+    "boundedLogEntriesReturned": 31,
+    "structuredRequestLogEntries": 6,
+    "correlationIds": [
+      "req-3",
+      "req-2",
+      "req-1",
+      "req-6",
+      "req-5",
+      "req-4"
+    ],
+    "completeLogInventoryClaimed": false
+  },
+  "negativeTestLimitation": "Temporary seeder invoker grant attempts remained platform 403 and did not prove app rejection; grant was revoked. Separate dual-header test uses authorised platform caller plus valid non-allowlisted seeder app token to prove app allowlist.",
+  "healthRoute": {
+    "deployedHealthzStatus": 404,
+    "cloudHealthPassed": false,
+    "localCorrection": "/health",
+    "correctionRedeployed": false,
+    "source": "https://docs.cloud.google.com/run/docs/known-issues#reserved_url_paths",
+    "interpretation": "Healthz returned provider HTML 404 with no request logs while normal KPI route returned 200. This is consistent with the documented reserved-path warning; no provider outage is claimed."
+  },
+  "cleanup": {
+    "databaseDeleteOperationCompleted": true,
+    "temporaryBindingsRemovedAtUTC": "2026-10-24T17:04:13.501762+00:00",
+    "independentAbsenceChecks": {
+      "services": "ABSENT",
+      "databases": "ABSENT",
+      "repositories": "ABSENT",
+      "userServiceAccounts": "ABSENT"
+    },
+    "projectState": "DELETE_REQUESTED",
+    "permanentErasureClaimed": false,
+    "recoveryAndLogRetentionStillApply": true
+  },
+  "cost": {
+    "trialConfirmedBeforeRun": true,
+    "upgradePerformed": false,
+    "budgetOrSubscriptionCreated": false,
+    "grossPlanningScenarioGBP": 0.10559,
+    "actualCreditConsumptionMeasured": false,
+    "finalBillingVerified": false,
+    "finalConsoleCreditRefresh": "Completed read-only Billing Overview reload and detailed Credits row check; Free trial account retained; values/dates checked privately; no measured final billing",
+    "postRunConsoleCheckedAtUTC": "2026-10-24T17:17:54.704727+00:00",
+    "trialRetainedAfterCleanup": true
+  },
+  "limitations": [
+    "One operator exercised all demo identities; no independent human segregation of duties or production RBAC claim.",
+    "Healthz was not a passing live endpoint. Local health correction is a different, undeployed image.",
+    "No new deployment is authorised by this completed run.",
+    "SDK retry telemetry and final delayed billing were not independently measured.",
+    "Cloud account/project/principal identifiers and tokens excluded from this public projection."
+  ]
+}

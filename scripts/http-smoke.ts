@@ -64,12 +64,19 @@ const request = async (
 };
 try {
   await wait("http://127.0.0.1:3101/healthz");
-  await wait("http://127.0.0.1:3103/healthz");
-  for (const port of [3101, 3103]) {
-    const r = await fetch(`http://127.0.0.1:${port}/healthz`);
+  await wait("http://127.0.0.1:3103/health");
+  for (const [port, path] of [
+    [3101, "/healthz"],
+    [3103, "/health"],
+  ] as const) {
+    const r = await fetch(`http://127.0.0.1:${port}${path}`);
     assert.equal(r.status, 403);
     evidence.push(`Anonymous loopback ${port} health: 403`);
   }
+  assert.deepEqual(await request("http://127.0.0.1:3103", "/health"), {
+    status: 200,
+    body: { status: "ok" },
+  });
   const base = "http://127.0.0.1:3101";
   const payload = {
     requestId: "REQ-0900",
