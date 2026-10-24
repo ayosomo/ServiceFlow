@@ -1,0 +1,91 @@
+{
+  "kind": "Actual local AWS-P07/P09 implementation verification; no cloud calls",
+  "startedAtUTC": "2026-10-24T20:14:47.096038+00:00",
+  "sourceBasisCommit": "e6b48a267f0948bd2b9da5de920a9165da14ba5b",
+  "workingTreeChangesIncluded": true,
+  "node": "v24.21.0",
+  "results": [
+    {
+      "command": "pnpm lint",
+      "startedAtUTC": "2026-10-24T20:14:47.313511+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-lint.txt",
+      "sha256": "875eb22bf800b1d8416fc1ce678331b1599108e78174960d589c3afe29c2201b"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAtUTC": "2026-10-24T20:14:57.119201+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-typecheck.txt",
+      "sha256": "6030d0c7205a598e0902c2923a00cf8f7481d1b76dac68ed928c23cf7ca8ad74"
+    },
+    {
+      "command": "pnpm test --reporter=default --reporter=json --outputFile=work/aws-r2-vitest-raw.json",
+      "startedAtUTC": "2026-10-24T20:15:08.286805+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-unit.txt",
+      "sha256": "553daa4fa35a319034c5c742eef529501c306259255e806b4b50e05f46f684c7"
+    },
+    {
+      "command": "pnpm build",
+      "startedAtUTC": "2026-10-24T20:15:16.389826+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-build.txt",
+      "sha256": "6545880dcd198b35539aaa09e8d0cc3280d5fd2f90564891164af7aec0b858ed"
+    },
+    {
+      "command": "pnpm test:http",
+      "startedAtUTC": "2026-10-24T20:15:19.947566+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-http.txt",
+      "sha256": "ec5f7b9410bb8a1e61237a908b742a03d4fd6aeaf6c7495c596f7592ca84735c"
+    },
+    {
+      "command": "pnpm aws:resilience",
+      "startedAtUTC": "2026-10-24T20:15:23.738677+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-memory.txt",
+      "sha256": "5b4e1f523a91881903768464873dbe6044948f634766f1976925d605ec2d2815"
+    },
+    {
+      "command": "pnpm aws:resilience dynamodb-local",
+      "startedAtUTC": "2026-10-24T20:15:26.023443+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-dynamodb-local.txt",
+      "sha256": "1c8afc4d97de9a7280247830db4b79068297760cea9d82f4b75e72c5ac29ab41"
+    },
+    {
+      "command": "pnpm test:integration",
+      "startedAtUTC": "2026-10-24T20:15:31.008451+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-integration.txt",
+      "sha256": "3ab32a0de7ffb9ecadf848cc06980a76f87937211676e3742b723abb92f0378f"
+    },
+    {
+      "command": "pnpm audit --prod --audit-level=high --json",
+      "startedAtUTC": "2026-10-24T20:15:49.170747+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-audit.txt",
+      "sha256": "a711d03ff79f9616a86106bf3cf5966b60059e8584b4185e721557ee7f2c8cb4"
+    },
+    {
+      "command": "pnpm check:portfolio",
+      "startedAtUTC": "2026-10-24T20:15:50.964571+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-links.txt",
+      "sha256": "bb69259b6b1c9164e5d41f563b9ef482af40e413854057e02185356f1ef5d4b6"
+    },
+    {
+      "command": "pnpm check:secrets",
+      "startedAtUTC": "2026-10-24T20:15:52.989190+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-2-secrets.txt",
+      "sha256": "5bef4d6ecda77d5858b074850c9c2eab6122be0b69b2980af748d6ec32f35664"
+    }
+  ],
+  "azureCloudVerified": false,
+  "currentAwsChangesCloudVerified": false,
+  "cloudChanges": [],
+  "completedAtUTC": "2026-10-24T20:15:54.803403+00:00",
+  "allChecksPassed": true
+}

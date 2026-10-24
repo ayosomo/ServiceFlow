@@ -14,3 +14,10 @@ Priority is high for all six MVP stories. Approval of the brief authorises imple
 UAT sequence: run fixture generation and all checks; submit REQ-0099; reread; approve at version 1; replay; retry with different rationale; inspect audit; process fixture batch twice; omit supplier in a new batch; query snapshot KPIs; drill into REQ-0001 (duplicate) and REQ-0013 (pending approval). Compare output to checked-in snapshots. Do not mark cloud UAT passed from local runs.
 
 Use distinct synthetic requester/approver identities for the new workflow. [Executable reviewer walkthrough and owner acceptance record](UAT-AND-DEMO.md).
+
+## Subsequent local operations extension
+
+- US-009 / BA-009: As an operator I need correlated handler outcomes without copying caller values. Given a completed handler call, emit one bounded operation/status/outcome/duration/correlation record and return a server-context correlation header. Ignore caller correlation/principal headers. A log-sink failure must not change an already committed business result. Do not represent handler-only metrics or liveness as full platform coverage or database readiness.
+- US-010 / BA-010: As a Service Owner I need predictable behaviour during dependency failure and contention. Given conditional-only cancellation, return 409; given mixed capacity/contention/unknown cancellation, return retryable 503 without SDK details. Given repeated unavailability and recovery, conflicting or identical-key concurrent decisions and an acknowledgement lost after commit, reconcile one durable business outcome. A bounded local exercise does not prove an accepted production load envelope, real provider backoff or cloud recovery objectives.
+
+[Current execution/limits](AWS-LOCAL-OPERATIONS.md). These are locally tested extensions, not owner UAT approval or an AWS deployment claim.

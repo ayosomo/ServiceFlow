@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T20:15:26.023443+00:00
+Command: pnpm aws:resilience dynamodb-local
+Exit: 0
+Boundary: local synthetic only
+
+PASS: dynamodb-local, 76 service invocations, 5 fault/concurrency scenarios; cleaned local test state. Evidence: docs/evidence/aws-readiness-2-resilience-dynamodb-local.json
+$ tsx scripts/aws-resilience.ts "dynamodb-local"

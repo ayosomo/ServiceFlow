@@ -1,5 +1,13 @@
 openapi: 3.1.0
-info: { title: ServiceFlow Request Approval API, version: 0.2.0 }
+info:
+  title: ServiceFlow Request Approval API
+  version: 0.3.0
+  description: >-
+    Handler-generated responses include a server-context x-correlation-id and
+    Cache-Control no-store. Caller correlation headers are ignored.
+    Gateway/runtime rejections may precede the handler and differ.
+    Health is process liveness, not persistence readiness. SDK capacity/contention
+    errors are retryable 503s; a 503 mutation can have an uncertain committed outcome.
 security: [{ sigv4: [] }]
 components:
   securitySchemes:

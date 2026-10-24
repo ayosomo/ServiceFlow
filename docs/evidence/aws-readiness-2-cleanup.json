@@ -1,0 +1,24 @@
+{
+  "checkedAtUTC": "2026-10-24T20:19:07.054960+00:00",
+  "method": "Actual Docker Compose state read; selected four review-started local services",
+  "services": [
+    {
+      "service": "azurite",
+      "state": "exited"
+    },
+    {
+      "service": "dynamodb",
+      "state": "exited"
+    },
+    {
+      "service": "firestore",
+      "state": "exited"
+    },
+    {
+      "service": "postgres",
+      "state": "exited"
+    }
+  ],
+  "volumesPreserved": true,
+  "cloudChanges": []
+}

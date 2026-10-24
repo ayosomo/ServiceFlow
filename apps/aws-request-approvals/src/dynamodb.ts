@@ -111,7 +111,11 @@ export class DynamoRepository implements Repository {
         "CancellationReasons" in error &&
         Array.isArray(error.CancellationReasons) &&
         error.CancellationReasons.some(
-          (r: { Code?: string }) => r.Code === "ConditionalCheckFailed",
+          (r: { Code?: string } | null) => r?.Code === "ConditionalCheckFailed",
+        ) &&
+        error.CancellationReasons.every(
+          (r: { Code?: string } | null) =>
+            r?.Code === "None" || r?.Code === "ConditionalCheckFailed",
         )
       )
         throw new Conflict();

@@ -1,5 +1,6 @@
 import Fastify from "fastify";
-import { api, MemoryRepository } from "./service.js";
+import { MemoryRepository } from "./service.js";
+import { execution } from "./execution.js";
 const token = process.env.LOCAL_API_TOKEN;
 const approverToken = process.env.LOCAL_APPROVER_TOKEN;
 if (
@@ -12,11 +13,14 @@ if (
   throw new Error(
     "Set distinct random 24+ character LOCAL_API_TOKEN and LOCAL_APPROVER_TOKEN values.",
   );
-const app = Fastify({ bodyLimit: 16384 });
-const handle = api(new MemoryRepository());
+const app = Fastify({ bodyLimit: 16384, requestIdHeader: false });
+const handle = execution(new MemoryRepository(), (metric) =>
+  console.log(JSON.stringify(metric)),
+);
 app.all("/*", async (req, reply) => {
   const result = await handle({
     method: req.method,
+    correlationId: req.id,
     path: req.url,
     body: req.body ? JSON.stringify(req.body) : undefined,
     idempotencyKey: String(req.headers["idempotency-key"] ?? ""),
@@ -30,6 +34,9 @@ app.all("/*", async (req, reply) => {
           ? { id: "synthetic-local-approver", roles: ["approver", "reader"] }
           : undefined,
   });
-  return reply.code(result.statusCode).send(result.body);
+  return reply
+    .code(result.statusCode)
+    .headers(result.headers)
+    .send(result.body);
 });
 await app.listen({ host: "127.0.0.1", port: 3101 });

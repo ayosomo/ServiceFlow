@@ -1,0 +1,21 @@
+Timestamp UTC: 2026-10-24T20:15:49.170747+00:00
+Command: pnpm audit --prod --audit-level=high --json
+Exit: 0
+Boundary: local synthetic only
+
+{
+  "advisories": {},
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 1,
+      "high": 0,
+      "critical": 0
+    },
+    "dependencies": 259,
+    "devDependencies": 0,
+    "optionalDependencies": 4,
+    "totalDependencies": 263
+  }
+}

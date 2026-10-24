@@ -1,0 +1,738 @@
+{
+  "startedAtUTC": "2026-10-24T20:15:25.920Z",
+  "passed": true,
+  "completedAtUTC": "2026-10-24T20:15:25.948Z",
+  "mode": "memory",
+  "boundary": "Actual local service calls; no HTTP/platform IAM or cloud calls; injected failures wrap memory or real DynamoDB Local persistence",
+  "serviceInvocations": 76,
+  "observations": [
+    {
+      "scenario": "dependency unavailable across ten read/write attempts each",
+      "statuses": [
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503,
+        503
+      ],
+      "assertion": "20 bounded 503s; existing state unchanged; absent request not created; liveness still 200 is not readiness"
+    },
+    {
+      "scenario": "unchanged create retry after dependency recovery",
+      "statuses": [
+        201,
+        201
+      ],
+      "assertion": "one request and one event after recovery/replay"
+    },
+    {
+      "scenario": "commit then injected lost acknowledgement",
+      "statuses": [
+        503,
+        200
+      ],
+      "assertion": "uncertain 503 reconciled by same-key retry; version 2 and two events"
+    },
+    {
+      "scenario": "16 conflicting decisions against one ID",
+      "statuses": [
+        200,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409,
+        409
+      ],
+      "assertion": "exactly one success, one version increment and one decision audit; transaction contention may return retryable 503"
+    },
+    {
+      "scenario": "16 simultaneous same-key decisions then 16 unchanged reconciliation retries",
+      "statuses": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "assertion": "all reconciliation retries return the original result; one version increment/decision event"
+    }
+  ],
+  "metrics": [
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_1",
+      "operation": "create",
+      "statusCode": 201,
+      "durationMs": 7,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_2",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_3",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_4",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_5",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_6",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_7",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_8",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_9",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_10",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_11",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_12",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_13",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_14",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_15",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_16",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_17",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_18",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_19",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_20",
+      "operation": "read",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_21",
+      "operation": "create",
+      "statusCode": 503,
+      "durationMs": 0,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_22",
+      "operation": "health",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_23",
+      "operation": "create",
+      "statusCode": 201,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_24",
+      "operation": "create",
+      "statusCode": 201,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_25",
+      "operation": "decision",
+      "statusCode": 503,
+      "durationMs": 1,
+      "outcome": "server_error"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_26",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_27",
+      "operation": "create",
+      "statusCode": 201,
+      "durationMs": 5,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_28",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 2,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_29",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 2,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_30",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 2,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_31",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_32",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_33",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_34",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_35",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_36",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_37",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_38",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_39",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_40",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_41",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_42",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_43",
+      "operation": "decision",
+      "statusCode": 409,
+      "durationMs": 1,
+      "outcome": "client_rejected"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_44",
+      "operation": "create",
+      "statusCode": 201,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_45",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_46",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_47",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_48",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_49",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_50",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_51",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_52",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_53",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_54",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_55",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_56",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_57",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_58",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_59",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_60",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 1,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_61",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_62",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_63",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_64",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_65",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_66",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_67",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_68",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_69",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_70",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_71",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_72",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_73",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_74",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_75",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    },
+    {
+      "event": "request_completed",
+      "correlationId": "local_fault_76",
+      "operation": "decision",
+      "statusCode": 200,
+      "durationMs": 0,
+      "outcome": "success"
+    }
+  ],
+  "durationSampleMs": {
+    "count": 76,
+    "min": 0,
+    "p50": 0,
+    "p95": 2,
+    "max": 7
+  },
+  "cleanupPassed": true,
+  "cloudCalls": false,
+  "alertsDelivered": false,
+  "acceptedProductionLoadOrSloClaimed": false,
+  "limitations": [
+    "Failure injection is at the repository boundary, not a measured real AWS outage or SDK backoff test.",
+    "Sixteen-way races and twenty failed operations are a bounded local exercise, not a sustained production benchmark.",
+    "Durations are end-to-end local service-call samples under this machine/emulator load, not latency targets or cloud performance."
+  ]
+}

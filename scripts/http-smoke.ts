@@ -60,12 +60,28 @@ const request = async (
     headers: {
       authorization: `Bearer ${identityToken}`,
       "content-type": "application/json",
+      ...(base === "http://127.0.0.1:3101"
+        ? { "x-correlation-id": "caller_value_must_not_be_trusted" }
+        : {}),
       ...(key ? { "idempotency-key": key } : {}),
     },
     ...(body ? { body: JSON.stringify(body) } : {}),
   });
   const result = { status: response.status, body: await response.json() };
-  evidence.push(JSON.stringify({ method, path, ...result }));
+  const correlationId = response.headers.get("x-correlation-id");
+  if (base === "http://127.0.0.1:3101") {
+    assert.match(correlationId ?? "", /^[A-Za-z0-9_-]{1,100}$/);
+    assert.notEqual(correlationId, "caller_value_must_not_be_trusted");
+    assert.equal(response.headers.get("cache-control"), "no-store");
+  }
+  evidence.push(
+    JSON.stringify({
+      method,
+      path,
+      ...result,
+      ...(correlationId ? { correlationId } : {}),
+    }),
+  );
   return result;
 };
 try {

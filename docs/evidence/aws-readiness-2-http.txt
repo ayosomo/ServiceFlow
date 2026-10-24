@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T20:15:19.947566+00:00
+Command: pnpm test:http
+Exit: 0
+Boundary: local synthetic only
+
+PASS: actual loopback HTTP intake, requester decision denial with unchanged audit/state, distinct approver/replay, stale-version denial, audit reread and compiled GCP KPI service.
+$ tsx scripts/http-smoke.ts

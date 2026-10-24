@@ -22,10 +22,12 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm test:http
+      - run: pnpm aws:resilience
       - run: pnpm audit --prod --audit-level=high
       - run: docker compose up -d --wait postgres dynamodb azurite firestore
       - run: pnpm db:migrate && pnpm db:seed && pnpm db:test && pnpm db:explain
       - run: pnpm test:integration
+      - run: pnpm aws:resilience dynamodb-local
       - if: always()
         run: docker compose down -v
 # No cloud credentials or deployment. Passing runs are evidence only for their exact SHA.

@@ -1,0 +1,16 @@
+{
+  "reviewedAtUTC": "2026-10-24T20:19:09.425606+00:00",
+  "candidateFiles": 239,
+  "knownPrivateValuesAbsent": 8,
+  "utf8TextVerified": true,
+  "currentCommandLogHashesMatched": true,
+  "unitCasesPassed": 45,
+  "resilienceServiceInvocationsPerMode": 76,
+  "resilienceScenariosPerMode": 5,
+  "scope": "AWS-P07/P09 local portions only",
+  "cloudChanges": [],
+  "azureCloudVerified": false,
+  "currentAwsChangesCloudVerified": false,
+  "ownerUatAcceptance": "PENDING",
+  "limitation": "Bounded scans and local faults, not security certification, cloud telemetry or production targets."
+}

@@ -27,6 +27,7 @@
     "db:explain": "tsx db/run.ts explain",
     "db:portable": "tsx scripts/portable-postgres.ts",
     "aws:local": "tsx apps/aws-request-approvals/src/local.ts",
+    "aws:resilience": "tsx scripts/aws-resilience.ts",
     "azure:batch": "tsx apps/azure-data-quality/src/local.ts",
     "azure:emulator": "tsx scripts/azure-emulator.ts",
     "azure:host-test": "tsx scripts/azure-host-smoke.ts",

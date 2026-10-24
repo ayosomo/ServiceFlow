@@ -24,7 +24,7 @@ Evidence: [GCP preflight](evidence/gcp-account-preflight.json), [container test]
 
 “Added and locally tested controls rejecting a submitting principal's own decision, failing closed on missing submission provenance, and recovering idempotent operations after an uncertain database acknowledgement.”
 
-Evidence: [readiness tests](../apps/aws-request-approvals/tests/readiness.test.ts), [DynamoDB Local persistence](../apps/aws-request-approvals/tests/dynamodb.integration.test.ts), [current execution manifest](evidence/phase4-verification.json). Eight new cases bring the unit/application suite to 33. The database test commits to the actual local emulator before injecting acknowledgement loss; it is not a real AWS outage. These controls are not cloud verified and do not establish independent human separation, effective least privilege, recovery objectives or production readiness. [Prioritised backlog](AWS-PRODUCTION-READINESS.md).
+Evidence: [readiness tests](../apps/aws-request-approvals/tests/readiness.test.ts), [DynamoDB Local persistence](../apps/aws-request-approvals/tests/dynamodb.integration.test.ts), [current execution manifest](evidence/phase4-verification.json). At that Phase 4 release, eight new cases brought the unit/application suite to 33; the later local operations iteration is recorded separately below. The database test commits to the actual local emulator before injecting acknowledgement loss; it is not a real AWS outage. These controls are not cloud verified and do not establish independent human separation, effective least privilege, recovery objectives or production readiness. [Prioritised backlog](AWS-PRODUCTION-READINESS.md).
 
 ## Supported by actual AWS deployment evidence
 
@@ -45,3 +45,9 @@ Evidence: [actual results](GCP-CLOUD-RESULTS.md) and [public-safe provider/test 
 - “Role-aware analytics,” “production-scale performance,” “commercial savings,” or any unmeasured outcome.
 
 Templates and provider documentation do not prove deployment. Record commit ID, passed command log, cloud resource/revision, smoke output and cost/teardown evidence before promoting a claim. This project does not corroborate professional experience claims elsewhere in the handoff; those need their own evidence.
+
+## Supported by subsequent local AWS operations/resilience evidence
+
+“Implemented and locally tested redacted request metrics, server-context correlation and transaction-failure classification, then exercised dependency failure/recovery and concurrent idempotent decisions against DynamoDB Local.”
+
+[Actual commands](evidence/aws-readiness-2-verification.json), [observability tests](../apps/aws-request-approvals/tests/observability.test.ts), [SDK fault cases](../apps/aws-request-approvals/tests/dynamodb-faults.test.ts), [local fault/concurrency exercise](evidence/aws-readiness-2-resilience-dynamodb-local.json). The suite now has 45 unit/application cases; each bounded exercise has 76 service invocations. No production monitoring/alert delivery, accepted load target, measured SDK backoff, live AWS outage recovery or production readiness claim is supported. [Remaining operational gates](AWS-LOCAL-OPERATIONS.md).

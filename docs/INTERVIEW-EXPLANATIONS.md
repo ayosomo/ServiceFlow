@@ -29,3 +29,9 @@ Docker initially could not start because a frozen WSL VM held its disk. An owner
 “I defined KPI boundaries and checked them against SQL, then deployed one authenticated TypeScript image to Cloud Run with a read-only Firestore runtime identity. Live responses matched the 48-record synthetic reference; unsigned/forged access and non-allowlisted app identity were rejected, and the snapshot stayed unchanged. I also found a real deployment limitation: healthz hit a provider-reserved path while the KPI route worked. I fixed and tested health locally rather than claiming it was deployed. I removed the lab resources, independently checked absence and retained the Free Trial. This is independent portfolio work, not a production reporting platform or measured saving.”
 
 [Exact run, scope and cleanup](GCP-CLOUD-RESULTS.md). No ongoing hosting, independent human approval or production-scale security/performance claim is made.
+
+## Local operations follow-up
+
+“I made handler logs useful without copying user inputs: bounded operation/status/outcome/duration plus server-context correlation, with tests for spoofed headers and log-sink failures. I also separated conditional conflicts from retryable SDK capacity/contention failures. I ran bounded memory and DynamoDB Local exercises with injected outages, a lost acknowledgement after commit and sixteen-way competing or identical-key decisions, then reconciled one final decision/audit. These are local tests, not cloud monitoring, a real AWS outage or evidence of production-scale performance. Service targets, live alarms, stable human identity and recovery/retention remain open.”
+
+[Exact local operations boundaries](AWS-LOCAL-OPERATIONS.md).

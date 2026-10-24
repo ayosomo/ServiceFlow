@@ -27,3 +27,7 @@ The image displays saved actual local HTTP results; [source, timestamp and hashe
 The approved demo retained the Free plan and was removed; delayed final billing is unverified. One owner exercised all original cloud roles. Managed project grants prevent an effective least-privilege claim, and different session IDs may belong to the same human. No load, backup/restore or production availability result is inferred from a small smoke test. [Cost gate](../COST_GATE.md), [prioritised production backlog and recovery playbook](../AWS-PRODUCTION-READINESS.md).
 
 Lesson: identity verification, business permission, concurrency and an auditable outcome are distinct acceptance criteria. A timeout does not prove that a write failed. Next: agree operational targets and stable identity/retention policy, then verify recovery and permissions through a separately approved release.
+
+## Subsequent local operations evidence
+
+Local AWS-P07/P09 work adds redacted completion metrics, server-context correlation, safe log-sink failure handling and SDK cancellation classification. The unit/application suite now has 45 cases. Two bounded exercises each run 76 service invocations, including 20 injected unavailable operations, recovery, uncertain-commit reconciliation and 16-way races. [Actual observations and limitations](../AWS-LOCAL-OPERATIONS.md). This is additional local evidence after the historical cloud run; no real dashboard/alert delivery, accepted load target, SDK backoff timing or provider fault is claimed. Production release remains on hold.
