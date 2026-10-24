@@ -1,0 +1,138 @@
+{
+  "observedAtUTC": "2026-10-24T17:35:14.736419+00:00",
+  "kind": "Actual read-only no-upgrade follow-up; credit visibility recovered, Y1 still blocked",
+  "subscriptionState": "Enabled",
+  "quotaId": "FreeTrial_2014-09-01",
+  "spendingLimit": "On",
+  "webProviderRegistered": true,
+  "creditSummaryHttpStatus": 200,
+  "creditLotsHttpStatus": 200,
+  "remainingCreditBalanceVerifiedPrivately": true,
+  "creditExpiryVerifiedFromCreditLotPrivately": true,
+  "creditLotMatchesSummary": true,
+  "apiIsEstimatedBalanceFlag": false,
+  "financialValuesAndAccountIdentifiersIncluded": false,
+  "formerDAS404ResolvedAtThisCheck": true,
+  "resolutionCause": "Not established; no account/provider mutation performed",
+  "regions": [
+    {
+      "region": "uksouth",
+      "checkedAtUTC": "2026-10-24T17:35:16.823444+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "ukwest",
+      "checkedAtUTC": "2026-10-24T17:35:17.230140+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "northeurope",
+      "checkedAtUTC": "2026-10-24T17:35:18.190262+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "westeurope",
+      "checkedAtUTC": "2026-10-24T17:35:18.496530+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "swedencentral",
+      "checkedAtUTC": "2026-10-24T17:35:18.777816+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "eastus",
+      "checkedAtUTC": "2026-10-24T17:35:20.814306+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "centralindia",
+      "checkedAtUTC": "2026-10-24T17:35:29.223346+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "eastus2",
+      "checkedAtUTC": "2026-10-24T17:35:30.235220+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "westus2",
+      "checkedAtUTC": "2026-10-24T17:35:31.037887+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    },
+    {
+      "region": "canadacentral",
+      "checkedAtUTC": "2026-10-24T17:35:32.039233+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "usableAllocationVerified": false
+    }
+  ],
+  "resourceCount": 0,
+  "resourceGroupCount": 0,
+  "actualCostQuery": {
+    "httpStatus": 200,
+    "rows": 0,
+    "interpretation": "Empty usage response, not measured final zero billing"
+  },
+  "supportPreparation": {
+    "providerState": "Registered",
+    "permissionListingIndicatesSupportWrite": true,
+    "actualTicketListHttpStatus": 403,
+    "actualTicketListErrorCode": "Forbidden",
+    "existingCaseCountVerified": false,
+    "requestTraceCapturedPrivately": true,
+    "caseSubmitted": false,
+    "permissionLimitation": "Permission listing does not prove successful support API operations; ticket list returned Forbidden."
+  },
+  "cloudMutations": [],
+  "paidUpgrade": false,
+  "deploymentApproved": false,
+  "cloudDeploymentVerified": false,
+  "decision": "Credit visibility gate resolved. Hold deployment for Y1 entitlement clarification and separate approval.",
+  "policy": "Free Trial subscriptions are ineligible for standard quota increases. Included billing/subscription support may investigate activation/default allocation; no exception promised.",
+  "sources": [
+    "https://learn.microsoft.com/en-us/rest/api/consumption/credits/get?view=rest-consumption-2024-08-01",
+    "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#how-to-manage-limits",
+    "https://azure.microsoft.com/en-us/support/plans/",
+    "https://learn.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request"
+  ]
+}

@@ -1,17 +1,17 @@
 # Azure trial diagnosis without upgrading
 
-All demonstration data is synthetic. Portfolio project, not an employer integration. Evidence date: 24 October 2026. **Read-only checks only; no new account changes, support submission or deployment.**
+All demonstration data is synthetic. Portfolio project, not an employer integration. Evidence date: 24 October 2026; later same-day recheck below supersedes the earlier missing-credit result. **Read-only checks only; no new account changes, support submission or deployment.**
 
 ## What the checks established
 
 - Subscription remains Enabled / FreeTrial_2014-09-01 with spending limit On; Microsoft.Web is Registered.
 - Billing-account, billing-profile and billing-permission GETs return HTTP 200. Both billing scopes report hasReadAccess=true, and the selected subscription is present in that billing account. Basic sign-in/read access is working.
 - Billing profile spendingLimitDetails identifies an Active FreeAccount item with an initial amount and precise start/end dates, verified privately. This resolves the initial entitlement/period uncertainty. It is **not a remaining-credit-balance field**: Microsoft defines amount as the initial amount and endDate as when that spending limit stops applying.
-- The credit-summary and credit-lots endpoints still return HTTP 404 with DAS discovery NotFound. This does not establish a zero balance or prove entitlement failure. Its cause remains unconfirmed.
+- The later credit-summary and credit-lots reads now return HTTP 200. Current promotional balance and direct credit-lot expiry are verified privately, and the lot matches the summary. The earlier DAS discovery 404 has resolved; no account change was performed and its cause is unconfirmed. The billing-currency figure is explicitly an estimate, distinct from current credit currency.
 - The billing-profile ActualCost query now succeeds (HTTP 200) and returns no rows. The prior throttling was not present at this check; empty usage data is not independently measured zero final spend.
 - No resources or resource groups exist. No plan/region switch, quota request, provider registration or resource creation occurred in this review.
 
-Actual selected-field evidence: [azure-trial-unblock.json](evidence/azure-trial-unblock.json). Personal identifiers, financial values and account dates are outside this public repository.
+Latest selected-field evidence: [azure-free-recheck.json](evidence/azure-free-recheck.json); earlier 404 history is retained in [azure-trial-unblock.json](evidence/azure-trial-unblock.json). Personal identifiers, financial values and account dates are outside this public repository.
 
 ## Regional alternatives checked
 
@@ -28,7 +28,7 @@ No usable alternative Y1 allocation was established. An absent SKU entry is neit
 
 Microsoft explicitly states that **Free Trial subscriptions are not eligible for limit or quota increases**. A normal increase request is therefore not a reliable no-upgrade route. Billing and subscription-management support are included in Basic support; a paid technical support plan is unnecessary for an account/trial entitlement investigation.
 
-New credits can take up to 24 hours to appear. The owner has a private recheck time derived from the observed trial start, plus an unsent support draft. The owner can open a Billing / Subscription management case to ask Microsoft to confirm the active trial and credit balance, and clarify whether the zero/missing Y1 allocations are intentional restrictions or an account activation/allocation issue. Do not promise that support will enable Y1 or grant an exception to the published policy.
+The credit visibility gate is now resolved; waiting until the earlier 24-hour recheck point is no longer necessary for the API balance. The owner has an updated unsent support draft focused on Y1. Open or update an included Billing / Subscription management case to ask whether zero/missing Y1 is an intentional offer restriction or an activation/default-allocation issue that can be corrected without conversion. Do not promise that support will enable Y1 or grant an exception to the published policy.
 
 Keep Free Trial and the spending limit. If Microsoft confirms that using Y1 requires a paid upgrade, preserve the locally verified Functions/Azurite lab and its honest cloud NOT VERIFIED status. Do not purchase Premium/Always Ready, create another trial to evade eligibility, or change hosting plans as an unreviewed workaround. Any later viable region/architecture still needs a fresh cost review and explicit deployment approval.
 
@@ -39,3 +39,9 @@ Keep Free Trial and the spending limit. If Microsoft confirms that using Y1 requ
 - [Credit visibility and up-to-24-hour delay](https://learn.microsoft.com/en-us/azure/cost-management-billing/benefits/credits/mca-check-azure-credits-balance)
 - [Basic support inclusion](https://azure.microsoft.com/en-us/support/plans/)
 - [Portal support-request steps](https://learn.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request)
+
+## Support access and owner handoff
+
+A fresh UK South response with request/correlation IDs was captured privately for Microsoft. Microsoft.Support is already Registered, and the permissions listing indicates support-ticket write via a wildcard. However, the actual ticket-list GET returned HTTP 403 Forbidden; that listing does not prove successful support access, and no existing-case count is inferred. The owner should check existing requests in the portal, choose included Billing / Subscription management support and submit the prepared draft/contact details themselves. No case, quota request, provider registration, plan change or resource was created in this review. A paid technical support plan is unnecessary for that category.
+
+Credit recovery removes one blocker; it does not change the Y1 results or authorise deployment. Six regions still explicitly return Y1 0/0, four omit it, and no usable allocation was verified. If Microsoft confirms paid conversion is required, retain the local Functions/Azurite lab. Do not deploy as a quota probe or change the hosting architecture as an unreviewed workaround.
