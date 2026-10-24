@@ -1,0 +1,138 @@
+{
+  "observedAt": "2026-10-24T15:25:46.499149+00:00",
+  "kind": "Read-only account diagnosis; no upgrade, quota change or deployment",
+  "subscriptionState": "Enabled",
+  "quotaId": "FreeTrial_2014-09-01",
+  "spendingLimit": "On",
+  "billingAccountHttpStatus": 200,
+  "billingAccountReadAccess": true,
+  "billingProfileHttpStatus": 200,
+  "billingProfileReadAccess": true,
+  "billingPermissionsHttpStatus": 200,
+  "selectedSubscriptionPresentInBillingAccount": true,
+  "activeFreeAccountInitialLimitVerified": true,
+  "freeAccountLimitEndDateVerified": true,
+  "financialDetailsRecordedPrivately": true,
+  "remainingCreditBalance": "NOT VERIFIED",
+  "creditSummaryHttpStatus": 404,
+  "creditLotsHttpStatus": 404,
+  "billingProfileCostQuery": {
+    "httpStatus": 200,
+    "returnedRows": 0,
+    "interpretation": "No cost rows returned; not independently measured zero spend"
+  },
+  "regions": [
+    {
+      "region": "uksouth",
+      "checkedAt": "2026-10-24T15:26:00.103684+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "ukwest",
+      "checkedAt": "2026-10-24T15:26:02.358936+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "northeurope",
+      "checkedAt": "2026-10-24T15:26:04.388114+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "westeurope",
+      "checkedAt": "2026-10-24T15:26:08.397915+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "swedencentral",
+      "checkedAt": "2026-10-24T15:26:13.973833+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "eastus",
+      "checkedAt": "2026-10-24T15:26:18.357865+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "centralindia",
+      "checkedAt": "2026-10-24T15:27:54.896516+00:00",
+      "httpStatus": 200,
+      "y1Returned": false,
+      "y1Current": null,
+      "y1Limit": null,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "eastus2",
+      "checkedAt": "2026-10-24T15:27:55.730830+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "westus2",
+      "checkedAt": "2026-10-24T15:27:57.046911+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    },
+    {
+      "region": "canadacentral",
+      "checkedAt": "2026-10-24T15:27:58.072704+00:00",
+      "httpStatus": 200,
+      "y1Returned": true,
+      "y1Current": 0,
+      "y1Limit": 0,
+      "totalRegionalLimit": 0,
+      "usableY1CapacityVerified": false
+    }
+  ],
+  "resourceCount": 0,
+  "resourceGroupCount": 0,
+  "cloudMutationsThisReview": [],
+  "supportRequestSubmitted": false,
+  "deploymentApproved": false,
+  "policyFinding": "Microsoft documents that Free Trial subscriptions are not eligible for quota increases. Seek trial/account clarification through included billing/subscription support; no upgrade is authorised.",
+  "sources": [
+    "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#how-to-manage-limits",
+    "https://learn.microsoft.com/en-us/rest/api/billing/billing-profiles/get?view=rest-billing-2024-04-01",
+    "https://learn.microsoft.com/en-us/azure/cost-management-billing/benefits/credits/mca-check-azure-credits-balance",
+    "https://azure.microsoft.com/en-us/support/plans/"
+  ]
+}
