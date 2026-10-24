@@ -1,0 +1,42 @@
+[
+  {
+    "logicalId": "Function",
+    "type": "AWS::Lambda::Function"
+  },
+  {
+    "logicalId": "FunctionDecisionPermission",
+    "type": "AWS::Lambda::Permission"
+  },
+  {
+    "logicalId": "Api",
+    "type": "AWS::ApiGatewayV2::Api"
+  },
+  {
+    "logicalId": "FunctionRole",
+    "type": "AWS::IAM::Role"
+  },
+  {
+    "logicalId": "Logs",
+    "type": "AWS::Logs::LogGroup"
+  },
+  {
+    "logicalId": "FunctionCreatePermission",
+    "type": "AWS::Lambda::Permission"
+  },
+  {
+    "logicalId": "Table",
+    "type": "AWS::DynamoDB::Table"
+  },
+  {
+    "logicalId": "ApiApiGatewayDefaultStage",
+    "type": "AWS::ApiGatewayV2::Stage"
+  },
+  {
+    "logicalId": "FunctionHealthPermission",
+    "type": "AWS::Lambda::Permission"
+  },
+  {
+    "logicalId": "FunctionReadPermission",
+    "type": "AWS::Lambda::Permission"
+  }
+]

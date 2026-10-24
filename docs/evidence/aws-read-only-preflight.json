@@ -1,0 +1,20 @@
+{
+  "observedAt": "2026-10-24T14:03:14.99947Z",
+  "mode": "READ ONLY; no resource creation, invocation, data seed or Cost Explorer query",
+  "region": "eu-north-1",
+  "stsIdentityVerified": true,
+  "nodeSdkCredentialsResolved": true,
+  "samPythonCredentialsResolved": true,
+  "accountPlanType": "FREE",
+  "accountPlanStatus": "ACTIVE",
+  "lambdaConcurrencyLimit": 400,
+  "lambdaUnreservedConcurrency": 400,
+  "dynamodbTableReadLimit": 40000,
+  "dynamodbTableWriteLimit": 40000,
+  "regionalLogListingReadable": true,
+  "regionalLogCreationVerified": false,
+  "cloudFormationTemplateValidation": "PASS; read-only API exit 0",
+  "budgetsCheckStatus": "Exit 0 with empty response body, including no-paginate; alert state remains UNKNOWN",
+  "cloudDeploymentApproved": false,
+  "effectiveLeastPrivilegeVerified": false
+}
