@@ -21,6 +21,9 @@ describe("shared business contract", () => {
       expect(requestSchema.safeParse(r).success).toBe(true),
     );
     const findings = reconcile(f.crm, f.supplier);
+    expect(findings).toEqual(
+      JSON.parse(readFileSync("packages/fixtures/data/findings.json", "utf8")),
+    );
     const crmRows = new Set(
       findings.filter((x) => x.source === "CRM").map((x) => x.row),
     );

@@ -1,0 +1,324 @@
+{
+  "kind": "Selected fields of actual Vitest JSON; private raw report retained; workspace paths normalised",
+  "startTimeEpochMs": 1792876086450,
+  "tests": 65,
+  "passed": 65,
+  "failed": 0,
+  "success": true,
+  "suites": [
+    {
+      "file": "packages/domain/tests/domain.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "shared business contract reproduces checked-in 48-record snapshots with eight affected source rows",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract separates quality, readiness and performance",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract handles empty metrics, invalid records and missing IDs explicitly",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract allows only specified transitions",
+          "status": "passed"
+        },
+        {
+          "name": "shared business contract compares timestamp instants regardless of fractional-second formatting",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/api.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-001/002 creates, persists, decides atomically and replays without another audit",
+          "status": "passed"
+        },
+        {
+          "name": "BA-005 denies anonymous and wrong-role calls without side effects",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2026-10-30T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"URGENT\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2026-10-30T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"wrong\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed create {\"requestId\":\"REQ-0099\",\"customerId\":\"SYN-099\",\"summary\":\"Synthetic installation\",\"ownerTeam\":\"Operations\",\"priority\":\"HIGH\",\"submittedAt\":\"2026-10-01T00:00:00.000Z\",\"targetAt\":\"2020-01-01T00:00:00.000Z\",\"approvalRequired\":true}",
+          "status": "passed"
+        },
+        {
+          "name": "preserves state on duplicate IDs and concurrent conflicting decisions",
+          "status": "passed"
+        },
+        {
+          "name": "reports malformed JSON, oversized input and missing key",
+          "status": "passed"
+        },
+        {
+          "name": "handles provider failure without claiming a write",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/dynamodb-faults.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-010 maps transaction cancellation [ 'None', \u2026(2) ] to 409, without leaking SDK details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-010 maps transaction cancellation [ 'ConditionalCheckFailed', \u2026(2) ] to 503, without leaking SDK details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-010 maps transaction cancellation [ 'ThrottlingError', 'None', 'None' ] to 503, without leaking SDK details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-010 maps transaction cancellation [ 'TransactionConflict', 'None', \u2026(1) ] to 503, without leaking SDK details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-010 maps transaction cancellation [] to 503, without leaking SDK details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-010 maps transaction cancellation [ 'ConditionalCheckFailed', undefined ] to 503, without leaking SDK details",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/identifiers.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-011 generates a UUID request reference, rereads/decides it and replays one original ID",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 keeps legacy IDs valid and returns conflict without overwrite on a forced generated collision",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 treats generator failure as server unavailability and writes nothing",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 rejects malformed/noncanonical request ID REQ-not-a-uuid",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 rejects malformed/noncanonical request ID REQ-637F6EC2-85B0-42CE-9F30-A295E3BE68E1",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 rejects malformed/noncanonical request ID REQ-637f6ec2-85b0-32ce-9f30-a295e3be68e1",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 rejects malformed/noncanonical request ID REQ-637f6ec2-85b0-42ce-7f30-a295e3be68e1",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 rejects malformed/noncanonical request ID REQ-12345",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 includes UUIDs in reconciliation/KPI eligibility and GCP drill-down without changing fixtures",
+          "status": "passed"
+        },
+        {
+          "name": "BA-011 classifies UUID read/decision metrics without logging the actual identifier",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/observability.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-009 correlates the response/audit with a bounded metric and omits request values",
+          "status": "passed"
+        },
+        {
+          "name": "BA-009 replaces invalid correlation IDs and never logs unknown caller paths",
+          "status": "passed"
+        },
+        {
+          "name": "BA-009 reports dependency failure as server error without logging exception details",
+          "status": "passed"
+        },
+        {
+          "name": "BA-009 logging failure cannot turn a committed creation into an error or extra event",
+          "status": "passed"
+        },
+        {
+          "name": "BA-009 Lambda adapter uses verified-context identity and ignores caller correlation/principal headers",
+          "status": "passed"
+        },
+        {
+          "name": "BA-009 liveness is explicitly independent of a failed persistence dependency",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/aws-request-approvals/tests/readiness.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-007 denies the submitting principal's own APPROVED decision, including dual-role identities",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 denies the submitting principal's own REJECTED decision, including dual-role identities",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on missing submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on duplicate submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on wrong-request submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-007 fails closed on empty-actor submission provenance without writing a receipt",
+          "status": "passed"
+        },
+        {
+          "name": "BA-008 recovers a create and decision after commit succeeded but its acknowledgement was lost",
+          "status": "passed"
+        },
+        {
+          "name": "BA-008 exposes a bounded 503 and leaves state unchanged when decision reads fail",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/gcp-delivery-insights/tests/api.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-004 serves deterministic KPIs and supports bounded drill-down",
+          "status": "passed"
+        },
+        {
+          "name": "denies anonymous, fake and expired tokens",
+          "status": "passed"
+        },
+        {
+          "name": "BA-006 returns null for zero denominators and rejects missing dates",
+          "status": "passed"
+        },
+        {
+          "name": "redacts provider errors and does not fabricate zero metrics",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "apps/azure-data-quality/tests/pipeline.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-003 preserves sources, reports eight affected rows and replays deterministically",
+          "status": "passed"
+        },
+        {
+          "name": "waits for missing input rather than producing PASS",
+          "status": "passed"
+        },
+        {
+          "name": "rejects malformed CSV, duplicate headers, oversized files, too many rows and missing columns",
+          "status": "passed"
+        },
+        {
+          "name": "rejects reuse of batch ID for changed data",
+          "status": "passed"
+        },
+        {
+          "name": "concurrent retry creates one committed result",
+          "status": "passed"
+        },
+        {
+          "name": "recovers after failure before commit without returning false success",
+          "status": "passed"
+        },
+        {
+          "name": "repairs the convenience findings file after a post-commit failure",
+          "status": "passed"
+        },
+        {
+          "name": "keeps an earlier rule-version summary immutable instead of relabelling it as current",
+          "status": "passed"
+        },
+        {
+          "name": "isolates current rule findings from an older orphan left before summary commit",
+          "status": "passed"
+        },
+        {
+          "name": "ingests a UUID reference through CSV without treating it as dirty or unidentified",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "file": "packages/release/tests/release.test.ts",
+      "status": "passed",
+      "cases": [
+        {
+          "name": "BA-012 identical inputs produce identical artifact manifests and existing candidates are not overwritten",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 rejects altered lambda.js against an independently retained manifest digest",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 rejects altered manifest.json against an independently retained manifest digest",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 rejects altered package.json against an independently retained manifest digest",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 rejects extra/nested payloads and a wrong expected digest without executing candidate code",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 rejects unhealthy or stale promotion and rolls a local pointer back to a verified earlier artifact",
+          "status": "passed"
+        },
+        {
+          "name": "BA-012 a cooperating-process promotion lock fails closed without deleting another holder's lock",
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

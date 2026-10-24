@@ -51,3 +51,9 @@ Templates and provider documentation do not prove deployment. Record commit ID, 
 “Implemented and locally tested redacted request metrics, server-context correlation and transaction-failure classification, then exercised dependency failure/recovery and concurrent idempotent decisions against DynamoDB Local.”
 
 [Actual commands](evidence/aws-readiness-2-verification.json), [observability tests](../apps/aws-request-approvals/tests/observability.test.ts), [SDK fault cases](../apps/aws-request-approvals/tests/dynamodb-faults.test.ts), [local fault/concurrency exercise](evidence/aws-readiness-2-resilience-dynamodb-local.json). The suite now has 45 unit/application cases; each bounded exercise has 76 service invocations. No production monitoring/alert delivery, accepted load target, measured SDK backoff, live AWS outage recovery or production readiness claim is supported. [Remaining operational gates](AWS-LOCAL-OPERATIONS.md).
+
+## Supported by local artifact and identifier evidence
+
+“Implemented and locally tested UUID request identifiers with legacy API/SQL/report compatibility, plus checksum-verified Lambda packaging and a promotion/rollback rehearsal with negative integrity and smoke checks.”
+
+[Commands](evidence/aws-readiness-3-verification.json), [packaged application smoke](evidence/aws-readiness-3-release-rehearsal.json), [scope/limitations](AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md). The 65-case suite and three persistence integrations are local evidence. Do not call the journal production deployment, signed provenance, cloud IAM verification or database rollback; do not claim Azure cloud deployment or owner UAT acceptance.

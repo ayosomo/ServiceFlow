@@ -6,6 +6,7 @@ import {
   kpis,
   assess,
   requestSchema,
+  requestIdSchema,
   SNAPSHOT,
 } from "../../../packages/domain/src/index.js";
 import { type InsightsRepository } from "./repository.js";
@@ -103,10 +104,7 @@ export function createApp(
     };
   });
   app.get("/requests/:id/insight", async (req, reply) => {
-    const id = z
-      .string()
-      .regex(/^REQ-\d{4}$/)
-      .parse((req.params as { id: string }).id);
+    const id = requestIdSchema.parse((req.params as { id: string }).id);
     const date = asOf(req.query),
       s = await repo.load(),
       rows = s.requests.filter((r) => r.requestId === id);

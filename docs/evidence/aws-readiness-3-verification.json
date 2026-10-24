@@ -1,0 +1,164 @@
+{
+  "kind": "Actual local AWS-P08/P13 implementation verification; no cloud calls",
+  "startedAtUTC": "2026-10-24T21:07:30.346576+00:00",
+  "sourceBasisCommit": "77fd26924fb21eaed299f64ababd0435e5ab16b1",
+  "workingTreeChangesIncluded": true,
+  "node": "v24.21.0",
+  "results": [
+    {
+      "command": "pnpm test --reporter=default --reporter=json --outputFile=work/aws-r3-vitest-raw.json",
+      "startedAtUTC": "2026-10-24T21:07:59.619875+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-unit.txt",
+      "sha256": "2d5b151276cd5a96681590f68c20b93551594b2b74b845494b96b82a03b1c05a"
+    },
+    {
+      "command": "pnpm build",
+      "startedAtUTC": "2026-10-24T21:08:45.176995+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-build.txt",
+      "sha256": "2d586b50f11e3f62f20532f2f3cbe4f4fdc2c8521f3f87276665be0d4d57b2e1"
+    },
+    {
+      "command": "pnpm aws:artifact prepare",
+      "startedAtUTC": "2026-10-24T21:09:15.902912+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-artifact.txt",
+      "sha256": "02c1ee3511340f9a6beb78b3824b3510c9727679bd80bc967db2dea2254b88e4"
+    },
+    {
+      "command": "pnpm aws:release-test",
+      "startedAtUTC": "2026-10-24T21:09:19.137522+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-release.txt",
+      "sha256": "074a14e1ec688e702ecf5f2135a2f5c320127b34ae1543e65e590fb9059d6152"
+    },
+    {
+      "command": "pnpm db:seed",
+      "startedAtUTC": "2026-10-24T21:09:47.548449+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-seed.txt",
+      "sha256": "be1a9dd6201eb145e6b6ba8d2c80b93d68f388a15e398eb32e112e0cd59f216a"
+    },
+    {
+      "command": "pnpm db:test",
+      "startedAtUTC": "2026-10-24T21:09:55.156518+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-sql.txt",
+      "sha256": "701495ac7813d79055187163d6e5b7457782a250bb36d355d6a4dd07c184363a"
+    },
+    {
+      "command": "pnpm test:container",
+      "startedAtUTC": "2026-10-24T21:09:56.758892+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-container.txt",
+      "sha256": "d1f5cb8063c0565dcf7f004d53e5421157f97a909c5362d5150ea8c680699117"
+    },
+    {
+      "command": "pnpm test:integration",
+      "startedAtUTC": "2026-10-24T21:10:16.521923+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-integration.txt",
+      "sha256": "6a3413050653cdd6ed4cb7e094ad39b2132979d70eb8e1ba180ab3ea7807c5c8"
+    },
+    {
+      "command": "pnpm audit --prod --audit-level=high --json",
+      "startedAtUTC": "2026-10-24T21:10:42.731370+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-audit.txt",
+      "sha256": "eef8c7ba8f1997ed59177dab6e03f46b987706669edd13d4031076fb0d0a21f6"
+    },
+    {
+      "command": "pnpm test:http",
+      "startedAtUTC": "2026-10-24T21:11:57.832631+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-http.txt",
+      "sha256": "8c2c857d0a97a2a883edbaeb16c8e30c54732cdba2cd443b4d8c28bfe8fdbaf0"
+    },
+    {
+      "command": "pnpm db:migrate",
+      "startedAtUTC": "2026-10-24T21:12:13.158502+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-migrate.txt",
+      "sha256": "90de23468d597df82f913d12d36051096262db7d06404d14bdcbff1f2954a8e6"
+    },
+    {
+      "command": "pnpm typecheck",
+      "startedAtUTC": "2026-10-24T21:12:15.030689+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-typecheck.txt",
+      "sha256": "c606fb52ee1a2e11c25dfa353345165be2a8833738917c411601d08a0e96aa60"
+    },
+    {
+      "command": "pnpm lint",
+      "startedAtUTC": "2026-10-24T21:12:24.344674+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-lint.txt",
+      "sha256": "844ed6595c8608e6d9bc03d8679916f031d054630854a37e814b5d85d87407c6"
+    },
+    {
+      "command": "pnpm check:portfolio",
+      "startedAtUTC": "2026-10-24T21:12:30.436713+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-links.txt",
+      "sha256": "9a317353d0a6721dd24563780642f586d23ed6d7a4e751c64a86e0bfcb9df8f8"
+    },
+    {
+      "command": "pnpm check:secrets",
+      "startedAtUTC": "2026-10-24T21:12:32.013841+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-secrets.txt",
+      "sha256": "826470791648ff83bdbee3e2e14d9f93b794303aa945012e8d87b506a73d6c21"
+    },
+    {
+      "command": "pnpm aws:artifact verify work/aws-artifacts/94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438 94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438",
+      "startedAtUTC": "2026-10-24T21:12:33.438240+00:00",
+      "code": 0,
+      "evidence": "docs/evidence/aws-readiness-3-artifact-verify.txt",
+      "sha256": "71f7defaa2c16cc1974246080c83dcc7cb164b4c98e5b9312436c7fa9c3daaf4"
+    }
+  ],
+  "azureCloudVerified": false,
+  "currentAwsChangesCloudVerified": false,
+  "cloudChanges": [],
+  "completedAtUTC": "2026-10-24T21:12:34.684165+00:00",
+  "allChecksPassed": true,
+  "initialFailedChecks": [
+    {
+      "command": "pnpm test:http",
+      "startedAtUTC": "2026-10-24T21:09:02.571225+00:00",
+      "code": 1,
+      "evidence": "docs/evidence/aws-readiness-3-initial-test-http-repeat.txt",
+      "sha256": "cd3fad590f8abbadc4eec81704c12aa2db3978e3ff5db8e2f24560cd705e8d4f"
+    },
+    {
+      "command": "pnpm db:migrate",
+      "startedAtUTC": "2026-10-24T21:09:24.630651+00:00",
+      "code": 1,
+      "evidence": "docs/evidence/aws-readiness-3-initial-db-migrate-repeat.txt",
+      "sha256": "b993f79f0f1806f874c54c57e28c7aa42e289229def1cb5616b37256615e1c3c"
+    }
+  ],
+  "additionalExecutionEvidence": [
+    {
+      "file": "docs/evidence/aws-readiness-3-azure-host.json",
+      "sha256": "2035ec98955220ab61d7ee90efc085bd000453b58f08934cd03d90be2ae997c1"
+    },
+    {
+      "file": "docs/evidence/aws-readiness-3-release-rehearsal.json",
+      "sha256": "bc54a77e04afef05a8d60775898fc09c84d285d68fa7fd3aa7a8434bddcac6d2"
+    },
+    {
+      "file": "docs/evidence/aws-readiness-3-gcp-container.json",
+      "sha256": "00da2428301f09821bd8daddd010e13d07445c6a101b186379b96f3d39fd479e"
+    },
+    {
+      "file": "docs/evidence/aws-readiness-3-local-services.json",
+      "sha256": "6e6a827847456afcf6ed72faa03c7de50ecf03a8d4831f9cd82b7a74ad1f4706"
+    },
+    {
+      "file": "docs/evidence/aws-readiness-3-initial-failure.json",
+      "sha256": "0d49acae5085256a8df2c36fa92d716360d092dd5b09e9ca43fbe3fce52db72c"
+    }
+  ]
+}

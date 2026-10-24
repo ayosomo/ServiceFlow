@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T21:12:13.158502+00:00
+Command: pnpm db:migrate
+Exit: 0
+Boundary: local synthetic only
+
+Migrations 001/002 applied transactionally (repeatable); legacy IDs retained.
+$ tsx db/run.ts migrate

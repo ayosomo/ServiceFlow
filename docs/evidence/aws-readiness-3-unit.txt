@@ -1,0 +1,73 @@
+Timestamp UTC: 2026-10-24T21:07:59.619875+00:00
+Command: pnpm test --reporter=default --reporter=json --outputFile=work/aws-r3-vitest-raw.json
+Exit: 0
+Boundary: local synthetic only
+
+
+ RUN  v5.0.5 [workspace]
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-2","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-3","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-4","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-5","statusCode":400,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-004 serves deterministic KPIs and supports bounded drill-down
+{"correlationId":"req-6","statusCode":400,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-1","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-2","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-3","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > denies anonymous, fake and expired tokens
+{"correlationId":"req-4","statusCode":403,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > BA-006 returns null for zero denominators and rejects missing dates
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > redacts provider errors and does not fabricate zero metrics
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+stdout | apps/gcp-delivery-insights/tests/api.test.ts > redacts provider errors and does not fabricate zero metrics
+{"correlationId":"req-2","statusCode":503,"event":"request_complete"}
+
+ ✓ apps/gcp-delivery-insights/tests/api.test.ts (4 tests) 1830ms
+   ✓ BA-004 serves deterministic KPIs and supports bounded drill-down 1198ms
+   ✓ denies anonymous, fake and expired tokens 602ms
+stdout | apps/aws-request-approvals/tests/identifiers.test.ts > BA-011 includes UUIDs in reconciliation/KPI eligibility and GCP drill-down without changing fixtures
+{"correlationId":"req-1","statusCode":200,"event":"request_complete"}
+
+ ✓ apps/aws-request-approvals/tests/identifiers.test.ts (10 tests) 861ms
+   ✓ BA-011 includes UUIDs in reconciliation/KPI eligibility and GCP drill-down without changing fixtures 705ms
+ ✓ packages/release/tests/release.test.ts (7 tests) 411ms
+ ✓ apps/azure-data-quality/tests/pipeline.test.ts (10 tests) 508ms
+ ✓ apps/aws-request-approvals/tests/api.test.ts (9 tests) 43ms
+ ✓ apps/aws-request-approvals/tests/observability.test.ts (6 tests) 76ms
+ ✓ apps/aws-request-approvals/tests/dynamodb-faults.test.ts (6 tests) 46ms
+ ✓ packages/domain/tests/domain.test.ts (5 tests) 187ms
+ ✓ apps/aws-request-approvals/tests/readiness.test.ts (8 tests) 49ms
+
+ Test Files  9 passed (9)
+      Tests  65 passed (65)
+   Start at  22:08:06
+   Duration  36.57s (import 78%, tests 13%, transform 7%, worker 1%)
+
+    Isolate  9 workers spawned · ~655ms startup each (spawn + environment, per file)
+             at least ~5.24s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to [workspace]/work/aws-r3-vitest-raw.json
+$ vitest run --exclude '**/*.integration.test.ts' "--reporter=default" "--reporter=json" "--outputFile=work/aws-r3-vitest-raw.json"

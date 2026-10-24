@@ -1,0 +1,54 @@
+{
+  "kind": "Actual initial local release-rehearsal test failure, retained before correction",
+  "observedLocalTestStart": "2026-10-24 21:49:24 Europe/London",
+  "command": "pnpm test",
+  "unitCasesPassed": 62,
+  "unitCasesFailed": 1,
+  "test": "BA-012 rejects unhealthy or stale promotion and rolls a local pointer back to a verified earlier artifact",
+  "errorCode": "EPERM",
+  "operation": "rename temporary pointer file over existing current.json in Windows sandbox temp directory",
+  "applicationOrCloudFailureClaimed": false,
+  "followupSandboxRun": {
+    "observedLocalTestStart": "2026-10-24 21:51:17 Europe/London",
+    "unitCasesPassed": 63,
+    "unitCasesFailed": 1,
+    "errorCode": "EPERM",
+    "operation": "Publishing a new journal filename also failed inside the sandbox; overwrite was not established as the cause"
+  },
+  "focusedOutsideSandboxRun": {
+    "observedLocalTestStart": "2026-10-24 21:51:45 Europe/London",
+    "command": "pnpm exec vitest run packages/release/tests/release.test.ts",
+    "passed": 7,
+    "failed": 0,
+    "sameAppendOnlyJournalCode": true
+  },
+  "resolution": "Local rename tests require execution outside this sandbox. The same journal implementation passed there; no general Windows application failure is inferred. Retain append-only history as the chosen local rehearsal design. Full verification is recorded separately.",
+  "cloudChanges": [],
+  "qualityFailures": [
+    {
+      "command": "pnpm lint",
+      "result": "Unused import and unsafe explicit throw in test finally; corrected",
+      "evidence": "docs/evidence/aws-readiness-3-initial-lint.txt"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "New test formatting; corrected before final check",
+      "evidence": "docs/evidence/aws-readiness-3-initial-lint-followup.txt"
+    },
+    {
+      "command": "pnpm check:portfolio",
+      "result": "Evidence targets referenced before report generation finished; corrected by completing evidence package and rerunning",
+      "evidence": "docs/evidence/aws-readiness-3-initial-links-followup.txt"
+    }
+  ],
+  "repeatRunTimeouts": {
+    "duringLocalContainerRebuild": true,
+    "http": "Local HTTP startup timeout; earlier run and final isolated repeat passed",
+    "postgresMigration": "Connection timeout; earlier run and final repeat passed; seed/SQL checks passed",
+    "causeProven": false,
+    "retainedLogs": [
+      "docs/evidence/aws-readiness-3-initial-test-http-repeat.txt",
+      "docs/evidence/aws-readiness-3-initial-db-migrate-repeat.txt"
+    ]
+  }
+}

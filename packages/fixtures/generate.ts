@@ -5,7 +5,13 @@ const f = fixtures();
 await mkdir("packages/fixtures/data", { recursive: true });
 for (const [name, data] of Object.entries({
   ...f,
-  manifest: { seed: SEED, asOf: SNAPSHOT, allDataSynthetic: true },
+  manifest: {
+    seed: SEED,
+    asOf: SNAPSHOT,
+    allDataSynthetic: true,
+    requestIdContract: "legacy-or-uuid-v1",
+    reconciliationRuleVersion: "2",
+  },
   findings: reconcile(f.crm, f.supplier),
   kpis: kpis(f.crm, reconcile(f.crm, f.supplier)),
 }))

@@ -21,3 +21,10 @@ Use distinct synthetic requester/approver identities for the new workflow. [Exec
 - US-010 / BA-010: As a Service Owner I need predictable behaviour during dependency failure and contention. Given conditional-only cancellation, return 409; given mixed capacity/contention/unknown cancellation, return retryable 503 without SDK details. Given repeated unavailability and recovery, conflicting or identical-key concurrent decisions and an acknowledgement lost after commit, reconcile one durable business outcome. A bounded local exercise does not prove an accepted production load envelope, real provider backoff or cloud recovery objectives.
 
 [Current execution/limits](AWS-LOCAL-OPERATIONS.md). These are locally tested extensions, not owner UAT approval or an AWS deployment claim.
+
+## Local identifier and release extension
+
+- US-011 / BA-011: As an Operations analyst I need durable opaque references beyond the small four-digit generation space. Given intake without an ID, generate a lowercase UUID v4 reference; identical replay returns it once. Existing four-digit IDs remain readable/decidable. Invalid UUIDs fail 400; forced collision returns 409 without overwrite. Shared CSV/KPI/GCP/SQL consumers accept the same format. A committed report from another rule version conflicts without changing it; use a new batch ID.
+- US-012 / BA-012: As a release reviewer I need a known package and a retained previous good local release. Given a trusted expected manifest digest, reject altered manifest/payload/descriptor, extra paths, unhealthy smoke or stale promotion. A successful local journal can promote and restore a verified package with packaged application smoke. Do not infer production promotion, IAM approval or database rollback from this rehearsal.
+
+[Execution and compatibility review](AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md); owner acceptance remains pending.

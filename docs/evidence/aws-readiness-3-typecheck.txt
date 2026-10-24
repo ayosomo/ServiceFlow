@@ -1,0 +1,6 @@
+Timestamp UTC: 2026-10-24T21:12:15.030689+00:00
+Command: pnpm typecheck
+Exit: 0
+Boundary: local synthetic only
+
+$ tsc --noEmit

@@ -1,0 +1,73 @@
+{
+  "startedAtUTC": "2026-10-24T21:12:43.307091+00:00",
+  "kind": "Actual local test-service cleanup only; not provider teardown",
+  "before": [
+    {
+      "Service": "azure-functions",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (137) 38 seconds ago"
+    },
+    {
+      "Service": "azurite",
+      "State": "running",
+      "Health": "",
+      "Status": "Up 19 minutes"
+    },
+    {
+      "Service": "dynamodb",
+      "State": "running",
+      "Health": "",
+      "Status": "Up 19 minutes"
+    },
+    {
+      "Service": "firestore",
+      "State": "running",
+      "Health": "healthy",
+      "Status": "Up 19 minutes (healthy)"
+    },
+    {
+      "Service": "postgres",
+      "State": "running",
+      "Health": "healthy",
+      "Status": "Up 19 minutes (healthy)"
+    }
+  ],
+  "volumesPreserved": true,
+  "cloudChanges": [],
+  "stopExitCode": 0,
+  "after": [
+    {
+      "Service": "azure-functions",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (137) 43 seconds ago"
+    },
+    {
+      "Service": "azurite",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (0) 3 seconds ago"
+    },
+    {
+      "Service": "dynamodb",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (143) 3 seconds ago"
+    },
+    {
+      "Service": "firestore",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (137) Less than a second ago"
+    },
+    {
+      "Service": "postgres",
+      "State": "exited",
+      "Health": "",
+      "Status": "Exited (0) 3 seconds ago"
+    }
+  ],
+  "allFiveStopped": true,
+  "completedAtUTC": "2026-10-24T21:12:48.570790+00:00"
+}

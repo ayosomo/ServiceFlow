@@ -1,7 +1,10 @@
-import { createHash, randomInt, randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { z } from "zod";
 import {
   requestSchema,
+  requestIdSchema,
+  generatedRequestIdSchema,
+  requestPathPattern,
   iso,
   priority,
   canTransition,
@@ -65,10 +68,7 @@ export class MemoryRepository implements Repository {
 }
 const create = z
   .object({
-    requestId: z
-      .string()
-      .regex(/^REQ-\d{4}$/)
-      .optional(),
+    requestId: requestIdSchema.optional(),
     customerId: z.string().regex(/^SYN-\d{3}$/),
     summary: z.string().trim().min(5).max(200),
     ownerTeam: z.string().trim().min(1).max(60),
@@ -93,7 +93,11 @@ export interface Call {
   actor?: { id: string; roles: ("requester" | "approver" | "reader")[] };
   correlationId?: string;
 }
-export function api(repo: Repository, clock = () => new Date().toISOString()) {
+export function api(
+  repo: Repository,
+  clock = () => new Date().toISOString(),
+  generateId = () => `REQ-${randomUUID()}`,
+) {
   return async (call: Call): Promise<{ statusCode: number; body: unknown }> => {
     const respond = (statusCode: number, body: unknown) => ({
       statusCode,
@@ -101,7 +105,7 @@ export function api(repo: Repository, clock = () => new Date().toISOString()) {
     });
     if (!call.actor) return respond(403, { error: "Forbidden" });
     const actor = call.actor;
-    const match = /^\/requests\/(REQ-\d{4})(\/decision)?$/.exec(call.path);
+    const match = requestPathPattern.exec(call.path);
     if (call.method === "GET") {
       if (
         !actor.roles.some((r) =>
@@ -165,11 +169,12 @@ export function api(repo: Repository, clock = () => new Date().toISOString()) {
       let request: ServiceRequest, expectedVersion: number | undefined;
       if (creating) {
         const r = create.parse(input);
+        const id = r.requestId ?? generateId();
+        if (!r.requestId && !generatedRequestIdSchema.safeParse(id).success)
+          throw new Error("Invalid server-generated request identifier");
         request = requestSchema.parse({
           ...r,
-          requestId:
-            r.requestId ??
-            `REQ-${String(randomInt(1, 10000)).padStart(4, "0")}`,
+          requestId: id,
           status: "SUBMITTED",
           approverId: null,
           version: 1,

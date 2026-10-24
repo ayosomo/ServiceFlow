@@ -104,6 +104,18 @@ try {
     signal: AbortSignal.timeout(5000),
   });
   assert.equal(bad.status, 403);
+  const uuidMissing = await fetch(
+    "http://127.0.0.1:58080/requests/REQ-637f6ec2-85b0-42ce-9f30-a295e3be68e1/insight",
+    {
+      headers: { authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(20000),
+    },
+  );
+  assert.equal(
+    uuidMissing.status,
+    404,
+    "A valid UUID route must be parsed, then report missing data rather than invalid ID",
+  );
   const image = (
     await docker([
       "image",
@@ -130,6 +142,7 @@ try {
         anonymousStatus: 403,
         invalidTokenStatus: bad.status,
         authenticatedStatus: response.status,
+        validUuidMissingReferenceStatus: uuidMissing.status,
         metrics,
       },
       null,

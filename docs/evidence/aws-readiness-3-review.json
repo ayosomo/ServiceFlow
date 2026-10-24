@@ -1,0 +1,31 @@
+{
+  "reviewedAtUTC": "2026-10-24T21:13:00.074202+00:00",
+  "candidateFiles": 284,
+  "knownPrivateValuesAbsent": 8,
+  "utf8TextVerified": true,
+  "currentCommandLogHashesMatched": true,
+  "unitCasesPassed": 65,
+  "persistenceIntegrationsPassed": 3,
+  "packagedSmokeRuns": 2,
+  "journalEntries": 3,
+  "rawFixtureFilesUnchangedFromBasisCommit": {
+    "packages/fixtures/data/base.json": "8c7b83be4bee0eee3c141a39ab0ac280a43ec688813ffbb6e4ef3f31ed129701",
+    "packages/fixtures/data/crm.json": "5cec256ccc060bc57e2f5afe6ed74504fc63a0cbde2582857827cb798909d1f6",
+    "packages/fixtures/data/supplier.json": "278b7836e3680f7f468947c90a56a99f3c819fbed72316ffcfa72e6d7b330d5c",
+    "packages/fixtures/data/crm.csv": "c73ee4576a55c5e03cf02bab87c1602c0f103b763be7239418c06450edb5e850",
+    "packages/fixtures/data/supplier.csv": "519f0ae2394c70ad7315c31960154c749507f7c576be48f8b77f92927da88544",
+    "packages/fixtures/data/kpis.json": "28f62e852e38f18b0a4cea8ec38a23cae8f275c10b1a1a6a4304f7310d213b7d"
+  },
+  "reconciliationRuleVersion": "2",
+  "scope": "AWS-P08 partial local rehearsal; AWS-P13 local implementation and shared consumer compatibility only",
+  "cloudChanges": [],
+  "azureCloudVerified": false,
+  "currentAwsChangesCloudVerified": false,
+  "ownerUatAcceptance": "PENDING",
+  "limitations": [
+    "Bounded scans, not security certification",
+    "Intermediate release candidate is a synthetic fixture",
+    "No production/cloud/infrastructure/data rollback verified",
+    "Moderate dependency advisory remains; zero high/critical at current audit"
+  ]
+}

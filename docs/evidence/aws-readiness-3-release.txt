@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T21:09:19.137522+00:00
+Command: pnpm aws:release-test
+Exit: 0
+Boundary: local synthetic only
+
+PASS: built artifact integrity/UUID/security smoke, tamper/unhealthy/stale rejection, and three-entry local promotion/rollback journal. No cloud calls.
+$ tsx scripts/aws-release-rehearsal.ts

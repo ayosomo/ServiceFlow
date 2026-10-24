@@ -41,3 +41,7 @@ The portfolio has executable/local documentation evidence for these gates, inclu
 Current AWS principal/provenance/metrics/fault-handling improvements and GCP's corrected health route have not been cloud verified. Retain their local-only labels. Delayed final AWS/GCP billing remains unverified. Owner UAT/case-study acceptance remains pending. Production identity/permissions, monitoring/alert delivery, accepted service/load/recovery/retention targets and release/rollback remain open; a portfolio Definition of Done is not production readiness.
 
 No application deployment, paid resource, support submission, account upgrade or Free Trial change was made by this audit. Any future cloud deployment requires fresh cost/eligibility review and explicit owner approval.
+
+## Subsequent source iteration
+
+The audit above describes its original source/evidence. The next local source iteration adds 65-case identifier/release checks, SQL constraint/FK rollback checks, rule-2 Azure host execution and a GCP UUID-route container check. [Current verification](evidence/aws-readiness-3-verification.json), [compatibility and limitations](AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md). Prior exact-ZIP, screenshots and deployment records remain dated historical evidence. Azure cloud is still NOT VERIFIED; no production acceptance or new cloud run is implied.

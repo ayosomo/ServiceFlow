@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T21:12:33.438240+00:00
+Command: pnpm aws:artifact verify work/aws-artifacts/94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438 94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438
+Exit: 0
+Boundary: local synthetic only
+
+{"verified":true,"manifestSHA256":"94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438","codeExecuted":false,"cloudCalls":false}
+$ tsx scripts/aws-artifact.ts "verify" "work/aws-artifacts/94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438" "94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438"

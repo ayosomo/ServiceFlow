@@ -20,10 +20,22 @@ try {
     f = fixtures(),
     findings = reconcile(f.crm, f.supplier);
   if (mode === "migrate") {
-    await client.query(
-      await readFile("db/migrations/001-baseline.sql", "utf8"),
+    await client.query("BEGIN");
+    try {
+      await client.query(
+        await readFile("db/migrations/001-baseline.sql", "utf8"),
+      );
+      await client.query(
+        await readFile("db/migrations/002-request-ids.sql", "utf8"),
+      );
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    }
+    console.log(
+      "Migrations 001/002 applied transactionally (repeatable); legacy IDs retained.",
     );
-    console.log("Migration 001 applied (idempotent).");
   } else if (mode === "seed") {
     await client.query("BEGIN");
     // Scoped fixture reset; no schema drop or production connection assumed.
@@ -164,6 +176,38 @@ try {
       f.supplier[23]!.supplierMilestone,
     );
     await client.query("BEGIN");
+    const uuidId = "REQ-637f6ec2-85b0-42ce-9f30-a295e3be68e1";
+    await client.query(
+      "INSERT INTO requests SELECT $1,customer_id,summary,owner_team,priority,status,submitted_at,target_at,actual_completed_at,approval_required,approver_id,version FROM requests WHERE request_id=$2",
+      [uuidId, "REQ-0001"],
+    );
+    await client.query(
+      "INSERT INTO events VALUES($1,$2,'UUID_TEST','synthetic',now(),'uuid-test','{}')",
+      ["uuid-local-event", uuidId],
+    );
+    assert.equal(
+      Number(
+        (
+          await client.query(
+            "SELECT count(*) FROM requests r JOIN events e USING(request_id) WHERE r.request_id=$1",
+            [uuidId],
+          )
+        ).rows[0].count,
+      ),
+      1,
+    );
+    await client.query("SAVEPOINT invalid_uuid");
+    let invalidUuidRejected = false;
+    try {
+      await client.query(
+        "INSERT INTO requests SELECT $1,customer_id,summary,owner_team,priority,status,submitted_at,target_at,actual_completed_at,approval_required,approver_id,version FROM requests WHERE request_id=$2",
+        ["REQ-not-a-uuid", uuidId],
+      );
+    } catch (error) {
+      invalidUuidRejected = (error as { code?: string }).code === "23514";
+    }
+    await client.query("ROLLBACK TO SAVEPOINT invalid_uuid");
+    assert(invalidUuidRejected);
     for (const sql of [
       "INSERT INTO requests SELECT * FROM requests LIMIT 1",
       "INSERT INTO events VALUES('bad','REQ-9999','X','synthetic',now(),'test','{}')",
@@ -180,6 +224,12 @@ try {
       assert.ok(rejected, "Expected PK/FK/chronology constraint failure");
     }
     await client.query("ROLLBACK");
+    assert.equal(
+      Number(
+        (await client.query("SELECT count(*) FROM requests")).rows[0].count,
+      ),
+      48,
+    );
     console.log(
       JSON.stringify(
         {
@@ -191,6 +241,7 @@ try {
             "FK rejection",
             "chronology rejection",
             "ROW_NUMBER latest-source selection over two historical updates",
+            "UUID ID accepted with event FK; malformed ID rejected; rollback preserves 48 fixtures",
           ],
           reference: sql,
           api: actual,

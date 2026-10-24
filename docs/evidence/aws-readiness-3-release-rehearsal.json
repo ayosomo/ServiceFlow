@@ -1,0 +1,67 @@
+{
+  "startedAtUTC": "2026-10-24T21:09:23.482Z",
+  "completedAtUTC": "2026-10-24T21:09:24.506Z",
+  "passed": true,
+  "source": {
+    "sourceCommit": "77fd26924fb21eaed299f64ababd0435e5ab16b1",
+    "workingTreeDirty": true
+  },
+  "artifact": {
+    "directory": "work/aws-release-rehearsal-1792876163486/application",
+    "manifestSHA256": "94034b488a6f445af5cc8883a971827d42c19bbc736ad77c8b2aed01fb05b438",
+    "manifest": {
+      "format": 1,
+      "runtime": "nodejs22.x",
+      "handler": "lambda.handler",
+      "requestIdContract": "legacy-or-uuid-v1",
+      "sourceCommit": "77fd26924fb21eaed299f64ababd0435e5ab16b1",
+      "workingTreeDirty": true,
+      "files": {
+        "lambda.js": {
+          "bytes": 2118139,
+          "sha256": "14e19b5030d918ba417604d6c65d20c61b18c8739065f57c7a9d617d207ce5a5"
+        },
+        "package.json": {
+          "bytes": 20,
+          "sha256": "dbf8353f77358bc12169b7bb7301e1978d5b503e002ee927229a8993672818fc"
+        }
+      }
+    }
+  },
+  "sameInputsProduceSameManifest": true,
+  "actualApplicationBundleSmoke": [
+    {
+      "generatedId": "REQ-139969dd-1c45-4019-adc6-680af8e218a7",
+      "create": 201,
+      "replayCreate": 201,
+      "selfDecision": 403,
+      "decision": 200,
+      "replayDecision": 200,
+      "auditEvents": 2
+    },
+    {
+      "generatedId": "REQ-057cce43-f8fd-4161-93a1-2622d4fcc71e",
+      "create": 201,
+      "replayCreate": 201,
+      "selfDecision": 403,
+      "decision": 200,
+      "replayDecision": 200,
+      "auditEvents": 2
+    }
+  ],
+  "tamperedPayloadRejectedBeforeCodeLoad": true,
+  "validChecksumUnhealthyFixtureRejected": true,
+  "stalePromotionRejected": true,
+  "journalEntries": 3,
+  "rolledBackToOriginalArtifact": true,
+  "intermediateCandidateWasSyntheticFixture": true,
+  "workArtifactsRetainedForReview": true,
+  "cloudCalls": false,
+  "cloudDeployments": [],
+  "limitations": [
+    "Actual packaged Lambda factory is tested using synthetic gateway context and memory persistence, not platform IAM or live AWS.",
+    "The intermediate candidate is a labelled synthetic fixture, not a second released application version.",
+    "Rollback changes a local append-only journal only; no infrastructure, database/schema or real traffic rollback is proved.",
+    "Expected digests and smoke callbacks are operator-controlled local inputs, not signed/protected CI attestations or owner deployment approval."
+  ]
+}

@@ -9,6 +9,7 @@ import {
 } from "../../../packages/domain/src/index.js";
 export class Retryable extends Error {}
 export class BatchConflict extends Error {}
+export const RULE_VERSION = "2";
 export interface BlobValue {
   text: string;
   etag: string;
@@ -116,6 +117,10 @@ export async function processBatch(
       throw new BatchConflict(
         "Batch ID already committed with different sources",
       );
+    if (report.ruleVersion !== RULE_VERSION)
+      throw new BatchConflict(
+        "Batch committed under another rule version; use a new batch ID",
+      );
     await store.putOnce(
       `results/${batchId}/findings.json`,
       JSON.stringify(report.findings, null, 2),
@@ -132,11 +137,11 @@ export async function processBatch(
     asOf: SNAPSHOT,
     findings,
     metrics: kpis(crmRows, findings),
-    ruleVersion: "1",
+    ruleVersion: RULE_VERSION,
   };
   // Content-addressed immutable report holds the complete result. No cross-blob
   // transaction is assumed. summary.json is the final atomic commit pointer/report.
-  const immutable = `results/${batchId}/${sourceHash}/findings.json`;
+  const immutable = `results/${batchId}/rules-${RULE_VERSION}/${sourceHash}/findings.json`;
   await store.putOnce(immutable, JSON.stringify(findings, null, 2));
   if (
     (await store.get(`incoming/${batchId}/crm.csv`))?.etag !== crm.etag ||
@@ -150,7 +155,11 @@ export async function processBatch(
   );
   if (!committed) {
     const winner = await store.get(summaryPath);
-    if (!winner || JSON.parse(winner.text).sourceHash !== sourceHash)
+    if (
+      !winner ||
+      JSON.parse(winner.text).sourceHash !== sourceHash ||
+      JSON.parse(winner.text).ruleVersion !== RULE_VERSION
+    )
       throw new BatchConflict("Concurrent batch conflict");
   }
   // Required convenience path is recoverable after a partial failure. Always derives

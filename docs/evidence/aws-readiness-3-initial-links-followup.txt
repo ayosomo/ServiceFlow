@@ -1,0 +1,28 @@
+Timestamp UTC: 2026-10-24T21:05:23.921881+00:00
+Command: pnpm check:portfolio
+Exit: 1
+Boundary: local synthetic only
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ tsx scripts/check-portfolio.ts
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: docs\07-TRACEABILITY-AND-TEST-EVIDENCE.md: missing or out-of-repository target evidence/aws-readiness-3-unit-results.json
+docs\AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md: missing or out-of-repository target evidence/aws-readiness-3-unit-results.json
+docs\AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md: missing or out-of-repository target evidence/aws-readiness-3-review.json
+docs\IMPLEMENTATION_STATUS.md: missing or out-of-repository target evidence/aws-readiness-3-unit-results.json
+
+4 !== 0
+
+    at <anonymous> ([workspace]\scripts\check-portfolio.ts:54:8) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 4,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

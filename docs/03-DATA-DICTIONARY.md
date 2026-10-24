@@ -4,7 +4,7 @@ Seed: 2301026, LCG (1664525 × state + 1013904223) modulo 2^32. Snapshot: 2026-1
 
 | Field             | Type / nullability                             | Source → target                               | Accepted values / rules                                             | Owner            |
 | ----------------- | ---------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------- | ---------------- |
-| requestId         | string, required                               | CRM requestId → requests.request_id           | REQ-0001 pattern; duplicates critical                               | Operations       |
+| requestId         | string, required                               | CRM requestId → requests.request_id           | Legacy REQ-0001 or lowercase REQ-UUID-v4; duplicates critical       | Operations       |
 | customerId        | string, required                               | CRM → customer_id                             | SYN-001 pattern; fictional only                                     | Operations       |
 | summary           | string, required                               | CRM → summary                                 | Trimmed 5–200 characters                                            | Service Owner    |
 | ownerTeam         | string, required                               | CRM → owner_team                              | Nonempty, max 60; missing is critical                               | Service Owner    |
@@ -27,3 +27,5 @@ CSV decoding is explicit: version → number, literal booleans → boolean, blan
 Eight affected CRM rows: 1 and 2 duplicate REQ-0001; 3 missing owner; 4 invalid status; 5 invalid target; 6 target before submission; 7 supplier date conflict; 8 missing ID. There are 12 findings (8 CRITICAL, 4 REVIEW). A missing ID has both missing and invalid-format rule evidence. Row 6 also has a supplier-date discrepancy. Supplier references 2 and 8 no longer match raw CRM and are REVIEW because match is optional. This is eight affected records, not eight findings.
 
 PostgreSQL stores all 48 valid canonical fixtures as a relational reference, raw inputs separately, and a 41-request metric_eligible subset derived from dirty CRM. Canonical values are never substituted into dirty-source metrics. Raw missing/duplicate IDs do not enter FK-constrained request tables.
+
+Generated IDs now use UUID v4; raw deterministic fixture IDs remain unchanged. The [contract/migration note](AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md) defines exact compatibility and rule-version-2 replay handling. UUID syntax validates references, not the uniqueness of a business request.

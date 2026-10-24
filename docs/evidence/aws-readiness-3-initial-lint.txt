@@ -1,0 +1,16 @@
+Timestamp UTC: 2026-10-24T21:02:59.655886+00:00
+Command: pnpm lint
+Exit: 1
+Boundary: local synthetic only
+
+
+[workspace]\packages\release\tests\release.test.ts
+  22:7  error  Unsafe usage of ThrowStatement  no-unsafe-finally
+
+[workspace]\scripts\aws-artifact.ts
+  3:19  error  'join' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 2 problems (2 errors, 0 warnings)
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ eslint . && prettier --check .

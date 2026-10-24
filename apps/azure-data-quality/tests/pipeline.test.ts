@@ -1,11 +1,13 @@
 import { it, expect } from "vitest";
 import { readFileSync } from "node:fs";
+import { fixtures } from "../../../packages/fixtures/src.js";
 import {
   MemoryStore,
   processBatch,
   Retryable,
   BatchConflict,
   csvInput,
+  RULE_VERSION,
 } from "../src/pipeline.js";
 async function ready() {
   const store = new MemoryStore();
@@ -102,4 +104,70 @@ it("repairs the convenience findings file after a post-commit failure", async ()
   expect(await store.get("results/demo/summary.json")).not.toBeNull();
   expect((await processBatch(store, "demo")).metrics.totalRecords).toBe(48);
   expect(await store.get("results/demo/findings.json")).not.toBeNull();
+});
+
+it("keeps an earlier rule-version summary immutable instead of relabelling it as current", async () => {
+  const store = await ready(),
+    report = await processBatch(store, "demo");
+  expect(report.ruleVersion).toBe(RULE_VERSION);
+  const old = JSON.stringify({ ...report, ruleVersion: "1" });
+  store.blobs.set("results/demo/summary.json", {
+    text: old,
+    etag: "synthetic-old-rule",
+  });
+  await expect(processBatch(store, "demo")).rejects.toThrow(BatchConflict);
+  expect((await store.get("results/demo/summary.json"))?.text).toBe(old);
+});
+
+it("isolates current rule findings from an older orphan left before summary commit", async () => {
+  const store = await ready();
+  const report = await processBatch(store, "demo");
+  // Model the pre-versioned immutable path using the same source bytes, then retry
+  // an uncommitted batch under the new rules. It must not reuse old findings.
+  store.blobs.delete("results/demo/summary.json");
+  store.blobs.delete("results/demo/findings.json");
+  store.blobs.delete(
+    `results/demo/rules-${RULE_VERSION}/${report.sourceHash}/findings.json`,
+  );
+  const legacyPath = `results/demo/${report.sourceHash}/findings.json`;
+  await store.putOnce(legacyPath, "[]");
+  const current = await processBatch(store, "demo");
+  expect((await store.get(legacyPath))?.text).toBe("[]");
+  expect(
+    JSON.parse(
+      (await store.get(
+        `results/demo/rules-${RULE_VERSION}/${report.sourceHash}/findings.json`,
+      ))!.text,
+    ),
+  ).toEqual(current.findings);
+  expect(current.findings).toHaveLength(12);
+});
+
+it("ingests a UUID reference through CSV without treating it as dirty or unidentified", async () => {
+  const id = "REQ-637f6ec2-85b0-42ce-9f30-a295e3be68e1",
+    row = { ...fixtures().base[0]!, requestId: id };
+  const supplier = {
+    requestId: id,
+    supplierUpdatedAt: row.submittedAt,
+    supplierMilestone: "Synthetic",
+    supplierTargetAt: row.targetAt,
+  };
+  const csv = (r: Record<string, unknown>) =>
+    Object.keys(r).join(",") +
+    "\n" +
+    Object.values(r)
+      .map((v) => '"' + String(v ?? "").replaceAll('"', '""') + '"')
+      .join(",") +
+    "\n";
+  const store = new MemoryStore();
+  await store.putOnce("incoming/uuid/crm.csv", csv(row));
+  await store.putOnce("incoming/uuid/supplier.csv", csv(supplier));
+  const report = await processBatch(store, "uuid");
+  expect(report.ruleVersion).toBe(RULE_VERSION);
+  expect(report.findings).toEqual([]);
+  expect(report.metrics).toMatchObject({
+    totalRecords: 1,
+    unidentifiable: 0,
+    qualityPassRate: { numerator: 1, denominator: 1 },
+  });
 });

@@ -1,0 +1,15 @@
+Timestamp UTC: 2026-10-24T21:10:16.521923+00:00
+Command: pnpm test:integration
+Exit: 0
+Boundary: local synthetic only
+
+
+ RUN  v5.0.5 [workspace]
+
+
+ Test Files  3 passed (3)
+      Tests  3 passed (3)
+   Start at  22:10:19
+   Duration  22.10s (import 68%, tests 31%, transform 1%)
+
+$ vitest run --config vitest.integration.config.ts

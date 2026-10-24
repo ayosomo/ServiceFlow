@@ -1,9 +1,11 @@
 openapi: 3.1.0
 info:
   title: ServiceFlow Request Approval API
-  version: 0.3.0
+  version: 0.4.0
   description: >-
-    Handler-generated responses include a server-context x-correlation-id and
+    Missing requestId generates a canonical REQ-prefixed UUID v4. Legacy four-digit
+    IDs remain accepted and are never renumbered. Clients must accept the broader
+    response format before a rollout. Handler-generated responses include a server-context x-correlation-id and
     Cache-Control no-store. Caller correlation headers are ignored.
     Gateway/runtime rejections may precede the handler and differ.
     Health is process liveness, not persistence readiness. SDK capacity/contention
@@ -33,7 +35,11 @@ components:
           approvalRequired,
         ]
       properties:
-        requestId: { type: string, pattern: "^REQ-[0-9]{4}$" }
+        requestId:
+          {
+            type: string,
+            pattern: "^REQ-([0-9]{4}|[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$",
+          }
         customerId: { type: string, pattern: "^SYN-[0-9]{3}$" }
         summary: { type: string, minLength: 5, maxLength: 200 }
         ownerTeam: { type: string, minLength: 1, maxLength: 60 }
@@ -62,7 +68,11 @@ components:
         name: id,
         in: path,
         required: true,
-        schema: { type: string, pattern: "^REQ-[0-9]{4}$" },
+        schema:
+          {
+            type: string,
+            pattern: "^REQ-([0-9]{4}|[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$",
+          },
       }
 paths:
   /healthz:

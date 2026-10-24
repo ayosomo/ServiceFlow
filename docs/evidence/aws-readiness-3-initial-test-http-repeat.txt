@@ -1,0 +1,16 @@
+Timestamp UTC: 2026-10-24T21:09:02.571225+00:00
+Command: pnpm test:http
+Exit: 1
+Boundary: local synthetic only
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ tsx scripts/http-smoke.ts
+[workspace]\scripts\http-smoke.ts:49
+  throw new Error("Local HTTP startup timeout");
+        ^
+
+Error: Local HTTP startup timeout
+    at wait ([workspace]\scripts\http-smoke.ts:49:9)
+    at async <anonymous> ([workspace]\scripts\http-smoke.ts:89:3)
+
+Node.js v24.21.0

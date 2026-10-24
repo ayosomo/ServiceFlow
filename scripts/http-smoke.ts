@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
+import { generatedRequestIdSchema } from "../packages/domain/src/index.js";
 const token = randomBytes(32).toString("hex");
 const approverToken = randomBytes(32).toString("hex");
 const aws = spawn(
@@ -178,6 +179,55 @@ try {
   );
   const reread = await request(base, "/requests/REQ-0900");
   assert.equal((reread.body as { events: unknown[] }).events.length, 2);
+  const noId = { ...payload } as Partial<typeof payload>;
+  delete noId.requestId;
+  const generated = await request(
+    base,
+    "/requests",
+    "POST",
+    noId,
+    "http_uuid_create",
+  );
+  assert.equal(generated.status, 201);
+  const uuid = generatedRequestIdSchema.parse(
+    (generated.body as { requestId: string }).requestId,
+  );
+  assert.deepEqual(
+    await request(base, "/requests", "POST", noId, "http_uuid_create"),
+    generated,
+  );
+  assert.equal((await request(base, `/requests/${uuid}`)).status, 200);
+  assert.equal(
+    (
+      await request(
+        base,
+        `/requests/${uuid}/decision`,
+        "POST",
+        body,
+        "http_uuid_decision",
+        approverToken,
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (
+      await request(
+        base,
+        `/requests/${uuid}/decision`,
+        "POST",
+        body,
+        "http_uuid_decision",
+        approverToken,
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    ((await request(base, `/requests/${uuid}`)).body as { events: unknown[] })
+      .events.length,
+    2,
+  );
   const metrics = await request(
     "http://127.0.0.1:3103",
     "/kpis?asOf=2026-10-23",

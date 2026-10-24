@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T21:09:47.548449+00:00
+Command: pnpm db:seed
+Exit: 0
+Boundary: local synthetic only
+
+Seeded 48 canonical requests, 96 preserved source rows, findings, approvals and events.
+$ tsx db/run.ts seed

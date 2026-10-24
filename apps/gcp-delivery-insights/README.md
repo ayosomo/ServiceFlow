@@ -25,3 +25,5 @@ Firestore uses one bounded document (48 demo requests), not a production analyti
 ## Health route correction
 
 Use authenticated `GET /health` for process liveness. On the deployed image, `/healthz` returned Google's HTML 404 without request logs while normal authenticated KPI routes returned 200. Google's [known issues](https://docs.cloud.google.com/run/docs/known-issues) recommend avoiding paths ending in z. The app, Docker healthcheck and local HTTP/container scripts now use `/health`. Local auth, provider-error isolation and 256 MiB container checks passed; this corrected image was **not** uploaded or deployed. The completed single-image run remains pinned to source `5e709d648fc2ef0bc68eeb7258d1fd9a9741905c`.
+
+The shared request-ID contract now permits legacy and lowercase UUID v4 references. Authenticated insight lookup of a valid missing UUID returns 404. This route change and the corrected health route are local-only: [current Docker/emulator evidence](../../docs/evidence/aws-readiness-3-gcp-container.json). No new Cloud Run deployment is claimed.

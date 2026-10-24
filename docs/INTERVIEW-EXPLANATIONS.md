@@ -35,3 +35,9 @@ Docker initially could not start because a frozen WSL VM held its disk. An owner
 “I made handler logs useful without copying user inputs: bounded operation/status/outcome/duration plus server-context correlation, with tests for spoofed headers and log-sink failures. I also separated conditional conflicts from retryable SDK capacity/contention failures. I ran bounded memory and DynamoDB Local exercises with injected outages, a lost acknowledgement after commit and sixteen-way competing or identical-key decisions, then reconciled one final decision/audit. These are local tests, not cloud monitoring, a real AWS outage or evidence of production-scale performance. Service targets, live alarms, stable human identity and recovery/retention remain open.”
 
 [Exact local operations boundaries](AWS-LOCAL-OPERATIONS.md).
+
+## Why change identifiers and version reconciliation?
+
+A small random ID space makes conflicts increasingly likely as a service grows. UUID v4 generation expands that space while preserving existing references and atomic duplicate rejection. Compatibility spans intake, routes, SQL constraints and reporting, so only changing the generator would be incomplete. A report computed under older rules must not silently replay as current; rule-version mismatch preserves the report and requires a new batch ID.
+
+The artifact rehearsal separately checks bytes against a retained digest, runs the actual bundled factory and retains local promotion history. Restoring a code pointer does not restore a database or prove cloud rollback. [Executable evidence and release limits](AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md).

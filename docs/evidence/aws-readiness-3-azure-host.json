@@ -1,0 +1,213 @@
+{
+  "timestamp": "2026-10-24T21:11:04.134Z",
+  "kind": "Actual local Azure Functions v4 blob-trigger host + Azurite, not Azure deployment",
+  "batchId": "host-1792876260994",
+  "ruleScopedFindingsVerified": true,
+  "report": {
+    "batchId": "host-1792876260994",
+    "sourceHash": "d384410cde2f84c4ac1569d12a92a4e6754a664c02a0f03330985f55c597a71d",
+    "sourceEtags": {
+      "crm": "\"0x1F4941FC21F6F30\"",
+      "supplier": "\"0x231B6BB9C0E7F00\""
+    },
+    "asOf": "2026-10-23T00:00:00.000Z",
+    "findings": [
+      {
+        "ruleId": "DUPLICATE_ID",
+        "source": "CRM",
+        "row": 1,
+        "requestId": "REQ-0001",
+        "severity": "CRITICAL",
+        "owner": "Operations",
+        "values": {
+          "requestId": "REQ-0001"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "DUPLICATE_ID",
+        "source": "CRM",
+        "row": 2,
+        "requestId": "REQ-0001",
+        "severity": "CRITICAL",
+        "owner": "Delivery",
+        "values": {
+          "requestId": "REQ-0001"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "INVALID_OWNERTEAM",
+        "source": "CRM",
+        "row": 3,
+        "requestId": "REQ-0003",
+        "severity": "CRITICAL",
+        "owner": "Data Steward",
+        "values": {
+          "field": "ownerTeam",
+          "value": "",
+          "message": "Too small: expected string to have >=1 characters"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "INVALID_STATUS",
+        "source": "CRM",
+        "row": 4,
+        "requestId": "REQ-0004",
+        "severity": "CRITICAL",
+        "owner": "Operations",
+        "values": {
+          "field": "status",
+          "value": "DELIVERED_MAYBE",
+          "message": "Invalid option: expected one of \"DRAFT\"|\"SUBMITTED\"|\"APPROVED\"|\"REJECTED\"|\"IN_PROGRESS\"|\"DONE\""
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "INVALID_TARGETAT",
+        "source": "CRM",
+        "row": 5,
+        "requestId": "REQ-0005",
+        "severity": "CRITICAL",
+        "owner": "Delivery",
+        "values": {
+          "field": "targetAt",
+          "value": "not-a-date",
+          "message": "Invalid ISO datetime"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "INVALID_TARGETAT",
+        "source": "CRM",
+        "row": 6,
+        "requestId": "REQ-0006",
+        "severity": "CRITICAL",
+        "owner": "Networks",
+        "values": {
+          "field": "targetAt",
+          "value": "2026-09-01T00:00:00.000Z",
+          "message": "Impossible chronology"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "MISSING_ID",
+        "source": "CRM",
+        "row": 8,
+        "requestId": null,
+        "severity": "CRITICAL",
+        "owner": "Delivery",
+        "values": {
+          "requestId": ""
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "INVALID_REQUESTID",
+        "source": "CRM",
+        "row": 8,
+        "requestId": null,
+        "severity": "CRITICAL",
+        "owner": "Delivery",
+        "values": {
+          "field": "requestId",
+          "value": "",
+          "message": "Invalid string: must match pattern /^(?:REQ-[0-9]{4}|REQ-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "MISSING_MATCH",
+        "source": "SUPPLIER",
+        "row": 2,
+        "requestId": "REQ-0002",
+        "severity": "REVIEW",
+        "owner": "Data Steward",
+        "values": {
+          "requestId": "REQ-0002"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "TARGET_MISMATCH",
+        "source": "SUPPLIER",
+        "row": 6,
+        "requestId": "REQ-0006",
+        "severity": "REVIEW",
+        "owner": "Data Steward",
+        "values": {
+          "crm": "2026-09-01T00:00:00.000Z",
+          "supplier": "2026-10-28T00:00:00.000Z",
+          "authority": "CRM planned target; steward review required"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "TARGET_MISMATCH",
+        "source": "SUPPLIER",
+        "row": 7,
+        "requestId": "REQ-0007",
+        "severity": "REVIEW",
+        "owner": "Data Steward",
+        "values": {
+          "crm": "2026-10-27T00:00:00.000Z",
+          "supplier": "2026-11-15T00:00:00.000Z",
+          "authority": "CRM planned target; steward review required"
+        },
+        "status": "OPEN"
+      },
+      {
+        "ruleId": "MISSING_MATCH",
+        "source": "SUPPLIER",
+        "row": 8,
+        "requestId": "REQ-0008",
+        "severity": "REVIEW",
+        "owner": "Data Steward",
+        "values": {
+          "requestId": "REQ-0008"
+        },
+        "status": "OPEN"
+      }
+    ],
+    "metrics": {
+      "asOf": "2026-10-23T00:00:00.000Z",
+      "totalRecords": 48,
+      "unidentifiable": 1,
+      "qualityPassRate": {
+        "numerator": 41,
+        "denominator": 47,
+        "excluded": 1,
+        "value": 0.8723404255319149,
+        "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+      },
+      "readinessRate": {
+        "numerator": 13,
+        "denominator": 20,
+        "excluded": 28,
+        "value": 0.65,
+        "definition": "Ready / assessable active; pending approval blocks readiness only."
+      },
+      "overdue": {
+        "count": 9,
+        "denominator": 20,
+        "excluded": 28,
+        "definition": "Active valid records with targetAt strictly before asOf."
+      },
+      "onTimeCompletion": {
+        "numerator": 0,
+        "denominator": 7,
+        "excluded": 41,
+        "value": 0,
+        "definition": "DONE with completion <= target / assessable DONE."
+      },
+      "exceptionBacklog": {
+        "count": 12,
+        "critical": 8,
+        "review": 4
+      }
+    },
+    "ruleVersion": "2"
+  }
+}

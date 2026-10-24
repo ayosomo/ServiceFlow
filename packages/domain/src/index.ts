@@ -11,9 +11,21 @@ export const status = z.enum([
   "DONE",
 ]);
 export const priority = z.enum(["LOW", "MEDIUM", "HIGH", "CRITICAL"]);
+export const UUID_REQUEST_ID_FRAGMENT =
+  "REQ-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+export const REQUEST_ID_FRAGMENT = `(?:REQ-[0-9]{4}|${UUID_REQUEST_ID_FRAGMENT})`;
+export const requestIdSchema = z
+  .string()
+  .regex(new RegExp(`^${REQUEST_ID_FRAGMENT}$`));
+export const generatedRequestIdSchema = z
+  .string()
+  .regex(new RegExp(`^${UUID_REQUEST_ID_FRAGMENT}$`));
+export const requestPathPattern = new RegExp(
+  `^/requests/(${REQUEST_ID_FRAGMENT})(/decision)?$`,
+);
 export const requestSchema = z
   .object({
-    requestId: z.string().regex(/^REQ-\d{4}$/),
+    requestId: requestIdSchema,
     customerId: z.string().regex(/^SYN-\d{3}$/),
     summary: z.string().trim().min(5).max(200),
     ownerTeam: z.string().trim().min(1).max(60),
@@ -197,7 +209,7 @@ export function kpis(raw: Raw[], findings: Finding[], asOf = SNAPSHOT) {
     counts.set(r.requestId, (counts.get(r.requestId) ?? 0) + 1),
   );
   const identifiable = raw.filter(
-    (r) => typeof r.requestId === "string" && /^REQ-\d{4}$/.test(r.requestId),
+    (r) => requestIdSchema.safeParse(r.requestId).success,
   );
   const valid = raw.flatMap((r) => {
     const p = requestSchema.safeParse(r);

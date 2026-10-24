@@ -2,6 +2,7 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 import { dirname } from "node:path";
+import { RULE_VERSION } from "../apps/azure-data-quality/src/pipeline.js";
 const storage = BlobServiceClient.fromConnectionString(
   "UseDevelopmentStorage=true",
 );
@@ -35,16 +36,32 @@ for (let i = 0; i < 60; i++) {
   }
 }
 assert.ok(report, "Functions host did not produce a report within 60 seconds");
+assert.equal(
+  report.ruleVersion,
+  RULE_VERSION,
+  "The local host must run the current reconciliation rules",
+);
 const metrics = report.metrics as {
   totalRecords: number;
   exceptionBacklog: { count: number };
 };
 assert.equal(metrics.totalRecords, 48);
 assert.equal(metrics.exceptionBacklog.count, 12);
+const ruleScopedFindings = storage
+  .getContainerClient("results")
+  .getBlockBlobClient(
+    `${batchId}/rules-${RULE_VERSION}/${report.sourceHash}/findings.json`,
+  );
+assert.deepEqual(
+  JSON.parse((await ruleScopedFindings.downloadToBuffer()).toString("utf8")),
+  report.findings,
+  "Rule-scoped immutable findings must match the committed summary",
+);
 const evidence = {
   timestamp: new Date().toISOString(),
   kind: "Actual local Azure Functions v4 blob-trigger host + Azurite, not Azure deployment",
   batchId,
+  ruleScopedFindingsVerified: true,
   report,
   ...(process.env.LAB_AZURE_PACKAGE_MANIFEST
     ? {

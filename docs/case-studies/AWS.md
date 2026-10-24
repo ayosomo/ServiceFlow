@@ -31,3 +31,7 @@ Lesson: identity verification, business permission, concurrency and an auditable
 ## Subsequent local operations evidence
 
 Local AWS-P07/P09 work adds redacted completion metrics, server-context correlation, safe log-sink failure handling and SDK cancellation classification. The unit/application suite now has 45 cases. Two bounded exercises each run 76 service invocations, including 20 injected unavailable operations, recovery, uncertain-commit reconciliation and 16-way races. [Actual observations and limitations](../AWS-LOCAL-OPERATIONS.md). This is additional local evidence after the historical cloud run; no real dashboard/alert delivery, accepted load target, SDK backoff timing or provider fault is claimed. Production release remains on hold.
+
+## Subsequent local release/identifier preparation
+
+Added UUID v4 generation with legacy reference compatibility and checksum-based package inspection followed by an actual bundled-Lambda smoke. Negative integrity, unhealthy/stale promotion and local journal rollback checks are separate from the historical AWS deployment. [Evidence/consumer and migration limitations](../AWS-LOCAL-RELEASE-AND-IDENTIFIERS.md). AWS-P08 remains partial, production HOLD and owner UAT pending.

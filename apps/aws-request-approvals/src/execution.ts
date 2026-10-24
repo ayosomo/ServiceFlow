@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { api, type Call, type Repository } from "./service.js";
+import { requestPathPattern } from "../../../packages/domain/src/index.js";
 
 export interface RequestMetric {
   event: "request_completed";
@@ -14,13 +15,9 @@ export interface RequestMetric {
 function operation(call: Call): RequestMetric["operation"] {
   if (call.method === "GET" && call.path === "/healthz") return "health";
   if (call.method === "POST" && call.path === "/requests") return "create";
-  if (call.method === "GET" && /^\/requests\/REQ-\d{4}$/.test(call.path))
-    return "read";
-  if (
-    call.method === "POST" &&
-    /^\/requests\/REQ-\d{4}\/decision$/.test(call.path)
-  )
-    return "decision";
+  const match = requestPathPattern.exec(call.path);
+  if (call.method === "GET" && match && !match[2]) return "read";
+  if (call.method === "POST" && !!match?.[2]) return "decision";
   return "unknown";
 }
 

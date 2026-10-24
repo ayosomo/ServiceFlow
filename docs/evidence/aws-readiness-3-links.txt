@@ -1,0 +1,7 @@
+Timestamp UTC: 2026-10-24T21:12:30.436713+00:00
+Command: pnpm check:portfolio
+Exit: 0
+Boundary: local synthetic only
+
+PASS: 362 local Markdown/image targets across 35 files exist inside the repository; screenshot/source hashes match. External URLs and anchor fragments are not validated by this check.
+$ tsx scripts/check-portfolio.ts
