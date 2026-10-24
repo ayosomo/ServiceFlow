@@ -6,7 +6,7 @@ COPY packages ./packages
 COPY apps ./apps
 COPY scripts ./scripts
 RUN pnpm install --frozen-lockfile && pnpm build && pnpm package:azure \
-    && cd work/azure-package && npm install --omit=dev
+    && cd work/azure-package && npm ci --omit=dev --ignore-scripts
 FROM mcr.microsoft.com/azure-functions/node:4-node22
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true

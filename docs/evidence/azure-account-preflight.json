@@ -12,21 +12,29 @@
   "storageV2StandardLrsUkSouthMatches": 1,
   "storageSkuRestrictions": [],
   "providerRegistration": {
-    "Microsoft.Web": "NotRegistered",
+    "Microsoft.Web": "Registered",
     "Microsoft.Storage": "NotRegistered"
   },
   "subscriptionBudgetCount": 0,
   "unavailableChecks": {
-    "webUsageUKSouth": {
-      "httpStatus": 400,
-      "result": "NOT VERIFIED"
-    },
     "creditLots": {
       "httpStatus": 404,
       "result": "NOT VERIFIED"
     },
     "monthToDateCost": {
       "httpStatus": 404,
+      "result": "NOT VERIFIED"
+    },
+    "creditSummary2026": {
+      "httpStatus": 404,
+      "result": "NOT VERIFIED"
+    },
+    "creditLots2026": {
+      "httpStatus": 404,
+      "result": "NOT VERIFIED"
+    },
+    "billingProfileCostRetry": {
+      "httpStatus": 429,
       "result": "NOT VERIFIED"
     }
   },
@@ -35,10 +43,36 @@
   "actualMonthToDateCost": null,
   "cloudDeploymentVerified": false,
   "deploymentApprovalReceived": false,
-  "cloudMutationsPerformed": [],
+  "cloudMutationsPerformed": [
+    {
+      "action": "Register Microsoft.Web only",
+      "explicitOwnerApproval": true,
+      "finalState": "Registered",
+      "chargeableResourcesCreated": false
+    }
+  ],
   "limitations": [
     "Regional listings do not prove quota or allocatable capacity.",
     "HTTP errors do not imply a zero balance or zero cost.",
     "Portal observations are recorded privately; no screenshots are published."
-  ]
+  ],
+  "lastCheckedAt": "2026-10-24T15:12:16.606754+00:00",
+  "webQuotaUKSouth": {
+    "httpStatus": 200,
+    "sku": "Y1",
+    "currentValue": 0,
+    "limit": 0,
+    "unit": "Instances"
+  },
+  "resourceCountAtRead": 0,
+  "resourceGroupCountAtRead": 0,
+  "decision": "HOLD: UK South Y1 limit is zero; credit balance/expiry and actual cost remain unverified",
+  "finalAccountCheck": {
+    "observedAt": "2026-10-24T15:19:15.426524+00:00",
+    "state": "Enabled",
+    "quotaId": "FreeTrial_2014-09-01",
+    "spendingLimit": "On",
+    "resources": 0,
+    "resourceGroups": 0
+  }
 }

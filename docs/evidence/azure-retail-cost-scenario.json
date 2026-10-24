@@ -1,0 +1,152 @@
+{
+  "observedAt": "2026-10-24T15:09:42.890938+00:00",
+  "kind": "Public retail-rate scenario, not actual spend or a billing cap",
+  "source": "https://prices.azure.com/api/retail/prices",
+  "currency": "USD",
+  "region": "uksouth",
+  "meters": [
+    {
+      "productName": "Functions",
+      "skuName": "Standard",
+      "meterName": "Standard Execution Time",
+      "retailPrice": 1.6e-05,
+      "unitOfMeasure": "1 GB Second",
+      "tierMinimumUnits": 400000.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-01-01T00:00:00Z",
+      "meterId": "2a384075-01d7-4f66-a84a-0eed3ca58876"
+    },
+    {
+      "productName": "Functions",
+      "skuName": "Standard",
+      "meterName": "Standard Total Executions",
+      "retailPrice": 2e-06,
+      "unitOfMeasure": "10",
+      "tierMinimumUnits": 100000.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-01-01T00:00:00Z",
+      "meterId": "4e5cd9e2-c20f-4d7f-acbe-58931b8b49ef"
+    },
+    {
+      "productName": "General Block Blob v2",
+      "skuName": "Hot LRS",
+      "meterName": "Hot LRS Data Stored",
+      "retailPrice": 0.0192,
+      "unitOfMeasure": "1 GB/Month",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-02-03T00:00:00Z",
+      "meterId": "758b46f1-1579-4490-a54a-9829ff267c51"
+    },
+    {
+      "productName": "General Block Blob v2",
+      "skuName": "Hot LRS",
+      "meterName": "Hot LRS Write Operations",
+      "retailPrice": 0.059,
+      "unitOfMeasure": "10K",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2016-10-01T00:00:00Z",
+      "meterId": "21b293cd-60dc-418f-9b98-2b452ed0de09"
+    },
+    {
+      "productName": "General Block Blob v2",
+      "skuName": "Hot LRS",
+      "meterName": "LRS List and Create Container Operations",
+      "retailPrice": 0.059,
+      "unitOfMeasure": "10K",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2016-10-01T00:00:00Z",
+      "meterId": "21b293cd-60dc-418f-9b98-2b452ed0de09"
+    },
+    {
+      "productName": "General Block Blob v2",
+      "skuName": "Hot LRS",
+      "meterName": "Hot Read Operations",
+      "retailPrice": 0.0047,
+      "unitOfMeasure": "10K",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2016-10-01T00:00:00Z",
+      "meterId": "6196d4b3-8056-4d9c-bf78-3793461a8fbb"
+    },
+    {
+      "productName": "General Block Blob v2",
+      "skuName": "Hot LRS",
+      "meterName": "All Other Operations",
+      "retailPrice": 0.0047,
+      "unitOfMeasure": "10K",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-10-01T00:00:00Z",
+      "meterId": "2bc281aa-ea2b-41db-a0ee-a8ee8019fa10"
+    },
+    {
+      "productName": "Queues v2",
+      "skuName": "Standard LRS",
+      "meterName": "LRS Data Stored",
+      "retailPrice": 0.045,
+      "unitOfMeasure": "1 GB/Month",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-11-01T00:00:00Z",
+      "meterId": "d6b6271c-3113-44a9-9d62-b2da937da902"
+    },
+    {
+      "productName": "Queues v2",
+      "skuName": "Standard LRS",
+      "meterName": "LRS Class 1 Operations",
+      "retailPrice": 0.004,
+      "unitOfMeasure": "10K",
+      "tierMinimumUnits": 0.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2017-11-01T00:00:00Z",
+      "meterId": "d92e7803-4de4-4a9c-b030-91680fc6931b"
+    },
+    {
+      "productName": "Rtn Preference: MGN",
+      "skuName": "Standard",
+      "meterName": "Standard Data Transfer Out",
+      "retailPrice": 0.087,
+      "unitOfMeasure": "1 GB",
+      "tierMinimumUnits": 100.0,
+      "armRegionName": "uksouth",
+      "effectiveStartDate": "2022-05-01T00:00:00Z",
+      "meterId": "9995d93a-7d35-4d3f-9c69-7a7fea447ef4"
+    }
+  ],
+  "assumptions": {
+    "hours": 1,
+    "functionInvocations": 100,
+    "secondsPerInvocation": 300,
+    "memoryGB": 1.5,
+    "blobStoredMiB": 10,
+    "queueStoredMiB": 1,
+    "blobWrites": 10000,
+    "blobLists": 10000,
+    "blobReads": 10000,
+    "blobOtherOps": 10000,
+    "queueTotalOps": 10000,
+    "internetDownloadMiB": 1,
+    "monthlyProrationHours": 730,
+    "freeGrantsOrTrialCreditsApplied": false
+  },
+  "grossComponentsUSD": {
+    "functionsExecution": 0.72,
+    "functionsRequests": 2e-05,
+    "blobWriteListReadOther": 0.1274,
+    "queueOperations": 0.004,
+    "blobCapacity": 2.757898520547945e-07,
+    "queueCapacity": 6.463824657534246e-08,
+    "internetDownload": 9.1226112e-05
+  },
+  "grossScenarioUSD": 0.8515115665400986,
+  "limits": [
+    "Usage assumptions are not enforced spend caps.",
+    "Actual host polling/retries/duration/usage can differ.",
+    "Tax, exchange rates and unplanned services are excluded.",
+    "No Azure Files, Application Insights, Log Analytics, Premium or Always Ready resources are included.",
+    "No actual credit balance, final bill or new cash amount is established."
+  ]
+}

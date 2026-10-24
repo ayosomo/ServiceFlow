@@ -1,4 +1,4 @@
-import { mkdir, copyFile, readFile, writeFile } from "node:fs/promises";
+import { mkdir, copyFile, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 const target = resolve(process.env.LAB_WORK_DIR ?? "work", "azure-package");
 await mkdir(target, { recursive: true });
@@ -11,23 +11,17 @@ await copyFile(
   resolve(target, "host.json"),
 );
 const root = JSON.parse(await readFile("package.json", "utf8"));
-await writeFile(
-  resolve(target, "package.json"),
-  JSON.stringify(
-    {
-      name: "serviceflow-quality-runtime",
-      version: "0.1.0",
-      private: true,
-      main: "function.cjs",
-      engines: { node: "22.x" },
-      dependencies: {
-        "@azure/functions": root.dependencies["@azure/functions"],
-      },
-    },
-    null,
-    2,
-  ) + "\n",
-);
+const runtime = "apps/azure-data-quality/runtime";
+const manifest = JSON.parse(await readFile(`${runtime}/package.json`, "utf8"));
+if (
+  manifest.dependencies["@azure/functions"] !==
+  root.dependencies["@azure/functions"]
+)
+  throw new Error(
+    "Azure runtime manifest must match the root Functions dependency",
+  );
+for (const file of ["package.json", "package-lock.json"])
+  await copyFile(`${runtime}/${file}`, resolve(target, file));
 console.log(
-  `Staged Azure package in ${target}. Install its exact production dependency before ZIP deployment. No cloud action performed.`,
+  `Staged Azure package in ${target}. Run npm ci --omit=dev --ignore-scripts there, then python scripts/package-azure.py from repository root. No cloud action performed.`,
 );

@@ -1,6 +1,7 @@
 import { BlobServiceClient } from "@azure/storage-blob";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
+import { dirname } from "node:path";
 const storage = BlobServiceClient.fromConnectionString(
   "UseDevelopmentStorage=true",
 );
@@ -45,12 +46,19 @@ const evidence = {
   kind: "Actual local Azure Functions v4 blob-trigger host + Azurite, not Azure deployment",
   batchId,
   report,
+  ...(process.env.LAB_AZURE_PACKAGE_MANIFEST
+    ? {
+        localPackage: JSON.parse(
+          await readFile(process.env.LAB_AZURE_PACKAGE_MANIFEST, "utf8"),
+        ),
+      }
+    : {}),
 };
-await mkdir("docs/evidence", { recursive: true });
-await writeFile(
-  "docs/evidence/azure-functions-host.json",
-  JSON.stringify(evidence, null, 2) + "\n",
-);
+const evidenceFile =
+  process.env.LAB_AZURE_HOST_EVIDENCE ??
+  "docs/evidence/azure-functions-host.json";
+await mkdir(dirname(evidenceFile), { recursive: true });
+await writeFile(evidenceFile, JSON.stringify(evidence, null, 2) + "\n");
 console.log(
   "PASS: actual Functions host triggered from CRM blob and persisted 48-record / 12-finding report.",
 );

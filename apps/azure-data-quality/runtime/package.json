@@ -1,0 +1,12 @@
+{
+  "name": "serviceflow-quality-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "main": "function.cjs",
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@azure/functions": "4.17.0"
+  }
+}

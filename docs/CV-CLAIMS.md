@@ -12,6 +12,10 @@ Use only claims supported by the final saved test evidence. Independent portfoli
 
 “Validated a local Azure Functions blob-trigger reconciliation flow and a non-root TypeScript container backed by a Firestore emulator, with 25 unit/application tests and three persistence integration tests.”
 
+“Configured and locally verified a reproducible Azure Functions deployment ZIP and identity-based private Blob package/storage infrastructure, with explicit cloud cost and quota gates.”
+
+Evidence: [storage/package runbook](AZURE-PACKAGE-AND-STORAGE.md), [compiled-configuration checks](evidence/azure-configuration-verification.json) and [exact-ZIP host smoke](evidence/azure-package-host.json). Azure cloud deployment remains unverified.
+
 ## Supported by actual AWS deployment evidence
 
 “Independent portfolio: deployed and tested an IAM-protected request approval API on AWS Lambda, API Gateway and DynamoDB, with requirements, API contracts, idempotent writes, audit records and verified teardown.”

@@ -1,0 +1,29 @@
+{
+  "observedAt": "2026-10-24T15:16:56.159496+00:00",
+  "kind": "Local compilation, artifact and runtime verification; no Azure managed identity/deployment claim",
+  "checks": {
+    "bicepMainCompile": true,
+    "bicepStorageCompile": true,
+    "privatePackageUrl": true,
+    "consistentUserAssignedIdentitySelectors": true,
+    "hostAndBindingManagedIdentity": true,
+    "sharedKeyDisabled": true,
+    "anonymousBlobDisabled": true,
+    "noAzureFilesOrStorageConnectionStrings": true,
+    "scaleLimitOne": true,
+    "runtimeLockInstalledAndZipCrc": true,
+    "zipByteForByteRebuild": true,
+    "localSettingsProbeRejected": true,
+    "exactZipLocalHostSmoke": true,
+    "unitApplicationTests": 25,
+    "lint": true,
+    "typecheck": true,
+    "cloudDeployment": false
+  },
+  "zipSha256": "14db53498b7be1ecafdaf30240303dc11628fee500ba7ce06c2b91720cc80d63",
+  "zipBytes": 899205,
+  "compiledTemplateSha256": {
+    "azure-app-package-checked.json": "3c272e334d3b6a8bbfada9e8c978b57334b456ce2d2b2e7c17710768bada9ae1",
+    "azure-storage-package-checked.json": "1b4cd09153c5388b1bd6a29310f7d8f90bd207ccc9ef3b5ae90576c80afa9a30"
+  }
+}

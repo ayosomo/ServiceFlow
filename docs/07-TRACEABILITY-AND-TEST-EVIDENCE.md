@@ -49,3 +49,9 @@ Actual Azure host testing exposed a .NET/Node difference in DevelopmentStoragePr
 PostgreSQL's canonical overdue EXPLAIN returns 13 rows from the 48 valid canonical fixtures; the dirty-source KPI returns 9 from 20 eligible active rows. These are deliberately different universes. The plan illustrates index access and buffer activity; its timings under local container/build load do not prove production performance.
 
 No fabricated screenshot is supplied. UI capture remains pending because the Windows app approval timed out. CLI/JSON execution evidence is available above. No browser UI is implemented; no Playwright or accessibility claim is made.
+
+## Azure package/storage follow-up — 24 October 2026
+
+The final ZIP passed byte-for-byte rebuild, CRC/root checks and rejection of a synthetic local.settings.json probe. Both final Bicep templates compiled with 0.48.1; compiled ARM identity, private-storage, Shared Key disabled, no Azure Files/connection strings and scale-one invariants passed. The exact ZIP was mounted read-only in the Node 22 Functions host and produced the expected 48-record/12-finding report. Lint, typecheck and all 25 unit/application tests passed during this change. No new real Azure deployment is claimed. [Configuration checks](evidence/azure-configuration-verification.json), [exact ZIP host](evidence/azure-package-host.json), [account/quota checks](evidence/azure-account-preflight.json), [retail-cost scenario](evidence/azure-retail-cost-scenario.json).
+
+Only Microsoft.Web registration was explicitly approved and performed. The resulting UK South Y1 quota is 0/0, so deployment remains on hold alongside unavailable credit balance/expiry and actual cost. No quota increase, paid-plan upgrade or chargeable resource was created.
