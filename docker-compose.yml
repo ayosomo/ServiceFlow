@@ -1,0 +1,66 @@
+name: serviceflow-cloud-labs
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: serviceflow
+      POSTGRES_DB: serviceflow
+      POSTGRES_PASSWORD: ${PGPASSWORD:-local-synthetic-only}
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U serviceflow -d serviceflow"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  dynamodb:
+    image: amazon/dynamodb-local:latest
+    command: "-jar DynamoDBLocal.jar -inMemory -sharedDb"
+    ports: ["127.0.0.1:58000:8000"]
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --skipApiVersionCheck --silent"
+    ports:
+      [
+        "127.0.0.1:10000:10000",
+        "127.0.0.1:10001:10001",
+        "127.0.0.1:10002:10002",
+      ]
+  azure-functions:
+    profiles: [hosts]
+    build:
+      context: .
+      dockerfile: apps/azure-data-quality/Dockerfile
+    environment:
+      AzureWebJobsStorage: "UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://azurite"
+      SOURCE_STORAGE: "UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://azurite"
+      LOCAL_BLOB_SERVICE_URL: "http://azurite:10000/devstoreaccount1"
+      FUNCTIONS_WORKER_RUNTIME: node
+    depends_on: [azurite]
+    ports: ["127.0.0.1:57071:80"]
+  firestore:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    entrypoint: [gcloud]
+    command:
+      [
+        emulators,
+        firestore,
+        start,
+        "--host-port=0.0.0.0:8085",
+        "--project=serviceflow-local",
+        --quiet,
+      ]
+    ports: ["127.0.0.1:58085:8085"]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          python3,
+          "-c",
+          "import socket; socket.create_connection(('127.0.0.1',8085),2).close()",
+        ]
+      interval: 2s
+      timeout: 3s
+      retries: 40
+volumes:
+  pgdata:

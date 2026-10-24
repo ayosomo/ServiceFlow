@@ -1,0 +1,2 @@
+$ tsx scripts/azure-host-smoke.ts
+PASS: actual Functions host triggered from CRM blob and persisted 48-record / 12-finding report.

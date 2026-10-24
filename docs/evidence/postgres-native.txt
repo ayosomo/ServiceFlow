@@ -1,0 +1,99 @@
+Portable native PostgreSQL (not Docker): 2026-10-24T12:42:19.164Z
+PostgreSQL 18.4 on x86_64-windows, compiled by msvc-19.44.35226, 64-bit
+COMMAND: pnpm db:migrate
+EXIT: 0
+Migration 001 applied (idempotent).
+
+COMMAND: pnpm db:migrate
+EXIT: 0
+Migration 001 applied (idempotent).
+
+COMMAND: pnpm db:seed
+EXIT: 0
+Seeded 48 canonical requests, 96 preserved source rows, findings, approvals and events.
+
+COMMAND: pnpm db:seed
+EXIT: 0
+Seeded 48 canonical requests, 96 preserved source rows, findings, approvals and events.
+
+COMMAND: pnpm db:test
+EXIT: 0
+{
+  "result": "PASS",
+  "checks": [
+    "SQL independent KPI comparison",
+    "48 canonical / 96 raw rows",
+    "PK rejection",
+    "FK rejection",
+    "chronology rejection"
+  ],
+  "reference": {
+    "eligible": "41",
+    "active": "20",
+    "ready": "13",
+    "overdue": "9",
+    "done": "7",
+    "on_time": "0"
+  },
+  "api": {
+    "asOf": "2026-10-23T00:00:00.000Z",
+    "totalRecords": 48,
+    "unidentifiable": 1,
+    "qualityPassRate": {
+      "numerator": 41,
+      "denominator": 47,
+      "excluded": 1,
+      "value": 0.8723404255319149,
+      "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+    },
+    "readinessRate": {
+      "numerator": 13,
+      "denominator": 20,
+      "excluded": 28,
+      "value": 0.65,
+      "definition": "Ready / assessable active; pending approval blocks readiness only."
+    },
+    "overdue": {
+      "count": 9,
+      "denominator": 20,
+      "excluded": 28,
+      "definition": "Active valid records with targetAt strictly before asOf."
+    },
+    "onTimeCompletion": {
+      "numerator": 0,
+      "denominator": 7,
+      "excluded": 41,
+      "value": 0,
+      "definition": "DONE with completion <= target / assessable DONE."
+    },
+    "exceptionBacklog": {
+      "count": 12,
+      "critical": 8,
+      "review": 4
+    }
+  }
+}
+
+COMMAND: pnpm db:explain
+EXIT: 0
+Index Scan using requests_pkey on requests  (cost=0.15..8.17 rows=1 width=253) (actual time=0.064..0.068 rows=1.00 loops=1)
+  Index Cond: (request_id = 'REQ-0024'::text)
+  Index Searches: 1
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=110
+Planning Time: 1.877 ms
+Execution Time: 0.187 ms
+Incremental Sort  (cost=8.17..8.22 rows=2 width=72) (actual time=0.176..0.177 rows=13.00 loops=1)
+  Sort Key: target_at, request_id
+  Presorted Key: target_at
+  Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
+  Buffers: shared hit=23
+  ->  Index Scan using requests_active_target_idx on requests  (cost=0.14..8.16 rows=1 width=72) (actual time=0.030..0.044 rows=13.00 loops=1)
+        Index Cond: (target_at < '2026-10-23 01:00:00+01'::timestamp with time zone)
+        Index Searches: 1
+        Buffers: shared hit=14
+Planning:
+  Buffers: shared hit=21
+Planning Time: 0.679 ms
+Execution Time: 0.220 ms

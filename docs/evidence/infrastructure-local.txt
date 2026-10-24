@@ -1,0 +1,2 @@
+Bicep CLI version 0.48.1 (cec7951cf6)
+Bicep build: EXIT 0. Local compilation only; no Azure provisioning.

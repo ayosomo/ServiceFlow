@@ -1,0 +1,1 @@
+C:\Users\ayoos\Documents\Codex\2026-10-24\read-codex-handoff-cross-cloud-business\outputs\serviceflow-cloud-labs\apps\aws-request-approvals\template.yaml is a valid SAM Template

@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info: { title: ServiceFlow Request Approval API, version: 0.1.0 }
+security: [{ sigv4: [] }]
+components:
+  securitySchemes:
+    sigv4:
+      {
+        type: apiKey,
+        in: header,
+        name: Authorization,
+        x-amazon-apigateway-authtype: awsSigv4,
+      }
+  schemas:
+    Create:
+      type: object
+      additionalProperties: false
+      required:
+        [
+          customerId,
+          summary,
+          ownerTeam,
+          priority,
+          submittedAt,
+          targetAt,
+          approvalRequired,
+        ]
+      properties:
+        requestId: { type: string, pattern: "^REQ-[0-9]{4}$" }
+        customerId: { type: string, pattern: "^SYN-[0-9]{3}$" }
+        summary: { type: string, minLength: 5, maxLength: 200 }
+        ownerTeam: { type: string, minLength: 1, maxLength: 60 }
+        priority: { enum: [LOW, MEDIUM, HIGH, CRITICAL] }
+        submittedAt: { type: string, format: date-time }
+        targetAt: { type: string, format: date-time }
+        approvalRequired: { type: boolean }
+    Decision:
+      type: object
+      additionalProperties: false
+      required: [decision, reason, version]
+      properties:
+        decision: { enum: [APPROVED, REJECTED] }
+        reason: { type: string, minLength: 5, maxLength: 500 }
+        version: { type: integer, minimum: 1 }
+  parameters:
+    Idempotency:
+      {
+        name: Idempotency-Key,
+        in: header,
+        required: true,
+        schema: { type: string, minLength: 8, maxLength: 100 },
+      }
+    RequestId:
+      {
+        name: id,
+        in: path,
+        required: true,
+        schema: { type: string, pattern: "^REQ-[0-9]{4}$" },
+      }
+paths:
+  /healthz:
+    get:
+      responses:
+        {
+          "200": { description: Redacted liveness },
+          "403": { description: Forbidden },
+        }
+  /requests:
+    post:
+      parameters: [{ $ref: "#/components/parameters/Idempotency" }]
+      requestBody:
+        required: true
+        content:
+          {
+            application/json:
+              { schema: { $ref: "#/components/schemas/Create" } },
+          }
+      responses:
+        {
+          "201": { description: Created and persisted },
+          "400": { description: Invalid input },
+          "403": { description: Forbidden },
+          "409": { description: Conflict },
+          "503": { description: Persistence unavailable },
+        }
+  /requests/{id}:
+    parameters: [{ $ref: "#/components/parameters/RequestId" }]
+    get:
+      responses:
+        {
+          "200": { description: Request and at most 50 recent audit events },
+          "403": { description: Forbidden },
+          "404": { description: Missing request },
+        }
+  /requests/{id}/decision:
+    parameters: [{ $ref: "#/components/parameters/RequestId" }]
+    post:
+      parameters: [{ $ref: "#/components/parameters/Idempotency" }]
+      requestBody:
+        required: true
+        content:
+          {
+            application/json:
+              { schema: { $ref: "#/components/schemas/Decision" } },
+          }
+      responses:
+        {
+          "200": { description: Atomic request and decision audit },
+          "400": { description: Invalid input },
+          "403": { description: Forbidden },
+          "404": { description: Missing request },
+          "409": { description: Version, state or idempotency conflict },
+          "503": { description: Persistence unavailable },
+        }

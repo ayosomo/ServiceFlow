@@ -1,0 +1,2 @@
+$ tsx db/run.ts seed
+Seeded 48 canonical requests, 96 preserved source rows, findings, approvals and events.

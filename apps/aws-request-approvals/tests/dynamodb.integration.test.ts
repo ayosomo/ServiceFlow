@@ -1,0 +1,84 @@
+import { it, expect } from "vitest";
+import {
+  DynamoDBClient,
+  CreateTableCommand,
+  DeleteTableCommand,
+} from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { DynamoRepository } from "../src/dynamodb.js";
+import { api } from "../src/service.js";
+it("DynamoDB Local commits audit and receipt atomically and rejects duplicate writes", async () => {
+  const client = new DynamoDBClient({
+    endpoint: "http://127.0.0.1:58000",
+    region: "local",
+    credentials: { accessKeyId: "local", secretAccessKey: "local" },
+    maxAttempts: 1,
+  });
+  const table = `serviceflow-local-${Date.now()}`;
+  await client.send(
+    new CreateTableCommand({
+      TableName: table,
+      AttributeDefinitions: [
+        { AttributeName: "pk", AttributeType: "S" },
+        { AttributeName: "sk", AttributeType: "S" },
+      ],
+      KeySchema: [
+        { AttributeName: "pk", KeyType: "HASH" },
+        { AttributeName: "sk", KeyType: "RANGE" },
+      ],
+      ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1 },
+    }),
+  );
+  try {
+    const repo = new DynamoRepository(
+        table,
+        DynamoDBDocumentClient.from(client),
+      ),
+      run = api(repo);
+    const actor = {
+      id: "synthetic-integration",
+      roles: ["requester", "approver"] as ("requester" | "approver")[],
+    };
+    const create = {
+      method: "POST",
+      path: "/requests",
+      actor,
+      idempotencyKey: "integration_create",
+      body: JSON.stringify({
+        requestId: "REQ-0199",
+        customerId: "SYN-199",
+        summary: "Synthetic integration request",
+        ownerTeam: "Operations",
+        priority: "HIGH",
+        submittedAt: "2026-10-01T00:00:00.000Z",
+        targetAt: "2026-10-30T00:00:00.000Z",
+        approvalRequired: true,
+      }),
+    };
+    expect((await run(create)).statusCode).toBe(201);
+    expect((await run(create)).statusCode).toBe(201);
+    expect(
+      (await run({ ...create, idempotencyKey: "duplicate_create" })).statusCode,
+    ).toBe(409);
+    const decision = {
+      method: "POST",
+      path: "/requests/REQ-0199/decision",
+      actor,
+      idempotencyKey: "integration_decision",
+      body: JSON.stringify({
+        decision: "APPROVED",
+        reason: "Integration acceptance",
+        version: 1,
+      }),
+    };
+    expect((await run(decision)).statusCode).toBe(200);
+    expect((await run(decision)).statusCode).toBe(200);
+    expect(await repo.get("REQ-0199")).toMatchObject({
+      request: { status: "APPROVED", version: 2 },
+    });
+    expect((await repo.get("REQ-0199"))?.events).toHaveLength(2);
+  } finally {
+    await client.send(new DeleteTableCommand({ TableName: table }));
+    client.destroy();
+  }
+});

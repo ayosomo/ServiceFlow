@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: serviceflow-insights
+  labels: { project: serviceflow }
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "1"
+        run.googleapis.com/cpu-throttling: "true"
+    spec:
+      serviceAccountName: REPLACE_WITH_DEDICATED_READ_ONLY_SERVICE_ACCOUNT
+      containerConcurrency: 10
+      timeoutSeconds: 15
+      containers:
+        - image: REPLACE_WITH_APPROVED_IMAGE_DIGEST
+          ports: [{ containerPort: 8080 }]
+          resources: { limits: { cpu: "1", memory: 256Mi } }
+          env:
+            - { name: API_AUDIENCE, value: REPLACE_WITH_SERVICE_URL }
+            - { name: ALLOWED_EMAILS, value: REPLACE_WITH_APPROVED_CALLER }
+# No allUsers/allAuthenticatedUsers IAM binding is supplied. Keep invoker IAM enabled.

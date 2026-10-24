@@ -1,0 +1,6 @@
+{
+  "name": "@serviceflow/gcp-delivery-insights",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module"
+}

@@ -1,0 +1,19 @@
+# Azure — Data Quality and Reconciliation
+
+All demonstration data is synthetic. Portfolio project, not an employer integration. **Cloud deployment: NOT VERIFIED.**
+
+The Data Steward gets rule-by-rule exceptions without silent source repairs. Eight dirty CRM rows produce 12 findings: 8 critical and 4 review. Pending approvals and valid late records remain quality-pass operational concerns. The pipeline reads supplier before CRM, uses ETags/content hashes, writes immutable findings, then atomically creates a batch summary. It repairs the convenience findings path on retry; changed inputs under a committed batch ID conflict.
+
+Local pure execution: `pnpm azure:batch` saves a labelled local JSON report. Azurite adapter test: start Compose azurite, run `pnpm test:integration`. Functions host execution is a separate check: copy local.settings.example.json to ignored local.settings.json, install Functions Core Tools, run `pnpm build`, then `func start` from this app directory. Upload supplier then CRM to incoming/<batchId>/. Inspect results/<batchId>/summary.json and findings.json, then repeat uploads. Source batch IDs must be immutable after upload; cross-blob snapshot atomicity is not guaranteed.
+
+## Deployment runbook (blocked by cost gate)
+
+1. Authenticate Azure CLI interactively; inspect subscription, region, current credits, expiry and storage charges. Complete COST_GATE and obtain approval before resource creation.
+2. Compile `apps/azure-data-quality/infra/main.bicep` with Bicep (standalone CLI 0.48.1 passed locally), or use `az bicep build --file apps/azure-data-quality/infra/main.bicep` after Azure CLI setup. Account-level validation and what-if remain pending. Even creating the dedicated resource group requires cloud action approval.
+3. Review the supplied Bicep: Windows Consumption Y1, Functions v4 Node 22, dedicated LRS storage, private containers, HTTPS/TLS, managed identity. Host and Blob trigger require dedicated storage-scoped Blob Data Owner, Queue Data Contributor and Storage Account Contributor; no subscription-wide contributor is granted to runtime.
+4. Provision only the reviewed dedicated group/template after approval. Wait for RBAC propagation. Validate identity-based AzureWebJobsStorage and SOURCE_STORAGE settings with the real host; never embed account keys.
+5. Package host.json, the bundled function.cjs and a package.json with main=function.cjs and the exact @azure/functions runtime dependency. Install production dependencies in that package before zip deployment. No local.settings.json in the zip. Packaging helper is provided by `pnpm package:azure`.
+6. Deploy code using the Azure Functions documented package mechanism for the selected plan. Verify host startup, upload synthetic supplier first then CRM, inspect report hash/findings, retry and check one result set. Test missing input and malformed file; inspect poison queue/host retries. No anonymous upload permissions.
+7. Record actual function invocation IDs, object ETags, rule counts, region, code commit and billing checks. Delete the dedicated group with `az group delete --name <dedicated-group>` when done; verify that no storage/plan/log resources remain and recheck billing.
+
+The polling Blob trigger matches Windows Consumption. Flex Consumption would require an event-based design and a fresh IaC/cost review; do not silently change hosting plans. Actual local Functions v4 host + Azurite execution passed using `docker compose --profile hosts up -d --build azure-functions` then `pnpm azure:host-test`. This Linux host container verifies the trigger/code; it is not a claim of Windows Consumption deployment. LOCAL_BLOB_SERVICE_URL selects the explicit emulator port because the .NET host and Node SDK parse DevelopmentStorageProxyUri differently. Cloud code still uses managed identity.

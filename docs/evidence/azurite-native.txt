@@ -1,0 +1,18 @@
+Native Azurite, not Docker/Functions host: 2026-10-24T12:44:11.917Z
+EXIT: 0
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  13:44:10
+   Duration  1.74s (import 75%, tests 19%, transform 5%, worker 1%)
+
+
+Azurite Blob service is starting at http://127.0.0.1:10000
+Azurite Blob service is successfully listening at http://127.0.0.1:10000
+Azurite Queue service is starting at http://127.0.0.1:10001
+Azurite Queue service is successfully listening at http://127.0.0.1:10001
+Azurite Table service is starting at http://127.0.0.1:10002
+Azurite Table service is successfully listening at http://127.0.0.1:10002

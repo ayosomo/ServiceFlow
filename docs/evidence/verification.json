@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-10-24T13:38:35.045Z",
+  "node": "v24.21.0",
+  "results": [
+    {
+      "command": "pnpm lint",
+      "code": 0,
+      "evidence": "docs/evidence/lint.txt"
+    },
+    {
+      "command": "pnpm typecheck",
+      "code": 0,
+      "evidence": "docs/evidence/typecheck.txt"
+    },
+    {
+      "command": "pnpm test",
+      "code": 0,
+      "evidence": "docs/evidence/test.txt"
+    },
+    {
+      "command": "pnpm build",
+      "code": 0,
+      "evidence": "docs/evidence/build.txt"
+    },
+    {
+      "command": "pnpm test:http",
+      "code": 0,
+      "evidence": "docs/evidence/test-http.txt"
+    },
+    {
+      "command": "pnpm azure:batch",
+      "code": 0,
+      "evidence": "docs/evidence/azure-batch.txt"
+    }
+  ]
+}

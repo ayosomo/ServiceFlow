@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+overrides:
+  "@opentelemetry/api": 1.9.0
+allowBuilds:
+  esbuild: true
+  protobufjs: true
+  "@embedded-postgres/windows-x64": true
+  "@embedded-postgres/linux-x64": true

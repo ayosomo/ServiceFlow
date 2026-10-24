@@ -1,0 +1,156 @@
+import { spawn } from "node:child_process";
+import { randomBytes } from "node:crypto";
+import assert from "node:assert/strict";
+import { mkdir, writeFile } from "node:fs/promises";
+const token = randomBytes(32).toString("hex");
+const aws = spawn(
+  process.execPath,
+  ["--import", "tsx", "apps/aws-request-approvals/src/local.ts"],
+  {
+    windowsHide: true,
+    env: { ...process.env, LOCAL_API_TOKEN: token },
+    stdio: "ignore",
+  },
+);
+const gcp = spawn(
+  process.execPath,
+  ["apps/gcp-delivery-insights/dist/server.cjs"],
+  {
+    windowsHide: true,
+    env: {
+      ...process.env,
+      MODE: "local",
+      PORT: "3103",
+      BIND_HOST: "127.0.0.1",
+      LOCAL_API_TOKEN: token,
+    },
+    stdio: "ignore",
+  },
+);
+const evidence: string[] = [
+  `Real loopback HTTP, fake/fixture persistence. Not cloud: ${new Date().toISOString()}`,
+];
+async function wait(url: string) {
+  for (let i = 0; i < 100; i++) {
+    try {
+      const r = await fetch(url, { signal: AbortSignal.timeout(200) });
+      if (r.status === 403) return;
+    } catch {
+      /* server starting */
+    }
+    await new Promise((r) => setTimeout(r, 100));
+  }
+  throw new Error("Local HTTP startup timeout");
+}
+const request = async (
+  base: string,
+  path: string,
+  method = "GET",
+  body?: unknown,
+  key?: string,
+) => {
+  const response = await fetch(base + path, {
+    method,
+    headers: {
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
+      ...(key ? { "idempotency-key": key } : {}),
+    },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  const result = { status: response.status, body: await response.json() };
+  evidence.push(JSON.stringify({ method, path, ...result }));
+  return result;
+};
+try {
+  await wait("http://127.0.0.1:3101/healthz");
+  await wait("http://127.0.0.1:3103/healthz");
+  for (const port of [3101, 3103]) {
+    const r = await fetch(`http://127.0.0.1:${port}/healthz`);
+    assert.equal(r.status, 403);
+    evidence.push(`Anonymous loopback ${port} health: 403`);
+  }
+  const base = "http://127.0.0.1:3101";
+  const payload = {
+    requestId: "REQ-0900",
+    customerId: "SYN-900",
+    summary: "Synthetic HTTP smoke request",
+    ownerTeam: "Operations",
+    priority: "HIGH",
+    submittedAt: "2026-10-01T00:00:00.000Z",
+    targetAt: "2026-10-30T00:00:00.000Z",
+    approvalRequired: true,
+  };
+  assert.equal(
+    (await request(base, "/requests", "POST", payload, "smoke_create")).status,
+    201,
+  );
+  const body = {
+    decision: "APPROVED",
+    version: 1,
+    reason: "Synthetic smoke approval",
+  };
+  assert.equal(
+    (
+      await request(
+        base,
+        "/requests/REQ-0900/decision",
+        "POST",
+        body,
+        "smoke_decision",
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (
+      await request(
+        base,
+        "/requests/REQ-0900/decision",
+        "POST",
+        body,
+        "smoke_decision",
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (
+      await request(
+        base,
+        "/requests/REQ-0900/decision",
+        "POST",
+        body,
+        "smoke_stale",
+      )
+    ).status,
+    409,
+  );
+  const reread = await request(base, "/requests/REQ-0900");
+  assert.equal((reread.body as { events: unknown[] }).events.length, 2);
+  const metrics = await request(
+    "http://127.0.0.1:3103",
+    "/kpis?asOf=2026-10-23",
+  );
+  assert.equal(metrics.status, 200);
+  assert.equal(
+    (metrics.body as { overdue: { count: number } }).overdue.count,
+    9,
+  );
+  assert.equal(
+    (await request("http://127.0.0.1:3103", "/requests/REQ-0013/insight"))
+      .status,
+    200,
+  );
+  await mkdir("docs/evidence", { recursive: true });
+  await writeFile(
+    "docs/evidence/http-local-smoke.txt",
+    evidence.join("\n") + "\nPASS\n",
+  );
+  console.log(
+    "PASS: actual loopback HTTP intake, approve/replay, stale-version denial, audit reread and compiled GCP KPI service.",
+  );
+} finally {
+  aws.kill();
+  gcp.kill();
+}

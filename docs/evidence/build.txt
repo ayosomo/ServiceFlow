@@ -1,0 +1,6 @@
+Timestamp: 2026-10-24T13:38:29.678Z
+Command: pnpm build
+Exit: 0
+
+Built AWS, Azure and GCP Node 22 bundles.
+$ tsx scripts/build.ts

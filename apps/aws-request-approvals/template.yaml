@@ -1,0 +1,87 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: ServiceFlow synthetic portfolio; manual cost approval required
+Parameters:
+  RequesterArns: { Type: String, Default: "" }
+  ApproverArns: { Type: String, Default: "" }
+  ReaderArns: { Type: String, Default: "" }
+Resources:
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth:
+        EnableIamAuthorizer: true
+        DefaultAuthorizer: AWS_IAM
+      DefaultRouteSettings: { ThrottlingBurstLimit: 5, ThrottlingRateLimit: 2 }
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        [
+          { AttributeName: pk, AttributeType: S },
+          { AttributeName: sk, AttributeType: S },
+        ]
+      KeySchema:
+        [
+          { AttributeName: pk, KeyType: HASH },
+          { AttributeName: sk, KeyType: RANGE },
+        ]
+      BillingMode: PROVISIONED
+      ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1 }
+      Tags: [{ Key: Project, Value: ServiceFlow }]
+  Function:
+    Type: AWS::Serverless::Function
+    Metadata: { SkipBuild: true }
+    Properties:
+      Runtime: nodejs22.x
+      Handler: lambda.handler
+      CodeUri: dist/
+      Timeout: 10
+      MemorySize: 128
+      ReservedConcurrentExecutions: 1
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref Table
+          REQUESTER_ARNS: !Ref RequesterArns
+          APPROVER_ARNS: !Ref ApproverArns
+          READER_ARNS: !Ref ReaderArns
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: [dynamodb:GetItem, dynamodb:Query, dynamodb:PutItem]
+              Resource: !GetAtt Table.Arn
+      Events:
+        Create:
+          {
+            Type: HttpApi,
+            Properties: { ApiId: !Ref Api, Path: /requests, Method: POST },
+          }
+        Read:
+          {
+            Type: HttpApi,
+            Properties:
+              { ApiId: !Ref Api, Path: "/requests/{id}", Method: GET },
+          }
+        Decision:
+          {
+            Type: HttpApi,
+            Properties:
+              {
+                ApiId: !Ref Api,
+                Path: "/requests/{id}/decision",
+                Method: POST,
+              },
+          }
+        Health:
+          {
+            Type: HttpApi,
+            Properties: { ApiId: !Ref Api, Path: /healthz, Method: GET },
+          }
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${Function}
+      RetentionInDays: 7
+Outputs:
+  ApiUrl:
+    { Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com" }

@@ -1,0 +1,61 @@
+{
+  "name": "serviceflow-cloud-labs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "fixtures": "tsx packages/fixtures/generate.ts",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --exclude '**/*.integration.test.ts'",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:http": "tsx scripts/http-smoke.ts",
+    "test:container": "tsx scripts/container-smoke.ts",
+    "check:secrets": "tsx scripts/check-secrets.ts",
+    "verify": "tsx scripts/verify.ts",
+    "build": "tsx scripts/build.ts",
+    "package:azure": "tsx scripts/package-azure.ts",
+    "db:migrate": "tsx db/run.ts migrate",
+    "db:seed": "tsx db/run.ts seed",
+    "db:test": "tsx db/run.ts test",
+    "db:explain": "tsx db/run.ts explain",
+    "db:portable": "tsx scripts/portable-postgres.ts",
+    "aws:local": "tsx apps/aws-request-approvals/src/local.ts",
+    "azure:batch": "tsx apps/azure-data-quality/src/local.ts",
+    "azure:emulator": "tsx scripts/azure-emulator.ts",
+    "azure:host-test": "tsx scripts/azure-host-smoke.ts",
+    "gcp:local": "tsx apps/gcp-delivery-insights/src/local.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.1156.0",
+    "@aws-sdk/lib-dynamodb": "3.1156.0",
+    "@azure/functions": "4.17.0",
+    "@azure/identity": "4.13.0",
+    "@azure/storage-blob": "12.34.0",
+    "@google-cloud/firestore": "9.4.0",
+    "csv-parse": "7.0.3",
+    "fastify": "5.12.7",
+    "google-auth-library": "11.3.1",
+    "pg": "8.23.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.5",
+    "@types/pg": "8.23.1",
+    "azurite": "3.37.0",
+    "embedded-postgres": "18.4.0-beta.17",
+    "esbuild": "0.28.2",
+    "eslint": "10.13.0",
+    "prettier": "3.9.10",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.0",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,2 @@
+$ tsx db/run.ts migrate
+Migration 001 applied (idempotent).

@@ -1,0 +1,9 @@
+$ vitest run --config vitest.integration.config.ts "dynamodb.integration" "azurite.integration"
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/outputs/serviceflow-cloud-labs
+
+
+ Test Files  2 passed (2)
+      Tests  2 passed (2)
+   Start at  14:17:06
+   Duration  31.92s (tests 73%, import 23%, transform 4%)

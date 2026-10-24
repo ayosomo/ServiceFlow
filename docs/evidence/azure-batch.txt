@@ -1,0 +1,42 @@
+Timestamp: 2026-10-24T13:38:34.033Z
+Command: pnpm azure:batch
+Exit: 0
+
+{
+  "asOf": "2026-10-23T00:00:00.000Z",
+  "totalRecords": 48,
+  "unidentifiable": 1,
+  "qualityPassRate": {
+    "numerator": 41,
+    "denominator": 47,
+    "excluded": 1,
+    "value": 0.8723404255319149,
+    "definition": "No critical integrity findings; identifiable raw rows denominator; duplicate occurrences fail."
+  },
+  "readinessRate": {
+    "numerator": 13,
+    "denominator": 20,
+    "excluded": 28,
+    "value": 0.65,
+    "definition": "Ready / assessable active; pending approval blocks readiness only."
+  },
+  "overdue": {
+    "count": 9,
+    "denominator": 20,
+    "excluded": 28,
+    "definition": "Active valid records with targetAt strictly before asOf."
+  },
+  "onTimeCompletion": {
+    "numerator": 0,
+    "denominator": 7,
+    "excluded": 41,
+    "value": 0,
+    "definition": "DONE with completion <= target / assessable DONE."
+  },
+  "exceptionBacklog": {
+    "count": 12,
+    "critical": 8,
+    "review": 4
+  }
+}
+$ tsx apps/azure-data-quality/src/local.ts

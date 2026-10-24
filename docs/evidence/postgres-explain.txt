@@ -1,0 +1,19 @@
+Index Scan using requests_pkey on requests  (cost=0.15..8.17 rows=1 width=253) (actual time=2.560..2.596 rows=1 loops=1)
+  Index Cond: (request_id = 'REQ-0024'::text)
+  Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=110
+Planning Time: 69.542 ms
+Execution Time: 5.050 ms
+Incremental Sort  (cost=8.17..8.22 rows=2 width=72) (actual time=1.431..1.433 rows=13 loops=1)
+  Sort Key: target_at, request_id
+  Presorted Key: target_at
+  Full-sort Groups: 1  Sort Method: quicksort  Average Memory: 25kB  Peak Memory: 25kB
+  Buffers: shared hit=11
+  ->  Index Scan using requests_active_target_idx on requests  (cost=0.14..8.16 rows=1 width=72) (actual time=0.274..0.282 rows=13 loops=1)
+        Index Cond: (target_at < '2026-10-23 00:00:00+00'::timestamp with time zone)
+        Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=16
+Planning Time: 25.269 ms
+Execution Time: 1.714 ms
