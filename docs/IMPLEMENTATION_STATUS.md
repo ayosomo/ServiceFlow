@@ -11,7 +11,7 @@ Evidence date: 24 October 2026 (Europe/London). Local runtime and persistence ch
 - Node v24.21.0; pnpm 11.25.0; Docker CLI 29.9.1; Compose v5.6.0; Git 2.41.0.windows.1.
 - AWS CLI, Azure CLI, Functions Core Tools, gcloud and GitHub CLI absent from PATH at inspection. Workspace-local SAM 1.170.0 and Bicep 0.48.1 were subsequently installed and validated. Functions v4 and gcloud/Firestore run inside local Docker images.
 - Azure CLI 2.91.0 was subsequently prepared from Microsoft's official Windows ZIP under workspace tooling and its version command passed. Azure browser authentication completed; read-only ARM confirms an Enabled FreeTrial subscription with spending limit On. UK South capability listings passed; after approved Microsoft.Web registration, the UK South Y1 quota is verified as current 0 / limit 0. Credit balance/expiry and month-to-date cost remain unverified. No Azure resources were deployed. See [subscription review](AZURE-SUBSCRIPTION-REVIEW.md).
-- GitHub connector identity verified as `ayosomo`; the owner supplied the new, empty public `ayosomo/ServiceFlow` repository; publication is being verified separately.
+- GitHub connector identity verified as `ayosomo`; the owner supplied the new, empty public `ayosomo/ServiceFlow` repository; source publication and repository readback passed; quality CI and CodeQL passed for implementation commit `56e708e`.
 - Private Notion root authorised by owner in chat; created as ServiceFlow Cloud Labs — BA & Cloud Evidence.
 - Docker's frozen WSL VM was recovered through an owner-approved Windows restart. Docker Desktop 4.96.3 / Engine 29.9.2 returned a real Server response and executed hello-world. Existing Docker data was preserved.
 - Docker PostgreSQL 16 migrations, seeding, constraints, latest-history selection, independent KPI comparison and EXPLAIN passed. Native PostgreSQL 18.4 fallback also passed before the Docker recovery.
@@ -29,14 +29,14 @@ Code was implemented in phase order: shared baseline, AWS, Azure, GCP. AWS has n
 
 ## Gates
 
-| Gate | Meaning                                        | Current state                                                                                      |
-| ---- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| G0   | BA baseline and acceptance definitions         | Implemented; owner review available                                                                |
-| G1   | Fixtures, SQL, Docker runtime                  | LOCAL PASS                                                                                         |
-| G2   | AWS local and real cloud smoke                 | LOCAL PASS; CLOUD VERIFIED; dedicated resources removed                                            |
-| G3   | Azure local and real storage trigger           | LOCAL PASS including actual Functions host + Azurite; cloud NOT VERIFIED                           |
-| G4   | GCP local/container and real private Cloud Run | LOCAL PASS; cloud business API VERIFIED and removed; deployed health failed, correction local-only |
-| G5   | Reviewed public portfolio and screenshots      | Case study prepared; GitHub publication/CI, owner review and UI screenshots pending                |
+| Gate | Meaning                                        | Current state                                                                                        |
+| ---- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| G0   | BA baseline and acceptance definitions         | Implemented; owner review available                                                                  |
+| G1   | Fixtures, SQL, Docker runtime                  | LOCAL PASS                                                                                           |
+| G2   | AWS local and real cloud smoke                 | LOCAL PASS; CLOUD VERIFIED; dedicated resources removed                                              |
+| G3   | Azure local and real storage trigger           | LOCAL PASS including actual Functions host + Azurite; cloud NOT VERIFIED                             |
+| G4   | GCP local/container and real private Cloud Run | LOCAL PASS; cloud business API VERIFIED and removed; deployed health failed, correction local-only   |
+| G5   | Reviewed public portfolio and screenshots      | Public source and implementation CI/CodeQL verified; owner case-study review and screenshots pending |
 
 ## Evidence and remaining work
 
@@ -48,7 +48,7 @@ The Windows screenshot helper timed out waiting for app approval; no screenshot 
 
 AWS evidence: [actual deployment/test/teardown](evidence/aws-cloud-verification.json), deployed source commit `e0a49b611d654728a72611ee1a5e7eb571ce4adf`. Regional logging worked in the real run. Managed project IAM defaults and one owner exercising all roles prevent an effective least-privilege or independent human approval claim. The offline inventory remains configuration evidence only; the cloud JSON records actual outcomes.
 
-Pending external gates: Azure remaining credit/actual-cost review, zero Y1 quota, live identity/package validation, observability review and separate approval; any Google Cloud health-fix redeployment needs fresh approval; their actual smoke/IAM/cost/teardown evidence; delayed AWS billing check; public repository publication, owner case-study review, screenshots and actual GitHub CI/CodeQL runs.
+Pending external gates: Azure remaining credit/actual-cost review, zero Y1 quota, live identity/package validation, observability review and separate approval; any Google Cloud health-fix redeployment needs fresh approval; their actual smoke/IAM/cost/teardown evidence; delayed AWS billing check; owner case-study review and screenshots; later CI states must be checked per commit.
 
 A fresh local clone of implemented source commit `3169f071e60ede4f4ccbe71e663db2583f896e8c` passed frozen-lockfile installation, lint, strict typecheck, all 25 unit/application tests and all three builds. See docs/evidence/clean-clone.txt. Terminal transcripts retain command/result content; only line endings and trailing whitespace were normalised for Git.
 
@@ -58,6 +58,4 @@ Google Cloud initial account gate: the owner opened the console, and read-only B
 
 GCP follow-up: owner-authorised local gcloud sign-in and read-only existing-project billing/IAM/quota checks passed. London quota is nonzero; relevant resource APIs remain disabled, so inventory/region eligibility in the proposed new project is conditional. Full GBP cost scenario and exact resource/test/teardown proposal are prepared. No cloud resource/API/billing/IAM change occurred. The actual non-root container passed at the proposed 256 MiB limit; service-wide scale-one, CPU boost off and custom audience are configured and locally checked. [Proposal](GCP-DEPLOYMENT-PROPOSAL.md), [preflight](evidence/gcp-account-preflight.json), [container result](evidence/gcp-proposal-container.json). Cloud deployment remains NOT VERIFIED; approval is required before bootstrap.
 
-GCP execution gate now has real evidence: business APIs and auth passed on Cloud Run/Firestore, active lab resources were independently removed and the new project is DELETE_REQUESTED. One documented exception remains: deployed `/healthz` returned provider 404; the `/health` correction passed local tests/container but was not redeployed. Final console refresh retained Free Trial and privately checked credit/dates. [Actual results](GCP-CLOUD-RESULTS.md). Earlier pending-account/proposal paragraphs are dated history, not the current deployment status. GitHub publication/remote CI and screenshots remain pending; the reviewed local portfolio is updated.
-
-GCP execution now has real evidence: business APIs and auth passed on Cloud Run/Firestore, active lab resources were independently removed and the new project is DELETE_REQUESTED. One exception remains: deployed `/healthz` returned provider 404; the `/health` correction passed local tests/container but was not redeployed. Final console refresh retained Free Trial and privately checked credit/dates. [Actual results](GCP-CLOUD-RESULTS.md). Earlier pending-account/proposal paragraphs are dated history. GitHub publication/remote CI and screenshots remain pending; the reviewed local portfolio is updated.
+GCP execution now has real evidence: business APIs and auth passed on Cloud Run/Firestore, active lab resources were independently removed and the new project is DELETE_REQUESTED. One exception remains: deployed `/healthz` returned provider 404; the `/health` correction passed local tests/container but was not redeployed. Final console refresh retained Free Trial and privately checked credit/dates. [Actual results](GCP-CLOUD-RESULTS.md). Earlier pending-account/proposal paragraphs are dated history. GitHub source publication/readback and implementation CI/CodeQL are verified; screenshots and owner case-study review remain pending.

@@ -1,4 +1,4 @@
-# ServiceFlow â€” three implementation case studies
+# ServiceFlow — three implementation case studies
 
 All demonstration data is synthetic. Portfolio project, not an employer integration. AWS and GCP have actual cloud business-feature and teardown evidence; Azure remains locally tested. GCP has an explicit deployed health-route exception. See the evidence register before reusing any claim.
 
@@ -24,4 +24,4 @@ Decision: one bounded snapshot document makes the demo predictable and easy to i
 
 ## Evidence and honest outcomes
 
-The implementation links stakeholder need â†’ rule/API â†’ acceptance test â†’ saved execution log. No employer data or commercial savings was used. Failure evidence includes the Docker startup blocker and an initially incorrect findings-count assertion, corrected from the preserved fixture output. Test source and local command evidence are supplied; cloud screenshots and URLs are not fabricated. Public GitHub publication and owner review remain explicit gates.
+The implementation links stakeholder need → rule/API → acceptance test → saved execution log. No employer data or commercial savings was used. Failure evidence includes the Docker startup blocker and an initially incorrect findings-count assertion, corrected from the preserved fixture output. Test source and local command evidence are supplied; cloud screenshots and URLs are not fabricated. Public GitHub source/readback and implementation CI/CodeQL are verified; owner case-study review and screenshots remain open.

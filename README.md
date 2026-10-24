@@ -56,7 +56,7 @@ The [data dictionary](docs/03-DATA-DICTIONARY.md) explains 48 requests, eight in
 
 Verified local evidence includes 25 unit/application tests, three persistence integrations, Docker PostgreSQL SQL checks, an actual Azure Functions host trigger, and a non-root GCP container backed by the Firestore emulator. SAM and Bicep validate locally. See the saved command logs for the exact boundaries.
 
-No web UI, accessibility audit, commercial time saving or production-scale benchmark is claimed. The 48-record EXPLAIN evidence illustrates query behaviour, not scalability. Cloud deployment, UI screenshots and public case-study review are tracked separately. GitHub Actions and CodeQL workflows are supplied but have not run on GitHub; neither deploys cloud resources.
+No web UI, accessibility audit, commercial time saving or production-scale benchmark is claimed. The 48-record EXPLAIN evidence illustrates query behaviour, not scalability. Cloud deployment, UI screenshots and public case-study review are tracked separately. GitHub Actions quality checks and CodeQL passed for the published implementation commit `56e708e`; neither workflow deploys cloud resources. See [publication evidence](docs/evidence/github-publication.json) and [live workflows](https://github.com/ayosomo/ServiceFlow/actions).
 
 ## Next review gates
 

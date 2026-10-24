@@ -1,0 +1,45 @@
+{
+  "checkedAtUTC": "2026-10-24T17:27:29.746869+00:00",
+  "repository": "https://github.com/ayosomo/ServiceFlow",
+  "ownerMatchesConnectedIdentity": true,
+  "writePermissionVerified": true,
+  "startingRepositoryEmpty": true,
+  "publishedImplementationCommit": "56e708ebf88e038a7048aeb5c0ac13fd514bd9c4",
+  "historyPreserved": true,
+  "readbackVerified": [
+    "main head SHA",
+    "README.md",
+    "docs/GCP-CLOUD-RESULTS.md"
+  ],
+  "privacyReview": {
+    "workingFilesChecked": 165,
+    "historyBlobsChecked": 207,
+    "knownPrivateIdentifiersAbsent": true,
+    "boundedTokenPatternsAbsent": true,
+    "limitation": "Pattern and known-identifier review, not a guarantee against every possible secret."
+  },
+  "runs": [
+    {
+      "name": "local-quality-gates",
+      "id": 40115993237,
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40115993237",
+      "headSHA": "56e708ebf88e038a7048aeb5c0ac13fd514bd9c4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "codeql",
+      "id": 40115993278,
+      "url": "https://github.com/ayosomo/ServiceFlow/actions/runs/40115993278",
+      "headSHA": "56e708ebf88e038a7048aeb5c0ac13fd514bd9c4",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "cloudDeploymentTriggered": false,
+  "limitations": [
+    "These run results apply to the stated implementation SHA, not automatically to future commits.",
+    "Owner case-study review and screenshots remain pending.",
+    "Local health correction was published as source but not redeployed to Google Cloud."
+  ]
+}
