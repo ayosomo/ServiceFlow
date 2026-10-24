@@ -1,0 +1,32 @@
+{
+  "evidenceDate": "2026-10-24",
+  "observedAtApproximateUTC": "2026-10-24T15:57:00Z",
+  "kind": "Read-only console account/credit observation; not CLI/API or deployment evidence",
+  "accountType": "Free trial account",
+  "accountTypeSources": ["Welcome page", "Billing Overview"],
+  "creditDetailSource": "Billing > Cost optimisation > Credits > Issued credits > Free Trial",
+  "creditStatus": "Available",
+  "creditType": "One-time",
+  "creditScope": "Certain usage; Free Trial terms apply",
+  "remainingValueVerifiedPrivately": true,
+  "originalValueVerifiedPrivately": true,
+  "startAndEndDatesVerifiedPrivately": true,
+  "exactExpiryTimeVerified": false,
+  "financialValuesAndAccountIdentifiersIncluded": false,
+  "cliAuthorised": false,
+  "projectInventoryVerified": false,
+  "regionAndQuotasVerified": false,
+  "budgetOrCapVerified": false,
+  "deploymentApprovalReceived": false,
+  "cloudDeploymentVerified": false,
+  "cloudMutationsPerformed": [],
+  "limitations": [
+    "This observation does not establish API access, IAM, available quota or deployment success.",
+    "Console cost displays are not independently verified final billing.",
+    "Recheck actual account type, credits, coverage and pricing before any proposed deployment."
+  ],
+  "sources": [
+    "https://docs.cloud.google.com/free/docs/free-cloud-features",
+    "https://docs.cloud.google.com/billing/docs/how-to/resolve-issues"
+  ]
+}
