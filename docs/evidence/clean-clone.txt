@@ -1,0 +1,86 @@
+Clean-clone reproducibility: PASS
+Source commit: 3169f071e60ede4f4ccbe71e663db2583f896e8c
+Checks: pnpm install --frozen-lockfile; pnpm lint; pnpm typecheck; pnpm test; pnpm build
+All commands exited 0; unit/application tests: 25 passed.
+
+Scope: all 6 workspace projects
+✓ Lockfile passes supply-chain policies (verified 54m ago)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +637
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 637, reused 39, downloaded 0, added 0
+Progress: resolved 637, reused 125, downloaded 0, added 0
+Progress: resolved 637, reused 317, downloaded 0, added 0
+Progress: resolved 637, reused 617, downloaded 0, added 0
+Packages are hard linked from the content-addressable store to the virtual store.
+  Content-addressable store is at: C:\Users\ayoos\AppData\Local\pnpm\store\v11
+  Virtual store is at:             node_modules/.pnpm
+Progress: resolved 637, reused 637, downloaded 0, added 35
+Progress: resolved 637, reused 637, downloaded 0, added 58
+Progress: resolved 637, reused 637, downloaded 0, added 95
+Progress: resolved 637, reused 637, downloaded 0, added 152
+Progress: resolved 637, reused 637, downloaded 0, added 195
+Progress: resolved 637, reused 637, downloaded 0, added 232
+Progress: resolved 637, reused 637, downloaded 0, added 234
+Progress: resolved 637, reused 637, downloaded 0, added 245
+Progress: resolved 637, reused 637, downloaded 0, added 304
+Progress: resolved 637, reused 637, downloaded 0, added 320
+Progress: resolved 637, reused 637, downloaded 0, added 324
+Progress: resolved 637, reused 637, downloaded 0, added 338
+Progress: resolved 637, reused 637, downloaded 0, added 375
+Progress: resolved 637, reused 637, downloaded 0, added 426
+Progress: resolved 637, reused 637, downloaded 0, added 520
+Progress: resolved 637, reused 637, downloaded 0, added 560
+Progress: resolved 637, reused 637, downloaded 0, added 634
+Progress: resolved 637, reused 637, downloaded 0, added 635
+Progress: resolved 637, reused 637, downloaded 0, added 636
+Progress: resolved 637, reused 637, downloaded 0, added 637, done
+
+dependencies:
++ @aws-sdk/client-dynamodb 3.1156.0
++ @aws-sdk/lib-dynamodb 3.1156.0
++ @azure/functions 4.17.0
++ @azure/identity 4.13.0
++ @azure/storage-blob 12.34.0
++ @google-cloud/firestore 9.4.0
++ csv-parse 7.0.3
++ fastify 5.12.7
++ google-auth-library 11.3.1
++ pg 8.23.1
++ zod 4.6.7
+
+devDependencies:
++ @eslint/js 10.0.1
++ @types/node 22.20.5
++ @types/pg 8.23.1
++ azurite 3.37.0
++ embedded-postgres 18.4.0-beta.17
++ esbuild 0.28.2
++ eslint 10.13.0
++ prettier 3.9.10
++ tsx 4.23.15
++ typescript 5.9.3
++ typescript-eslint 8.72.0
++ vitest 5.0.5
+
+Done in 24.9s using pnpm v11.25.0
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit
+$ vitest run --exclude '**/*.integration.test.ts'
+
+ RUN  v5.0.5 C:/Users/ayoos/Documents/Codex/2026-10-24/read-codex-handoff-cross-cloud-business/work/clean-clone
+
+
+ Test Files  4 passed (4)
+      Tests  25 passed (25)
+   Start at  14:40:51
+   Duration  2.82s (import 70%, tests 22%, transform 7%, worker 1%)
+
+    Isolate  4 workers spawned · ~155ms startup each (spawn + environment, per file)
+             at least ~466ms faster with isolate: false — reuses workers across files instead of one per file
+
+$ tsx scripts/build.ts
+Built AWS, Azure and GCP Node 22 bundles.

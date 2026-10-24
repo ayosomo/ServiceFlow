@@ -1,0 +1,11 @@
+After all local checks: stopped only ServiceFlow containers, preserving the PostgreSQL volume. Docker engine remains running at 29.9.2.
+ Container serviceflow-cloud-labs-dynamodb-1 Stopping
+ Container serviceflow-cloud-labs-postgres-1 Stopping
+ Container serviceflow-cloud-labs-firestore-1 Stopping
+ Container serviceflow-cloud-labs-azure-functions-1 Stopping
+ Container serviceflow-cloud-labs-postgres-1 Stopped
+ Container serviceflow-cloud-labs-dynamodb-1 Stopped
+ Container serviceflow-cloud-labs-azure-functions-1 Stopped
+ Container serviceflow-cloud-labs-azurite-1 Stopping
+ Container serviceflow-cloud-labs-firestore-1 Stopped
+ Container serviceflow-cloud-labs-azurite-1 Stopped

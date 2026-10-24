@@ -4,6 +4,8 @@ Target: **£0 net new spend**. This is an intent, not a vendor guarantee. No pro
 
 Pricing/documentation checked on 24 October 2026 as research only; **repeat on actual deployment day**. Account-specific eligibility is UNKNOWN. Do not fill unknown fields with assumptions.
 
+Owner confirmed a new AWS account must be created. No account has been created through this task; no AWS CLI/profile/credential configuration was present. Signup and actual billing review are the next owner steps, followed by an explicit resource-specific deployment approval.
+
 | Field                                | AWS                                                                         | Azure                                                                             | GCP                                                                                          |
 | ------------------------------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | Account age / free plan              | UNKNOWN                                                                     | UNKNOWN                                                                           | UNKNOWN                                                                                      |

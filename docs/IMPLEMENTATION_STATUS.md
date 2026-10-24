@@ -17,6 +17,7 @@ Evidence date: 24 October 2026 (Europe/London). Local runtime and persistence ch
 - 25 unit/application tests and 3 Docker persistence integration tests passed (DynamoDB, Azurite, Firestore). Actual Functions v4 Blob-trigger host smoke passed. Non-root GCP container HTTP -> Firestore emulator -> exact KPI response passed, with anonymous/invalid-token 403.
 - `sam validate --lint`, prebuilt-bundle `sam build`, and Bicep compilation passed locally. Cloud IAM, managed identity, real provider availability and billing remain unverified.
 - No AWS config/profile/credentials file, AWS credential environment variable or AWS CLI was present during the access check. Account access and billing still require setup/review.
+- The owner confirmed a new AWS account needs to be created. Deployment approval is still absent. The authorised private Notion root and its seven requested evidence/learning subpages have been created and read back successfully; their private links are kept outside this public-ready repository.
 - Cloud account age, billing state, credits, region eligibility and spend protections UNKNOWN. No provider resources created. Explicit deployment approval absent.
 
 ## Assumptions and scope decisions
@@ -45,3 +46,5 @@ Runtime dependency audit has zero high/critical and one moderate uuid advisory t
 The Windows screenshot helper timed out waiting for app approval; no screenshot has been fabricated or labelled as captured. Reproducible CLI logs, JSON outputs and actual container/host tests are supplied. No browser UI or accessibility audit is claimed.
 
 Pending external gates: account login and actual eligibility/billing checks; explicit approval of each concrete resource plan; real provider smoke/IAM denial/cost/teardown evidence; public repository publication and actual GitHub CI/CodeQL runs. AWS remains first for any real deployment.
+
+A fresh local clone of implemented source commit `3169f071e60ede4f4ccbe71e663db2583f896e8c` passed frozen-lockfile installation, lint, strict typecheck, all 25 unit/application tests and all three builds. See docs/evidence/clean-clone.txt. Terminal transcripts retain command/result content; only line endings and trailing whitespace were normalised for Git.
