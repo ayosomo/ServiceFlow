@@ -1,0 +1,50 @@
+{
+  "kind": "Actual archive verification failure and correction; no cloud test rerun",
+  "observedAtUTC": "2026-10-24T18:18:57.200540+00:00",
+  "initialRelease": "v0.4.0-portfolio-local-readiness",
+  "initialCommit": "7021723600ff940837cee5ce2c494e5f6bf91651",
+  "failure": "Local GCP evidence hash included CRLF; Git archive stored LF; displayed source hash did not match published bytes",
+  "affectedSource": "docs/evidence/gcp-cloud-verification.json",
+  "oldWorkingByteSHA256": "262e52d7c1f60b01eac5a5988f023fcfa0f5213a4633c101f3a4a09201c20ba5",
+  "canonicalGitByteSHA256": "fb088848079adc852cebafb609fc45f7948a415ffead48b16befa3a71f176fd1",
+  "jsonValuesUnchanged": true,
+  "cloudCallsPerformed": false,
+  "applicationCodeChanged": false,
+  "correction": "Normalised local bytes to already published Git blob; regenerated source manifest/view and recaptured GCP screenshot; added source/image hash checks to portfolio CI",
+  "followupChecks": [
+    {
+      "command": "pnpm lint",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-correction-lint.txt",
+      "sha256": "327e7794ebf2bad06e107b2d82dda53a88169646e684a29609a1733b6ab6c39d"
+    },
+    {
+      "command": "pnpm typecheck",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-correction-typecheck.txt",
+      "sha256": "174ab495d8c787f513bb17f8fa8597c207bf9d8932a7adf581f146a44780bfcb"
+    },
+    {
+      "command": "pnpm check:portfolio",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-correction-hashes.txt",
+      "sha256": "e841c6950abfc573a6ba8bacc8f3b7f1d96ee51114be0a394ef719ad27c710de"
+    },
+    {
+      "command": "pnpm check:secrets",
+      "code": 0,
+      "evidence": "docs/evidence/phase4-correction-secrets.txt",
+      "sha256": "b6b6fb19d6d9dbb23057db5a0d8c264d4f00885a8b2ef51e8e13aafc85dcb825"
+    }
+  ],
+  "negativeProbe": {
+    "deliberatelyCorruptedSourceHash": true,
+    "actualExitCode": 1,
+    "nonzeroExpected": true,
+    "passed": true,
+    "manifestRestored": true,
+    "evidence": "docs/evidence/phase4-corrupt-hash-probe.txt"
+  },
+  "allCorrectionChecksPassed": true,
+  "completedAtUTC": "2026-10-24T18:19:24.457941+00:00"
+}

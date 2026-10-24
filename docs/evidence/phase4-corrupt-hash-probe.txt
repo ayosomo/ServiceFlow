@@ -1,0 +1,27 @@
+Timestamp UTC: 2026-10-24T18:19:24.456788+00:00
+Probe: intentionally incorrect source hash
+Actual exit: 1; expected nonzero
+
+[ELIFECYCLE] Command failed with exit code 1.
+$ tsx scripts/check-portfolio.ts
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Evidence hash mismatch: docs/evidence/phase4-http-responses.txt
++ actual - expected
+
++ '247675b5acf629c430562697f012a889051e30b239e4b455ff4c7acbd958ed5f'
+- '0000000000000000000000000000000000000000000000000000000000000000'
+
+    at verifyHash ([workspace]\scripts\check-portfolio.ts:63:10)
+    at async <anonymous> ([workspace]\scripts\check-portfolio.ts:76:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '247675b5acf629c430562697f012a889051e30b239e4b455ff4c7acbd958ed5f',
+  expected: '0000000000000000000000000000000000000000000000000000000000000000',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

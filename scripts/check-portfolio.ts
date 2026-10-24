@@ -1,6 +1,7 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import { resolve, dirname, relative, isAbsolute } from "node:path";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 
 // Checks repository links without network access or cloud credentials.
 const root = process.cwd();
@@ -51,6 +52,36 @@ assert(
   "Keep unverified cloud status explicit",
 );
 assert.equal(errors.length, 0, errors.join("\n"));
+async function verifyHash(file: string, expected: string) {
+  const target = resolve(root, file),
+    inside = relative(root, target);
+  assert(
+    !inside.startsWith("..") && !isAbsolute(inside),
+    "evidence leaves repository",
+  );
+  assert.match(expected, /^[a-f0-9]{64}$/);
+  assert.equal(
+    createHash("sha256")
+      .update(await readFile(target))
+      .digest("hex"),
+    expected,
+    `Evidence hash mismatch: ${file}`,
+  );
+}
+const sources = JSON.parse(
+  await readFile("docs/evidence/screenshots/sources.json", "utf8"),
+) as { views: { sources: { file: string; sha256: string }[] }[] };
+for (const view of sources.views)
+  for (const source of view.sources)
+    await verifyHash(source.file, source.sha256);
+const captures = JSON.parse(
+  await readFile("docs/evidence/screenshots/captures.json", "utf8"),
+) as { captures: { image: string; sha256: string }[] };
+for (const capture of captures.captures)
+  await verifyHash(
+    `docs/evidence/screenshots/${capture.image}`,
+    capture.sha256,
+  );
 console.log(
-  `PASS: ${links} local Markdown/image targets across ${files.length} files exist inside the repository. External URLs and anchor fragments are not validated by this check.`,
+  `PASS: ${links} local Markdown/image targets across ${files.length} files exist inside the repository; screenshot/source hashes match. External URLs and anchor fragments are not validated by this check.`,
 );

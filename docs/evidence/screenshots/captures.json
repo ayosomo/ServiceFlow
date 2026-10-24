@@ -10,20 +10,20 @@
       "bytes": 76246
     },
     {
-      "image": "gcp-cloud-evidence.png",
-      "html": "gcp-cloud-evidence.html",
-      "capturedAtUTC": "2026-10-24T18:04:15.505502+00:00",
-      "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
-      "sha256": "1bc72f3307b14178efc273b1c82ae5843fe713e8fc5cbf6a4af032389707a37f",
-      "bytes": 84377
-    },
-    {
       "image": "aws-local-evidence.png",
       "html": "aws-local-evidence.html",
       "capturedAtUTC": "2026-10-24T18:06:06.967626+00:00",
       "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
       "sha256": "55e80806e411833b79f32e02d095789aa5ed624a5ccd1717469ba61ee3250459",
       "bytes": 79570
+    },
+    {
+      "image": "gcp-cloud-evidence.png",
+      "html": "gcp-cloud-evidence.html",
+      "capturedAtUTC": "2026-10-24T18:18:12.973606+00:00",
+      "method": "Installed Microsoft Edge headless screenshot of local static saved-evidence HTML; 1440x1900; no provider call",
+      "sha256": "fbec1ca7eb41c02adc22a3e7b07f6120af096cd4d0144a865979c057fa296a94",
+      "bytes": 84753
     }
   ]
 }
